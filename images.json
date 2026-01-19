@@ -1,92 +1,6 @@
 {
   "gallery": [
     {
-      "id": 1,
-      "url": "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
-      "category": "Detalhes",
-      "title": "Alianças em Ouro",
-      "album": [
-        "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop"
-      ]
-    },
-    {
-      "id": 2,
-      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
-      "category": "Noiva",
-      "title": "Retrato no Jardim",
-      "album": [
-        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop"
-      ]
-    },
-    {
-      "id": 3,
-      "url": "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop",
-      "category": "Festa",
-      "title": "Saída dos Noivos"
-    },
-    {
-      "id": 4,
-      "url": "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop",
-      "category": "Preto & Branco",
-      "title": "Dança Espontânea"
-    },
-    {
-      "id": 5,
-      "url": "https://images.unsplash.com/photo-1520854226103-38f5c5b7d629?q=80&w=800&auto=format&fit=crop",
-      "category": "Editorial",
-      "title": "Sessão de Moda"
-    },
-    {
-      "id": 6,
-      "url": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop",
-      "category": "Noiva",
-      "title": "Véu ao Vento"
-    },
-    {
-      "id": 7,
-      "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop",
-      "category": "Festa",
-      "title": "Brinde dos Padrinhos"
-    },
-    {
-      "id": 8,
-      "url": "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop",
-      "category": "Detalhes",
-      "title": "Decoração de Mesa"
-    },
-    {
-      "id": 9,
-      "url": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
-      "category": "Noivo",
-      "title": "Preparação do Noivo"
-    },
-    {
-      "id": 10,
-      "url": "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop",
-      "category": "Preto & Branco",
-      "title": "Olhares"
-    },
-    {
-      "id": 11,
-      "url": "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?q=80&w=800&auto=format&fit=crop",
-      "category": "Editorial",
-      "title": "Pôr do Sol na Praia"
-    },
-    {
-      "id": 12,
-      "url": "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?q=80&w=800&auto=format&fit=crop",
-      "category": "Imprensa",
-      "title": "Publicação Vogue"
-    },
-    {
       "id": 13,
       "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_400,h_600,c_fill,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-100-2195d5b6-300_e1ex6m.jpg",
       "category": "Festa",
@@ -136,6 +50,49 @@
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-94-306c9c75-300_du9etj.jpg",
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-95-c2db1e86-300_mo6ejz.jpg",
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853021/mostruario-carolericardo-lucaslimafotografia-96-72e71155-300_bk0yob.jpg"
+      ]
+    },
+    {
+      "id": 14,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859574/portfolio/stories-giuliaefelipe-lucaslimafotografia-25_he3sfv.jpg",
+      "category": "Noiva",
+      "title": "Giulia & Felipe",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-1_fnnjyc.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-2_h0np3g.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-3_dtkekb.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-4_hzb6wg.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-5_dtmh6w.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-6_hhcryf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859596/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-7_hmepxy.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859597/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-8_dnmh6s.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859597/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-9_iqjvhe.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859597/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-10_epo2wu.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859597/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-11_wvaomb.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859597/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-12_pampdw.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-12a_otvrcl.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-13_wq17xo.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-14_cwjull.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-15_fro4n7.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-16_dz8b7j.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859598/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-17_asyxjm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-18_rymktp.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-19_dvewln.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-20_w9loit.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-21_ooghyp.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-22_iuxlsa.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859599/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-23_f9fhur.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859600/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-24_mm8mib.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859600/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-25_nmmbfe.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859600/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-26_mjnqrz.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859600/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-27_cd6llo.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859601/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-28_idsfa3.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859601/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-30_uavj0r.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859601/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-31_ngtnkf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859601/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-32_vajsik.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859602/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-33_nzzipk.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859601/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-34_ml2beb.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768859602/portfolio/albums/stories-giuliaefelipe-lucaslimafotografia-35_nvfkrs.jpg"
       ]
     }
   ],
