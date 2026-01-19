@@ -67,7 +67,8 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNav
 
       {/* Footer Links inside Menu */}
       <div className="flex flex-col md:flex-row justify-between items-end p-8 md:px-20 text-xs md:text-sm uppercase tracking-widest text-gray-400">
-         <div className="flex flex-col gap-2 mb-4 md:mb-0">
+         {/* Items escondidos: Política de Privacidade, Direitos Comerciais, Projetos Criativos */}
+         <div className="flex flex-col gap-2 mb-4 md:mb-0 hidden">
             <span className="cursor-pointer hover:text-white transition-colors">{t.privacy}</span>
             <span className="cursor-pointer hover:text-white transition-colors">{t.rights}</span>
             <span className="cursor-pointer hover:text-white transition-colors">{t.projects}</span>
