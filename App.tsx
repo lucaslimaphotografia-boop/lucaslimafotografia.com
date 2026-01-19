@@ -11,6 +11,7 @@ import { Photobook } from './components/Photobook';
 import { MenuOverlay } from './components/MenuOverlay';
 import { VerticalNav } from './components/VerticalNav';
 import { ClaudeChat } from './components/ClaudeChat';
+import { AdminPanel } from './components/AdminPanel';
 import { Menu } from 'lucide-react';
 import { translations } from './translations';
 
@@ -53,8 +54,22 @@ export default function App() {
     setLang(prev => prev === 'pt' ? 'en' : 'pt');
   };
 
+  // Admin access via keyboard shortcut (Ctrl/Cmd + Shift + A)
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'A') {
+        e.preventDefault();
+        setCurrentView(ViewState.ADMIN);
+      }
+    };
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, []);
+
   const renderView = () => {
     switch (currentView) {
+      case ViewState.ADMIN:
+        return <AdminPanel onBack={() => setCurrentView(ViewState.HOME)} lang={lang} />;
       case ViewState.HOME:
         return <Hero />;
       case ViewState.PORTFOLIO:

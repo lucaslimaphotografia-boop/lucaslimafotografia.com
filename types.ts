@@ -6,7 +6,8 @@ export enum ViewState {
   TESTIMONIALS = 'TESTIMONIALS',
   DETAILS = 'DETAILS',
   FAQ = 'FAQ',
-  PHOTOBOOK = 'PHOTOBOOK'
+  PHOTOBOOK = 'PHOTOBOOK',
+  ADMIN = 'ADMIN'
 }
 
 export type Language = 'pt' | 'en';
