@@ -80,6 +80,23 @@
 
       /* Pause animation on hover if desired, usually distinct for background */
       /* .group:hover .animate-scroll-down { animation-play-state: paused; } */
+
+      /* Hide scrollbar but keep functionality */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Smooth scroll snap */
+      .snap-y {
+        scroll-snap-type: y mandatory;
+      }
+      .snap-start {
+        scroll-snap-align: start;
+      }
     </style>
   <script type="importmap">
 {

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImageItem, Language } from '../types';
 import { translations } from '../translations';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface ProjectDetailsProps {
   project: ImageItem;
@@ -14,139 +15,270 @@ const getAlbumImages = (project: ImageItem): string[] => {
   if (project.album && project.album.length > 0) {
     return project.album;
   }
-  // Fotos padrão caso não tenha álbum definido
-  return [
-    project.url,
-    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop", 
-  ];
+  return [project.url];
 };
 
 export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack, onMenuOpen, lang }) => {
   const t = translations[lang].details;
   const albumImages = getAlbumImages(project);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
+  const containerRef = useRef<HTMLDivElement>(null);
+  const touchStartRef = useRef<number>(0);
+  const touchEndRef = useRef<number>(0);
+
+  const totalSlides = albumImages.length + 1; // +1 para o slide de introdução
+
+  // Parse project title para extrair nomes
+  const parseTitle = (title?: string) => {
+    if (!title) return { first: 'Carol', second: 'Ricardo' };
+    const parts = title.split('&').map(s => s.trim());
+    if (parts.length === 2) {
+      return { first: parts[0], second: parts[1] };
+    }
+    const words = title.split(' ');
+    if (words.length >= 2) {
+      return { first: words[0], second: words.slice(1).join(' ') };
+    }
+    return { first: title, second: '' };
+  };
+
+  const { first, second } = parseTitle(project.title);
+
+  // Scroll to slide
+  useEffect(() => {
+    if (containerRef.current) {
+      const slides = containerRef.current.querySelectorAll('section');
+      if (slides[currentSlide]) {
+        slides[currentSlide].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    }
+  }, [currentSlide]);
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        setCurrentSlide(prev => Math.min(prev + 1, totalSlides - 1));
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        setCurrentSlide(prev => Math.max(prev - 1, 0));
+      } else if (e.key === 'Escape') {
+        onBack();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [totalSlides, onBack]);
+
+  // Touch/swipe handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartRef.current = e.targetTouches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    touchEndRef.current = e.changedTouches[0].clientY;
+    handleSwipe();
+  };
+
+  const handleSwipe = () => {
+    const diff = touchStartRef.current - touchEndRef.current;
+    const minSwipeDistance = 50;
+
+    if (Math.abs(diff) > minSwipeDistance) {
+      if (diff > 0) {
+        // Swipe up - next slide
+        setCurrentSlide(prev => Math.min(prev + 1, totalSlides - 1));
+      } else {
+        // Swipe down - previous slide
+        setCurrentSlide(prev => Math.max(prev - 1, 0));
+      }
+    }
+  };
+
+  // Track scroll position to update current slide
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const slides = container.querySelectorAll('section');
+      const containerTop = container.scrollTop;
+      const containerHeight = container.clientHeight;
+
+      slides.forEach((slide, index) => {
+        const slideTop = (slide as HTMLElement).offsetTop;
+        const slideHeight = slide.clientHeight;
+        const slideCenter = slideTop + slideHeight / 2;
+
+        if (containerTop + containerHeight / 2 >= slideTop && 
+            containerTop + containerHeight / 2 < slideTop + slideHeight) {
+          setCurrentSlide(index);
+        }
+      });
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Image loading handler
+  const handleImageLoad = (index: number) => {
+    setImagesLoaded(prev => new Set(prev).add(index));
+  };
+
+  // Format page number
+  const formatPageNumber = (num: number) => {
+    return String(num + 1).padStart(2, '0');
+  };
 
   return (
-    <div className="fixed inset-0 bg-white z-50 overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
-      
-      {/* Custom Navigation for Details View */}
+    <div 
+      ref={containerRef}
+      className="fixed inset-0 bg-black z-50 overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+
+      {/* Navigation - Back (Left) */}
       <div 
         onClick={onBack}
-        className="fixed top-0 bottom-0 left-0 z-[60] w-12 md:w-16 flex items-center justify-center cursor-pointer hover:bg-black/5 transition-colors group mix-blend-difference text-white"
+        className="fixed top-0 bottom-0 left-0 z-[60] w-12 md:w-16 flex items-center justify-center cursor-pointer hover:bg-white/5 transition-colors group"
       >
         <span 
-            className="uppercase font-bold tracking-widest text-xs md:text-sm"
-            style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+          className="uppercase font-bold tracking-widest text-xs md:text-sm text-white mix-blend-difference"
+          style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
         >
-            {t.back}
+          {t.back}
         </span>
       </div>
 
+      {/* Navigation - Menu (Right) */}
       <div 
         onClick={onMenuOpen}
-        className="fixed top-0 bottom-0 right-0 z-[60] w-12 md:w-16 flex items-center justify-center cursor-pointer hover:bg-black/5 transition-colors group mix-blend-difference text-white"
+        className="fixed top-0 bottom-0 right-0 z-[60] w-12 md:w-16 flex items-center justify-center cursor-pointer hover:bg-white/5 transition-colors group"
       >
         <span 
-            className="uppercase font-bold tracking-widest text-xs md:text-sm"
-            style={{ writingMode: 'vertical-rl' }}
+          className="uppercase font-bold tracking-widest text-xs md:text-sm text-white mix-blend-difference"
+          style={{ writingMode: 'vertical-rl' }}
         >
-            {t.menu}
+          {t.menu}
         </span>
       </div>
 
-      {/* Floating Logo Top Center */}
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] text-center mix-blend-difference text-white pointer-events-none">
-        <h1 className="font-bold uppercase tracking-tighter text-sm md:text-base">LUCASLIMA</h1>
+      {/* Logo Top Center */}
+      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] text-center pointer-events-none">
+        <h1 className="font-bold uppercase tracking-tighter text-sm md:text-base text-white mix-blend-difference">LUCASLIMA</h1>
       </div>
 
-      {/* Floating Page Number Bottom Left */}
-      <div className="fixed bottom-8 left-8 z-[60] mix-blend-difference text-white hidden md:block">
-         <span className="font-bold text-xl tracking-tighter">01</span>
-      </div>
-       {/* Floating Credits Bottom Right */}
-      <div className="fixed bottom-8 right-8 z-[60] mix-blend-difference text-white hidden md:block">
-         <span className="font-bold text-xs uppercase tracking-widest" style={{ writingMode: 'vertical-rl'}}>
-             {t.credits}
-         </span>
+      {/* Page Number Bottom Left */}
+      <div className="fixed bottom-8 left-8 z-[60] text-white mix-blend-difference">
+        <span className="font-bold text-xl md:text-2xl tracking-tighter">
+          {formatPageNumber(currentSlide)}
+        </span>
       </div>
 
-      {/* --- SLIDE 1: INTRO (Split Screen) --- */}
-      <section className="w-full h-screen snap-start flex flex-col md:flex-row relative">
-         {/* Left: Text Content */}
-         <div className="w-full md:w-1/2 h-1/2 md:h-full bg-white flex flex-col items-center justify-center p-8 md:p-20 relative order-2 md:order-1">
-            <div className="text-center">
-                <span className="block text-xs font-bold uppercase tracking-[0.2em] mb-4 text-gray-500 whitespace-pre-line">
-                    {t.intro.location}
-                </span>
-                <h1 className="text-6xl md:text-8xl font-serif italic mb-2 leading-none">
-                    {project.title?.split(' ')[0] || 'Marisa'} <span className="text-4xl md:text-6xl not-italic font-light">&</span>
-                </h1>
-                <h1 className="text-6xl md:text-8xl font-serif italic leading-none">
-                    {project.title?.split(' ')[1] || 'Andrew'}
-                </h1>
-            </div>
-         </div>
+      {/* Credits Bottom Right */}
+      <div className="fixed bottom-8 right-8 z-[60] text-white mix-blend-difference hidden md:block">
+        <span 
+          className="font-bold text-xs uppercase tracking-widest"
+          style={{ writingMode: 'vertical-rl' }}
+        >
+          {t.credits}
+        </span>
+      </div>
 
-         {/* Right: Hero Image */}
-         <div className="w-full md:w-1/2 h-1/2 md:h-full relative order-1 md:order-2">
-            <img 
-                src={project.url} 
-                alt={project.title} 
-                className="w-full h-full object-cover"
-            />
-         </div>
-      </section>
+      {/* Progress Indicator */}
+      <div className="fixed top-0 left-0 right-0 h-1 bg-white/10 z-[61]">
+        <div 
+          className="h-full bg-white transition-all duration-300"
+          style={{ width: `${((currentSlide + 1) / totalSlides) * 100}%` }}
+        />
+      </div>
 
-      {/* --- SLIDE 2: DOUBLE IMAGE (B&W + Color) --- */}
-      <section className="w-full h-screen snap-start flex flex-col md:flex-row bg-white">
-          <div className="w-full md:w-1/2 h-1/2 md:h-full p-4 md:p-12 flex items-center justify-center">
-             <div className="w-full h-full relative overflow-hidden">
-                <img 
-                    src={albumImages[3] || albumImages[0]} 
-                    alt="Detail 1" 
-                    className="w-full h-full object-cover grayscale contrast-125"
-                />
-             </div>
-          </div>
-          <div className="w-full md:w-1/2 h-1/2 md:h-full p-4 md:p-12 flex items-center justify-center">
-            <div className="w-full h-full relative overflow-hidden">
-                <img 
-                    src={albumImages[1] || albumImages[0]} 
-                    alt="Detail 2" 
-                    className="w-full h-full object-cover"
-                />
-             </div>
-          </div>
-      </section>
-
-      {/* --- SLIDE 3: FULL SCREEN IMMERSIVE --- */}
-      <section className="w-full h-screen snap-start relative">
-         <img 
-            src={albumImages[2] || albumImages[0]} 
-            alt="Party" 
-            className="w-full h-full object-cover"
-         />
-         <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-             <h2 className="text-white font-serif italic text-6xl md:text-9xl opacity-90">{t.immersive}</h2>
-         </div>
-      </section>
-
-      {/* --- SLIDE 4: CENTERED PORTRAIT --- */}
-      <section className="w-full h-screen snap-start bg-[#f5f5f5] flex items-center justify-center p-8 md:p-24">
-         <div className="h-full aspect-[3/4] shadow-2xl relative">
-            <img 
-                src={albumImages[0] || project.url} 
-                alt="Portrait" 
-                className="w-full h-full object-cover"
-            />
-            <span className="absolute -bottom-12 left-1/2 -translate-x-1/2 font-serif italic text-2xl text-gray-400 whitespace-nowrap">
-                {t.portrait}
+      {/* Slide 1: Introduction */}
+      <section className="w-full h-screen snap-start flex flex-col md:flex-row relative bg-black">
+        {/* Left: Text Content */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full flex flex-col items-center justify-center p-8 md:p-20 relative order-2 md:order-1">
+          <div className="text-center text-white">
+            <span className="block text-xs font-bold uppercase tracking-[0.3em] mb-6 md:mb-8 text-white/60 whitespace-pre-line">
+              {project.category || t.intro.location}
             </span>
-         </div>
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif italic mb-2 leading-none">
+              {first} <span className="text-3xl md:text-5xl lg:text-6xl not-italic font-light">&</span>
+            </h1>
+            <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif italic leading-none">
+              {second}
+            </h1>
+          </div>
+        </div>
+
+        {/* Right: Hero Image */}
+        <div className="w-full md:w-1/2 h-1/2 md:h-full relative order-1 md:order-2">
+          <img 
+            src={project.url} 
+            alt={project.title || 'Wedding'} 
+            className="w-full h-full object-cover"
+            onLoad={() => handleImageLoad(0)}
+          />
+        </div>
       </section>
 
+      {/* Photo Slides - Fullscreen */}
+      {albumImages.map((imageUrl, index) => {
+        const slideIndex = index + 1;
+        const isLoaded = imagesLoaded.has(slideIndex);
+
+        return (
+          <section 
+            key={index}
+            className="w-full h-screen snap-start relative bg-black"
+          >
+            <div className="relative w-full h-full">
+              {!isLoaded && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                </div>
+              )}
+              <img 
+                src={imageUrl} 
+                alt={`${project.title} - Photo ${slideIndex}`}
+                className="w-full h-full object-cover"
+                onLoad={() => handleImageLoad(slideIndex)}
+                style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s' }}
+              />
+            </div>
+          </section>
+        );
+      })}
+
+      {/* Navigation Arrows (Desktop) */}
+      {currentSlide < totalSlides - 1 && (
+        <button
+          onClick={() => setCurrentSlide(prev => Math.min(prev + 1, totalSlides - 1))}
+          className="fixed bottom-1/2 right-8 z-[60] w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-colors mix-blend-difference hidden md:flex"
+          aria-label="Next"
+        >
+          <ChevronRight className="w-6 h-6" />
+        </button>
+      )}
+
+      {currentSlide > 0 && (
+        <button
+          onClick={() => setCurrentSlide(prev => Math.max(prev - 1, 0))}
+          className="fixed bottom-1/2 left-8 z-[60] w-12 h-12 flex items-center justify-center text-white hover:bg-white/10 rounded-full transition-colors mix-blend-difference hidden md:flex"
+          aria-label="Previous"
+        >
+          <ChevronLeft className="w-6 h-6" />
+        </button>
+      )}
+
+      {/* Mobile Hint */}
+      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[60] text-white/60 text-xs uppercase tracking-widest text-center md:hidden pointer-events-none">
+        Tap to see more
+      </div>
     </div>
   );
 };
