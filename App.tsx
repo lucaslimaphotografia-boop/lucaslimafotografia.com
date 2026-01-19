@@ -54,8 +54,16 @@ export default function App() {
     setLang(prev => prev === 'pt' ? 'en' : 'pt');
   };
 
-  // Admin access via keyboard shortcut (Ctrl/Cmd + Shift + K)
+  // Admin access via keyboard shortcut (Ctrl/Cmd + Shift + K) or URL parameter
   useEffect(() => {
+    // Verificar se há parâmetro na URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('admin') === 'true') {
+      setCurrentView(ViewState.ADMIN);
+      // Limpar o parâmetro da URL sem recarregar
+      window.history.replaceState({}, '', window.location.pathname);
+    }
+
     const handleKeyPress = (e: KeyboardEvent) => {
       if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
         e.preventDefault();

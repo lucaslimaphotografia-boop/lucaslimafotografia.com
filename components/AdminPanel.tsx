@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ImageItem, Language } from '../types';
 import imagesData from '../images.json';
 import { translations } from '../translations';
 import { 
   Save, Plus, Trash2, Edit2, Image as ImageIcon, 
-  Settings, Eye, EyeOff, Upload, X, Check, Download
+  Settings, Eye, EyeOff, Upload, X, Check, Download, Loader2
 } from 'lucide-react';
 
 interface AdminPanelProps {
@@ -27,6 +27,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [newImageCategory, setNewImageCategory] = useState('Festa');
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
   const [hasChanges, setHasChanges] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
+  const [uploadingAlbum, setUploadingAlbum] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const albumFileInputRef = useRef<HTMLInputElement>(null);
 
   // Senha padrão (em produção, use autenticação adequada)
   const ADMIN_PASSWORD = 'lucaslima2024';
@@ -61,8 +66,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
         hero
       };
 
-      // Em produção, isso seria uma chamada API
-      // Por enquanto, vamos usar localStorage e mostrar instruções
+      // Salvar backup no localStorage
       localStorage.setItem('admin_images_backup', JSON.stringify(updatedData));
       
       // Criar arquivo para download
@@ -75,7 +79,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       URL.revokeObjectURL(url);
 
       setHasChanges(false);
-      alert('✅ Dados salvos! Baixe o arquivo images.json e substitua no projeto.');
+      
+      // Mostrar instruções completas
+      const message = `✅ Dados salvos!\n\n` +
+        `📥 O arquivo images.json foi baixado.\n\n` +
+        `📋 Próximos passos:\n` +
+        `1. Substitua o arquivo images.json no projeto\n` +
+        `2. Execute: git add images.json\n` +
+        `3. Execute: git commit -m "Update images"\n` +
+        `4. Execute: git push origin main\n` +
+        `5. Aguarde o deploy no Vercel (~1-2 min)\n\n` +
+        `💡 Dica: As fotos já estão no Cloudinary e prontas para uso!`;
+      
+      alert(message);
     } catch (error) {
       alert('❌ Erro ao salvar: ' + error);
     }
@@ -157,6 +173,149 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
   const removeAlbumUrl = (index: number) => {
     setNewAlbumUrls(newAlbumUrls.filter((_, i) => i !== index));
+  };
+
+  // Upload de imagem para Cloudinary
+  const uploadToCloudinary = async (file: File, folder?: string): Promise<string> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    if (folder) {
+      formData.append('folder', folder);
+    }
+
+    // Usar upload preset do Cloudinary (unsigned)
+    const cloudName = 'di6xabxne';
+    const uploadPreset = 'ml_default'; // Você pode criar um preset específico no Cloudinary
+
+    const response = await fetch(
+      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+      {
+        method: 'POST',
+        body: formData,
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.text();
+      throw new Error(`Upload failed: ${error}`);
+    }
+
+    const data = await response.json();
+    
+    // Retornar URL otimizada
+    return data.secure_url.replace('/upload/', '/upload/w_1200,q_auto,f_auto/');
+  };
+
+  // Handler para upload de foto principal
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // Validar tipo de arquivo
+    if (!file.type.startsWith('image/')) {
+      alert('Por favor, selecione apenas arquivos de imagem');
+      return;
+    }
+
+    // Validar tamanho (max 10MB)
+    if (file.size > 10 * 1024 * 1024) {
+      alert('Arquivo muito grande. Máximo: 10MB');
+      return;
+    }
+
+    setUploading(true);
+    setUploadProgress({ main: 0 });
+
+    try {
+      const url = await uploadToCloudinary(file, 'portfolio');
+      setNewImageUrl(url);
+      setUploadProgress({ main: 100 });
+      alert('✅ Foto principal enviada com sucesso!');
+    } catch (error: any) {
+      alert('❌ Erro ao fazer upload: ' + error.message);
+    } finally {
+      setUploading(false);
+      if (fileInputRef.current) {
+        fileInputRef.current.value = '';
+      }
+    }
+  };
+
+  // Handler para upload múltiplo de álbum
+  const handleAlbumUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (files.length === 0) return;
+
+    // Validar arquivos
+    const invalidFiles = files.filter(f => !f.type.startsWith('image/'));
+    if (invalidFiles.length > 0) {
+      alert('Por favor, selecione apenas arquivos de imagem');
+      return;
+    }
+
+    const oversizedFiles = files.filter(f => f.size > 10 * 1024 * 1024);
+    if (oversizedFiles.length > 0) {
+      alert('Alguns arquivos são muito grandes. Máximo: 10MB por arquivo');
+      return;
+    }
+
+    setUploadingAlbum(true);
+    setUploadProgress({});
+
+    try {
+      const uploadPromises = files.map(async (file, index) => {
+        setUploadProgress(prev => ({ ...prev, [index]: 0 }));
+        const url = await uploadToCloudinary(file, 'portfolio/albums');
+        setUploadProgress(prev => ({ ...prev, [index]: 100 }));
+        return url;
+      });
+
+      const urls = await Promise.all(uploadPromises);
+      
+      // Adicionar URLs ao array de álbum
+      const currentUrls = newAlbumUrls.filter(url => url.trim());
+      setNewAlbumUrls([...currentUrls, ...urls]);
+      
+      alert(`✅ ${urls.length} foto(s) enviada(s) com sucesso!`);
+    } catch (error: any) {
+      alert('❌ Erro ao fazer upload: ' + error.message);
+    } finally {
+      setUploadingAlbum(false);
+      if (albumFileInputRef.current) {
+        albumFileInputRef.current.value = '';
+      }
+    }
+  };
+
+  // Drag and drop handlers
+  const handleDrop = async (e: React.DragEvent, isAlbum: boolean = false) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    
+    if (isAlbum) {
+      const input = albumFileInputRef.current;
+      if (input) {
+        const dt = new DataTransfer();
+        files.forEach(file => dt.items.add(file));
+        input.files = dt.files;
+        handleAlbumUpload({ target: input } as any);
+      }
+    } else {
+      const file = files[0];
+      if (file) {
+        const input = fileInputRef.current;
+        if (input) {
+          const dt = new DataTransfer();
+          dt.items.add(file);
+          input.files = dt.files;
+          handleFileUpload({ target: input } as any);
+        }
+      }
+    }
+  };
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
   };
 
   const addHeroImage = () => {
@@ -296,15 +455,69 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                 </div>
 
                 <div className="space-y-4">
+                  {/* Upload de Foto Principal */}
                   <div>
-                    <label className="block text-sm font-medium mb-2">URL da Foto Principal *</label>
-                    <input
-                      type="text"
-                      value={newImageUrl}
-                      onChange={(e) => setNewImageUrl(e.target.value)}
-                      placeholder="https://exemplo.com/foto.jpg"
-                      className="w-full px-4 py-2 border border-gray-300 rounded"
-                    />
+                    <label className="block text-sm font-medium mb-2">Foto Principal *</label>
+                    
+                    {/* Área de Drag & Drop */}
+                    <div
+                      onDrop={(e) => handleDrop(e, false)}
+                      onDragOver={handleDragOver}
+                      className={`border-2 border-dashed rounded-lg p-8 text-center transition-colors ${
+                        uploading ? 'border-blue-500 bg-blue-50' : 'border-gray-300 hover:border-gray-400'
+                      }`}
+                    >
+                      {uploading ? (
+                        <div className="flex flex-col items-center gap-2">
+                          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+                          <span className="text-sm text-gray-600">Enviando...</span>
+                        </div>
+                      ) : newImageUrl ? (
+                        <div className="flex flex-col items-center gap-2">
+                          <img src={newImageUrl} alt="Preview" className="max-h-32 rounded" />
+                          <span className="text-sm text-green-600">✓ Foto carregada</span>
+                          <button
+                            onClick={() => setNewImageUrl('')}
+                            className="text-xs text-red-600 hover:text-red-800"
+                          >
+                            Remover
+                          </button>
+                        </div>
+                      ) : (
+                        <>
+                          <Upload className="w-12 h-12 mx-auto text-gray-400 mb-2" />
+                          <p className="text-sm text-gray-600 mb-2">
+                            Arraste uma foto aqui ou clique para selecionar
+                          </p>
+                          <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/*"
+                            onChange={handleFileUpload}
+                            className="hidden"
+                            id="main-image-upload"
+                          />
+                          <label
+                            htmlFor="main-image-upload"
+                            className="inline-block bg-black text-white px-4 py-2 rounded cursor-pointer hover:bg-gray-800 transition-colors"
+                          >
+                            Selecionar Arquivo
+                          </label>
+                        </>
+                      )}
+                    </div>
+
+                    {/* Ou colar URL */}
+                    <div className="mt-4">
+                      <p className="text-xs text-gray-500 mb-2">Ou cole uma URL:</p>
+                      <input
+                        type="text"
+                        value={newImageUrl}
+                        onChange={(e) => setNewImageUrl(e.target.value)}
+                        placeholder="https://exemplo.com/foto.jpg"
+                        className="w-full px-4 py-2 border border-gray-300 rounded text-sm"
+                      />
+                    </div>
                   </div>
 
                   <div>
@@ -338,21 +551,67 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <label className="block text-sm font-medium">Fotos do Álbum (opcional)</label>
-                      <button
-                        onClick={addAlbumUrl}
-                        className="text-sm text-blue-600 hover:text-blue-800"
-                      >
-                        + Adicionar URL
-                      </button>
+                      <div className="flex gap-2">
+                        <input
+                          ref={albumFileInputRef}
+                          type="file"
+                          accept="image/*"
+                          multiple
+                          onChange={handleAlbumUpload}
+                          className="hidden"
+                          id="album-images-upload"
+                        />
+                        <label
+                          htmlFor="album-images-upload"
+                          className="text-sm text-blue-600 hover:text-blue-800 cursor-pointer flex items-center gap-1"
+                        >
+                          <Upload className="w-4 h-4" />
+                          {uploadingAlbum ? 'Enviando...' : 'Upload Múltiplo'}
+                        </label>
+                        <button
+                          onClick={addAlbumUrl}
+                          className="text-sm text-blue-600 hover:text-blue-800"
+                        >
+                          + Adicionar URL
+                        </button>
+                      </div>
                     </div>
+
+                    {/* Área de Drag & Drop para Álbum */}
+                    {!uploadingAlbum && newAlbumUrls.filter(url => url.trim()).length === 0 && (
+                      <div
+                        onDrop={(e) => handleDrop(e, true)}
+                        onDragOver={handleDragOver}
+                        className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors mb-4"
+                      >
+                        <Upload className="w-8 h-8 mx-auto text-gray-400 mb-2" />
+                        <p className="text-sm text-gray-600">
+                          Arraste múltiplas fotos aqui ou use o botão "Upload Múltiplo"
+                        </p>
+                      </div>
+                    )}
+
+                    {uploadingAlbum && (
+                      <div className="border border-blue-300 rounded-lg p-4 mb-4 bg-blue-50">
+                        <div className="flex items-center gap-2">
+                          <Loader2 className="w-5 h-5 animate-spin text-blue-500" />
+                          <span className="text-sm text-gray-600">Enviando fotos...</span>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Lista de URLs do Álbum */}
                     {newAlbumUrls.map((url, index) => (
-                      <div key={index} className="flex gap-2 mb-2">
+                      <div key={index} className="flex gap-2 mb-2 items-center">
+                        {url && url.startsWith('http') && (
+                          <img src={url} alt={`Preview ${index}`} className="w-16 h-16 object-cover rounded" />
+                        )}
                         <input
                           type="text"
                           value={url}
                           onChange={(e) => updateAlbumUrl(index, e.target.value)}
                           placeholder={`URL da foto ${index + 1} do álbum`}
-                          className="flex-1 px-4 py-2 border border-gray-300 rounded"
+                          className="flex-1 px-4 py-2 border border-gray-300 rounded text-sm"
                         />
                         {newAlbumUrls.length > 1 && (
                           <button
