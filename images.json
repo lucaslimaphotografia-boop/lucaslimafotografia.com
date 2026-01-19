@@ -1,0 +1,156 @@
+{
+  "gallery": [
+    {
+      "id": 1,
+      "url": "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
+      "category": "Detalhes",
+      "title": "Alianças em Ouro",
+      "album": [
+        "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop"
+      ]
+    },
+    {
+      "id": 2,
+      "url": "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+      "category": "Noiva",
+      "title": "Retrato no Jardim",
+      "album": [
+        "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop"
+      ]
+    },
+    {
+      "id": 3,
+      "url": "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop",
+      "category": "Festa",
+      "title": "Saída dos Noivos"
+    },
+    {
+      "id": 4,
+      "url": "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop",
+      "category": "Preto & Branco",
+      "title": "Dança Espontânea"
+    },
+    {
+      "id": 5,
+      "url": "https://images.unsplash.com/photo-1520854226103-38f5c5b7d629?q=80&w=800&auto=format&fit=crop",
+      "category": "Editorial",
+      "title": "Sessão de Moda"
+    },
+    {
+      "id": 6,
+      "url": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop",
+      "category": "Noiva",
+      "title": "Véu ao Vento"
+    },
+    {
+      "id": 7,
+      "url": "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop",
+      "category": "Festa",
+      "title": "Brinde dos Padrinhos"
+    },
+    {
+      "id": 8,
+      "url": "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop",
+      "category": "Detalhes",
+      "title": "Decoração de Mesa"
+    },
+    {
+      "id": 9,
+      "url": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
+      "category": "Noivo",
+      "title": "Preparação do Noivo"
+    },
+    {
+      "id": 10,
+      "url": "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop",
+      "category": "Preto & Branco",
+      "title": "Olhares"
+    },
+    {
+      "id": 11,
+      "url": "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?q=80&w=800&auto=format&fit=crop",
+      "category": "Editorial",
+      "title": "Pôr do Sol na Praia"
+    },
+    {
+      "id": 12,
+      "url": "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?q=80&w=800&auto=format&fit=crop",
+      "category": "Imprensa",
+      "title": "Publicação Vogue"
+    },
+    {
+      "id": 13,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_400,h_600,c_fill,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-100-2195d5b6-300_e1ex6m.jpg",
+      "category": "Festa",
+      "title": "Carol & Ricardo",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-100-2195d5b6-300_e1ex6m.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853070/mostruario-carolericardo-lucaslimafotografia-103-805093a6-300_kyxo34.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-104-1e52d1b6-300_xcnvc3.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853032/mostruario-carolericardo-lucaslimafotografia-107-d3225745-300_so1mtl.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-108-3b818ce7-300_wffnnj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-114-c9360e14-300_wz4zuf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853032/mostruario-carolericardo-lucaslimafotografia-116-6ae511b6-300_jowzhy.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853032/mostruario-carolericardo-lucaslimafotografia-119-98529345-300_jkccgv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853021/mostruario-carolericardo-lucaslimafotografia-121-3997d555-300_lw9kkc.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853029/mostruario-carolericardo-lucaslimafotografia-127-f4af8544-300_amdyc9.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-14-0e0eca72-2500_com7fl.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853032/mostruario-carolericardo-lucaslimafotografia-146-9a0fb4d2-2500_ja2g1f.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-18-5d7c0e91-2500_e5w8nc.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853021/mostruario-carolericardo-lucaslimafotografia-2-b97f5605-2500_t5twol.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853035/mostruario-carolericardo-lucaslimafotografia-24-ed400142-2500_vdl52q.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853020/mostruario-carolericardo-lucaslimafotografia-33-1ff783b1-2500_fnkur3.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853023/mostruario-carolericardo-lucaslimafotografia-35-653a5d64-2500_gpfnbd.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853033/mostruario-carolericardo-lucaslimafotografia-39-d24bc113-2500_kv2l6k.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853029/mostruario-carolericardo-lucaslimafotografia-41-f3cd9310-2500_ud8nu9.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853070/mostruario-carolericardo-lucaslimafotografia-42-ce1f6665-300_pdkseu.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853022/mostruario-carolericardo-lucaslimafotografia-45-3ca8e496-300_oyb65s.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-5-fcb94881-2500_mrs7sq.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-50-8c94eb45-300_n6kgvj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853053/mostruario-carolericardo-lucaslimafotografia-51-0d22a26d-300_yt8uif.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853021/mostruario-carolericardo-lucaslimafotografia-52-ace7e47d-300_kbdcci.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-54-1cdbebae-300_fukelz.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853022/mostruario-carolericardo-lucaslimafotografia-55-5e50668e-300_yulaco.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853033/mostruario-carolericardo-lucaslimafotografia-56-ee6c695d-300_aigjmj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853033/mostruario-carolericardo-lucaslimafotografia-59-0a036cba-300_gml2fo.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853022/mostruario-carolericardo-lucaslimafotografia-63-62df031e-300_owyjuf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853020/mostruario-carolericardo-lucaslimafotografia-66-d2e30ccd-300_vzfon2.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853033/mostruario-carolericardo-lucaslimafotografia-67-8191c82e-300_twmljv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-70-20548e3e-300_quu39a.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-71-56f5178c-300_uoxbzg.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853022/mostruario-carolericardo-lucaslimafotografia-75-6059e06c-300_yhvezz.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853032/mostruario-carolericardo-lucaslimafotografia-76-a442957f-300_i4inyk.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-78-b73d3fce-300_dvt3ug.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-80-92ee629f-300_dj9ihd.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-81-458abd3d-300_fb93gy.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853071/mostruario-carolericardo-lucaslimafotografia-83-f2fb214a-300_odw2zi.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853022/mostruario-carolericardo-lucaslimafotografia-90-004ca3b9-300_rd9uml.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853028/mostruario-carolericardo-lucaslimafotografia-94-306c9c75-300_du9etj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853019/mostruario-carolericardo-lucaslimafotografia-95-c2db1e86-300_mo6ejz.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1768853021/mostruario-carolericardo-lucaslimafotografia-96-72e71155-300_bk0yob.jpg"
+      ]
+    }
+  ],
+  "hero": [
+    "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1520854226103-38f5c5b7d629?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?q=80&w=800&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?q=80&w=800&auto=format&fit=crop"
+  ]
+}

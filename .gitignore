@@ -17,6 +17,10 @@ dist-ssr
 .env.local
 .env.production
 
+# Downloaded images
+downloads/
+scripts/downloads/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

@@ -16,6 +16,7 @@ export interface ImageItem {
   url: string;
   category: string;
   title?: string;
+  album?: string[]; // Array de URLs das fotos do álbum/projeto
 }
 
 export interface NavItem {

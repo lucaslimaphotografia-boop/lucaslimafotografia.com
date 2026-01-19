@@ -9,16 +9,24 @@ interface ProjectDetailsProps {
   lang: Language;
 }
 
-const albumImages = [
-  "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop", 
-  "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop", 
-  "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop", 
-  "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop", 
-  "https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop", 
-];
+// Usa as fotos do álbum do projeto, ou fotos padrão se não houver álbum
+const getAlbumImages = (project: ImageItem): string[] => {
+  if (project.album && project.album.length > 0) {
+    return project.album;
+  }
+  // Fotos padrão caso não tenha álbum definido
+  return [
+    project.url,
+    "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop", 
+    "https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop", 
+    "https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop", 
+    "https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop", 
+  ];
+};
 
 export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack, onMenuOpen, lang }) => {
   const t = translations[lang].details;
+  const albumImages = getAlbumImages(project);
 
   return (
     <div className="fixed inset-0 bg-white z-50 overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar">
@@ -96,7 +104,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
           <div className="w-full md:w-1/2 h-1/2 md:h-full p-4 md:p-12 flex items-center justify-center">
              <div className="w-full h-full relative overflow-hidden">
                 <img 
-                    src={albumImages[3]} 
+                    src={albumImages[3] || albumImages[0]} 
                     alt="Detail 1" 
                     className="w-full h-full object-cover grayscale contrast-125"
                 />
@@ -105,7 +113,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
           <div className="w-full md:w-1/2 h-1/2 md:h-full p-4 md:p-12 flex items-center justify-center">
             <div className="w-full h-full relative overflow-hidden">
                 <img 
-                    src={albumImages[1]} 
+                    src={albumImages[1] || albumImages[0]} 
                     alt="Detail 2" 
                     className="w-full h-full object-cover"
                 />
@@ -116,7 +124,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
       {/* --- SLIDE 3: FULL SCREEN IMMERSIVE --- */}
       <section className="w-full h-screen snap-start relative">
          <img 
-            src={albumImages[2]} 
+            src={albumImages[2] || albumImages[0]} 
             alt="Party" 
             className="w-full h-full object-cover"
          />
@@ -129,7 +137,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
       <section className="w-full h-screen snap-start bg-[#f5f5f5] flex items-center justify-center p-8 md:p-24">
          <div className="h-full aspect-[3/4] shadow-2xl relative">
             <img 
-                src={albumImages[0]} 
+                src={albumImages[0] || project.url} 
                 alt="Portrait" 
                 className="w-full h-full object-cover"
             />

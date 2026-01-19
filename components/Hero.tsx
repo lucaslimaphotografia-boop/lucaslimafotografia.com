@@ -1,20 +1,8 @@
 import React from 'react';
+import imagesData from '../images.json';
 
-// Using the same images as Gallery for consistency, but structured for columns
-const heroImages = [
-  'https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1520854226103-38f5c5b7d629?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?q=80&w=800&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?q=80&w=800&auto=format&fit=crop',
-];
+// Using images from images.json for consistency
+const heroImages: string[] = imagesData.hero;
 
 // Split images into 3 columns
 const col1 = heroImages.slice(0, 4);

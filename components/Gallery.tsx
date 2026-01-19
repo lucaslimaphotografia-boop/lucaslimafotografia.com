@@ -2,21 +2,9 @@ import React, { useState, useMemo, useEffect } from 'react';
 import { Search } from 'lucide-react';
 import { ImageItem, GalleryProps, Language } from '../types';
 import { translations } from '../translations';
+import imagesData from '../images.json';
 
-const sampleImages: ImageItem[] = [
-  { id: 1, url: 'https://images.unsplash.com/photo-1511285560982-1351c4f809b9?q=80&w=800&auto=format&fit=crop', category: 'Detalhes', title: 'Alianças em Ouro' },
-  { id: 2, url: 'https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=800&auto=format&fit=crop', category: 'Noiva', title: 'Retrato no Jardim' },
-  { id: 3, url: 'https://images.unsplash.com/photo-1519225468359-2996bc017a12?q=80&w=800&auto=format&fit=crop', category: 'Festa', title: 'Saída dos Noivos' },
-  { id: 4, url: 'https://images.unsplash.com/photo-1604017011826-d3b4c23f8914?q=80&w=800&auto=format&fit=crop', category: 'Preto & Branco', title: 'Dança Espontânea' },
-  { id: 5, url: 'https://images.unsplash.com/photo-1520854226103-38f5c5b7d629?q=80&w=800&auto=format&fit=crop', category: 'Editorial', title: 'Sessão de Moda' },
-  { id: 6, url: 'https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop', category: 'Noiva', title: 'Véu ao Vento' },
-  { id: 7, url: 'https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=800&auto=format&fit=crop', category: 'Festa', title: 'Brinde dos Padrinhos' },
-  { id: 8, url: 'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=800&auto=format&fit=crop', category: 'Detalhes', title: 'Decoração de Mesa' },
-  { id: 9, url: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=800&auto=format&fit=crop', category: 'Noivo', title: 'Preparação do Noivo' },
-  { id: 10, url: 'https://images.unsplash.com/photo-1522673607200-1645062cd958?q=80&w=800&auto=format&fit=crop', category: 'Preto & Branco', title: 'Olhares' },
-  { id: 11, url: 'https://images.unsplash.com/photo-1519741347686-c1e0aadf4611?q=80&w=800&auto=format&fit=crop', category: 'Editorial', title: 'Pôr do Sol na Praia' },
-  { id: 12, url: 'https://images.unsplash.com/photo-1470116892389-0de5d9770b2c?q=80&w=800&auto=format&fit=crop', category: 'Imprensa', title: 'Publicação Vogue' },
-];
+const sampleImages: ImageItem[] = imagesData.gallery as ImageItem[];
 
 export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
   const t = translations[lang].gallery;
