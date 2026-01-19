@@ -8,9 +8,10 @@ interface MenuOverlayProps {
   onClose: () => void;
   onNavigate: (view: ViewState) => void;
   lang: Language;
+  onAdminAccess?: () => void;
 }
 
-export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNavigate, lang }) => {
+export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNavigate, lang, onAdminAccess }) => {
   if (!isOpen) return null;
 
   const t = translations[lang].menu;
@@ -90,6 +91,18 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNav
             >
                 {t.faq}
             </button>
+            {onAdminAccess && (
+              <button 
+                  onClick={() => {
+                    onAdminAccess();
+                    onClose();
+                  }} 
+                  className="text-gray-500 hover:text-white transition-all text-[0.65rem] mt-2"
+                  title="Painel Admin (Ctrl+Shift+K)"
+              >
+                  Admin
+              </button>
+            )}
          </div>
       </div>
     </div>

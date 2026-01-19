@@ -7,13 +7,17 @@ Painel de administração estilo WordPress para gerenciar o conteúdo do site se
 ### Método 1: Atalho de Teclado (Recomendado)
 
 1. **Acesse o site** (qualquer página)
-2. **Pressione:** `Ctrl + Shift + A` (Windows/Linux) ou `Cmd + Shift + A` (Mac)
+2. **Pressione:** `Ctrl + Shift + K` (Windows/Linux) ou `Cmd + Shift + K` (Mac)
 3. **Digite a senha:** `lucaslima2024`
 4. **Pronto!** Você está no painel de administração
 
-### Método 2: URL Direta (Se configurado)
+### Método 2: Pelo Menu
 
-Você pode adicionar um link secreto ou configurar uma rota específica.
+1. **Abra o menu** (clique no botão de menu ou navegação vertical)
+2. **Role até o final** do menu
+3. **Clique em "Admin"** (no canto inferior direito)
+4. **Digite a senha:** `lucaslima2024`
+5. **Pronto!** Você está no painel de administração
 
 ## 🔐 Segurança
 
@@ -195,4 +199,4 @@ Para produção, recomendo:
 
 ---
 
-**Pronto para usar!** Pressione `Ctrl+Shift+A` (ou `Cmd+Shift+A` no Mac) no site para acessar! 🚀
+**Pronto para usar!** Pressione `Ctrl+Shift+K` (ou `Cmd+Shift+K` no Mac) no site para acessar, ou use o botão "Admin" no menu! 🚀

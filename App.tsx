@@ -54,10 +54,10 @@ export default function App() {
     setLang(prev => prev === 'pt' ? 'en' : 'pt');
   };
 
-  // Admin access via keyboard shortcut (Ctrl/Cmd + Shift + A)
+  // Admin access via keyboard shortcut (Ctrl/Cmd + Shift + K)
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'A') {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'K') {
         e.preventDefault();
         setCurrentView(ViewState.ADMIN);
       }
@@ -187,6 +187,7 @@ export default function App() {
             }
         }}
         lang={lang}
+        onAdminAccess={() => setCurrentView(ViewState.ADMIN)}
       />
 
       {/* Claude Chat */}
