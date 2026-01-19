@@ -1,3 +1,4 @@
+// Versão alternativa usando JavaScript puro (mais compatível)
 import Anthropic from '@anthropic-ai/sdk';
 
 export default async function handler(req, res) {
@@ -69,7 +70,7 @@ INSTRUÇÕES:
       model: 'claude-3-5-sonnet-20241022',
       max_tokens: 1024,
       system: systemMessage,
-      messages: messages.map((msg: any) => ({
+      messages: messages.map(msg => ({
         role: msg.role,
         content: msg.content
       }))
@@ -78,7 +79,7 @@ INSTRUÇÕES:
     const content = response.content[0].text;
 
     return res.status(200).json({ content });
-  } catch (error: any) {
+  } catch (error) {
     console.error('Error calling Claude API:', error);
     
     // Mensagens de erro mais amigáveis
