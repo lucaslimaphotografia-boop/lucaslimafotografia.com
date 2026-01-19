@@ -13,21 +13,36 @@ Ou use o atalho: `Ctrl+Shift+K` (Windows) ou `Cmd+Shift+K` (Mac)
 
 ## ⚙️ Configuração do Cloudinary
 
-### Passo 1: Criar Upload Preset no Cloudinary
+### Passo 1: Criar Upload Preset no Cloudinary (IMPORTANTE!)
+
+⚠️ **ATENÇÃO:** Este passo é CRÍTICO para que o upload funcione!
 
 1. Acesse o [Cloudinary Dashboard](https://cloudinary.com/console)
 2. Vá em **Settings** → **Upload**
-3. Role até **Upload presets**
-4. Clique em **Add upload preset**
-5. Configure:
-   - **Preset name:** `ml_default` (ou o nome que preferir)
-   - **Signing mode:** `Unsigned` (importante!)
+3. Role até a seção **Upload presets**
+4. Clique em **Add upload preset** (ou edite um preset existente)
+
+5. **Configure EXATAMENTE assim:**
+   - **Preset name:** `ml_default` (ou escolha outro nome, mas deve ser o mesmo no código)
+   - **Signing mode:** ⚠️ **Selecione `Unsigned`** (CRÍTICO!)
    - **Folder:** `portfolio` (opcional, para organizar)
+   
+6. **Permissões de Upload (muito importante!):**
+   - Na seção **Access control** ou **Restricted media types**, certifique-se de que:
+     - ✅ Uploads unsigned estão permitidos
+     - ✅ Nenhuma restrição está bloqueando uploads
+   
+7. **Transformações (opcional):**
    - **Incoming transformation:** 
      - Width: `1200`
      - Quality: `auto`
      - Format: `auto`
-6. Clique em **Save**
+
+8. **Clique em "Save"** para salvar o preset
+
+9. **Verifique se o preset foi criado corretamente:**
+   - O preset deve aparecer na lista com o ícone de "Unsigned"
+   - O status deve ser "Active"
 
 ### Passo 2: Configurar Variáveis de Ambiente no Vercel (Opcional)
 

@@ -200,8 +200,33 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     );
 
     if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`Upload failed: ${error}`);
+      const errorText = await response.text();
+      let errorMessage = `Upload failed: ${errorText}`;
+      
+      // Mensagens de erro mais amigáveis
+      if (errorText.includes('whitelisted')) {
+        errorMessage = `❌ Erro de Configuração!\n\n` +
+          `O preset "${uploadPreset}" precisa estar configurado como "Unsigned" no Cloudinary.\n\n` +
+          `🔧 Como corrigir:\n` +
+          `1. Acesse: https://cloudinary.com/console\n` +
+          `2. Vá em Settings → Upload → Upload presets\n` +
+          `3. Encontre o preset "${uploadPreset}"\n` +
+          `4. Edite e configure "Signing mode" como "Unsigned"\n` +
+          `5. Salve e tente novamente\n\n` +
+          `📖 Veja o guia: GUIA_UPLOAD_CLOUDINARY.md`;
+      } else if (errorText.includes('preset')) {
+        errorMessage = `❌ Preset não encontrado!\n\n` +
+          `O preset "${uploadPreset}" não existe no Cloudinary.\n\n` +
+          `🔧 Crie o preset:\n` +
+          `1. Acesse: https://cloudinary.com/console\n` +
+          `2. Vá em Settings → Upload → Upload presets\n` +
+          `3. Clique em "Add upload preset"\n` +
+          `4. Nome: "${uploadPreset}"\n` +
+          `5. Signing mode: "Unsigned"\n` +
+          `6. Salve e tente novamente`;
+      }
+      
+      throw new Error(errorMessage);
     }
 
     const data = await response.json();
