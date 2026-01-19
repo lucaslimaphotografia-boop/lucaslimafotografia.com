@@ -59,7 +59,8 @@ export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to get response');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.message || errorData.error || 'Failed to get response');
       }
 
       const data = await response.json();
@@ -68,13 +69,27 @@ export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
         content: data.content || t.error
       };
       setMessages(prev => [...prev, assistantMessage]);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error:', error);
-      const errorMessage: Message = {
+      
+      // Mensagens de erro mais específicas
+      let errorMessage = t.error;
+      
+      if (error.message?.includes('API key not configured')) {
+        errorMessage = '⚠️ API Key não configurada. Configure a variável ANTHROPIC_API_KEY no Vercel.';
+      } else if (error.message?.includes('authentication')) {
+        errorMessage = '⚠️ Erro de autenticação. Verifique sua API Key no Vercel.';
+      } else if (error.message?.includes('Failed to fetch') || error.message?.includes('NetworkError')) {
+        errorMessage = '⚠️ Erro de conexão. Verifique se a API route está configurada corretamente.';
+      } else if (error.message) {
+        errorMessage = `⚠️ Erro: ${error.message}`;
+      }
+      
+      const errorMsg: Message = {
         role: 'assistant',
-        content: t.error
+        content: errorMessage
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages(prev => [...prev, errorMsg]);
     } finally {
       setIsLoading(false);
     }
