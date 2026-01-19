@@ -1,0 +1,266 @@
+import { ViewState } from './types';
+
+export const translations = {
+  pt: {
+    menu: {
+      portfolio: 'Portfólio',
+      about: 'Sobre Nós',
+      testimonials: 'Depoimentos',
+      contact: 'Contato',
+      albums: 'Álbuns/Livros',
+      search: 'Busca',
+      faq: 'Perguntas Frequentes',
+      close: 'Fechar',
+      privacy: 'Política de Privacidade',
+      rights: 'Direitos Comerciais',
+      projects: 'Projetos Criativos',
+      instagram: 'Instagram'
+    },
+    nav: {
+      menu: 'Menu',
+      home: 'Início'
+    },
+    gallery: {
+      searchTitle: 'Busque por',
+      searchPlaceholder: 'Digite para buscar (ex: Noiva, Detalhes...)',
+      rotatingWords: ["Momentos", "Lugares", "Pessoas", "Histórias", "Emoções", "Detalhes"],
+      categories: {
+        "Todos": "Todos",
+        "Imprensa": "Imprensa",
+        "Noiva": "Noiva",
+        "Noivo": "Noivo",
+        "Festa": "Festa",
+        "Editorial": "Editorial",
+        "Detalhes": "Detalhes",
+        "Preto & Branco": "Preto & Branco"
+      },
+      noResults: "Nenhum momento encontrado.",
+      clearFilters: "Limpar Filtros"
+    },
+    about: {
+      title: "Minha História",
+      story: [
+        "A fotografia de casamento sempre esteve entrelaçada à minha história, como se cada clique que hoje faço fosse, na verdade, um eco da minha infância. Cresci cercado por câmeras, cerimônias e celebrações. Meus pais — também apaixonados pela arte de eternizar momentos — me ensinaram a olhar além da imagem, a enxergar o invisível: um olhar emocionado, um gesto sutil, um instante de silêncio carregado de significado.",
+        "Durante os 15 anos em que trilhei profissionalmente esse caminho, vivi intensamente a beleza da fotografia e descobri que ela vai muito além da técnica. Aprendi que a luz mais bonita é a que nasce da conexão verdadeira entre as pessoas. E que o tempo, embora incansável, não consegue apagar aquilo que é registrado com alma.",
+        "Tive o privilégio de contar histórias de amor em lugares como Estados Unidos, Marrocos, República Tcheca, Portugal, Itália, França, Uruguai e México. Cada destino trouxe novos olhares, culturas e inspirações, contribuindo para a lapidação do meu estilo — uma assinatura que hoje reconheço e valorizo: a Fotografia Atemporal.",
+        "Meu trabalho é guiado por uma busca constante por emoções autênticas. Acredito na força das imagens que resistem ao tempo, que não seguem modismos passageiros, mas que permanecem belas, sensíveis e verdadeiras ao longo dos anos. É isso que me move: capturar o que é eterno no efêmero."
+      ],
+      years: "Anos de História",
+      countries: "Países Fotografados"
+    },
+    contact: {
+      title: "Fale\nConosco",
+      direct: "Contato Direto",
+      whatsapp: "Iniciar conversa no WhatsApp",
+      infoText: "Para entrar em contato com LUCASLIMA ou solicitar um orçamento detalhado dos nossos serviços de fotografia de casamento, por favor preencha suas informações e entraremos em contato em até 24 horas.",
+      form: {
+        name: "Nome Completo",
+        email: "Email",
+        type: "Tipo de Evento",
+        date: "Data",
+        found: "Como nos encontrou?",
+        message: "Mensagem",
+        consent: "Concordo que as informações enviadas acima sejam gravadas e usadas para comunicação comigo.",
+        submit: "Enviar Solicitação",
+        types: ["Casamento", "Noivado", "Editorial"]
+      }
+    },
+    testimonials: {
+      title: "Depoimentos"
+    },
+    faq: {
+      title: "Perguntas Frequentes",
+      items: [
+        {
+          question: "Qual é o seu estilo de fotografia?",
+          answer: "Meu estilo é atemporal, elegante e profundamente conectado à história de cada casal.\n\nBusco uma fotografia que vá além da estética bonita: quero registrar sentimentos reais, gestos espontâneos e a atmosfera do dia exatamente como ela aconteceu — sem poses engessadas ou interferências excessivas.\n\nTrabalho de forma documental e artística, criando imagens que continuem emocionando daqui a 10, 20 ou 30 anos.\nCada casamento é único, e minhas fotos refletem isso: narrativa, luz natural, composição refinada e muita sensibilidade."
+        },
+        {
+          question: "Você viaja para casamentos internacionais?",
+          answer: "Sim, com muito prazer.\nFotografo casamentos no Brasil e no exterior, acompanhando casais que escolhem celebrar sua história em destinos especiais pelo mundo.\n\nJá realizo casamentos internacionais e destination weddings, cuidando de toda a logística para que a experiência seja tranquila e segura para vocês — desde o planejamento até a entrega final das imagens.\n\nBasta me contar onde será o seu grande dia. 🌍"
+        },
+        {
+          question: "Como funciona a entrega das fotos?",
+          answer: "Após o casamento, faço uma curadoria cuidadosa de todas as imagens para contar a história completa do dia.\nVocês recebem:\n• Galeria online exclusiva, elegante e fácil de usar\n• Fotos em alta resolução, prontas para download\n• Backup seguro por longo prazo, para total tranquilidade\n\nO prazo médio de entrega é de até 30 dias, e cada galeria é pensada para que vocês revivam cada momento com a mesma emoção do dia do casamento."
+        },
+        {
+          question: "Vocês oferecem álbuns impressos?",
+          answer: "Sim — e eles são uma parte essencial da experiência.\n\nMeus álbuns são produzidos com os melhores materiais do mundo, totalmente personalizados, com design autoral e acabamento premium.\nEles transformam a história do casamento em um objeto físico atemporal, que atravessa gerações.\n\nAlém do álbum principal, também ofereço mini-álbuns para os pais e opções de caixas, capas especiais e formatos exclusivos."
+        },
+        {
+          question: "Quantos fotógrafos estarão no meu casamento?",
+          answer: "Isso depende do tamanho, da dinâmica e da proposta do seu evento.\nNormalmente trabalho com 2 a 3 fotógrafos, garantindo que todos os momentos importantes sejam registrados com profundidade, sensibilidade e segurança.\n\nCada equipe é pensada sob medida para o seu casamento — nada é padrão, tudo é personalizado."
+        },
+        {
+          question: "Como reservamos a data?",
+          answer: "A reserva é simples e segura:\n\n1. Conversamos para entender a história e o projeto do seu casamento\n2. Definimos o pacote ideal para vocês\n3. Enviamos o contrato\n4. A data é garantida mediante assinatura do contrato e pagamento do sinal\n\nA partir daí, vocês passam a contar com meu acompanhamento completo até o grande dia."
+        }
+      ]
+    },
+    photobook: {
+      title: "Fine Art\nBooks",
+      quote: "\"Uma fotografia não tirada é uma memória que não existe. Uma fotografia não impressa é uma memória que não se pode tocar.\"",
+      collection: "The Signature Collection",
+      features: [
+        { title: "Papel Algodão", desc: "Textura suave de museu, garantindo durabilidade de 100 anos." },
+        { title: "Linho Italiano", desc: "Capas feitas à mão com os melhores tecidos da Toscana." },
+        { title: "Design Editorial", desc: "Layouts limpos e minimalistas que contam a história sem distrações." }
+      ],
+      magazine: {
+        title: "A Revista",
+        desc: "Para casais que desejam algo mais contemporâneo, oferecemos a Revista Editorial. Impressa em papel fosco de alta gramatura, é perfeita para deixar na mesa de centro e compartilhar com amigos de uma forma descontraída e chique.",
+        cta: "Solicitar Orçamento"
+      }
+    },
+    details: {
+      back: "Voltar",
+      menu: "Menu",
+      credits: "Créditos",
+      intro: {
+        location: "Villa Balbiano\nLake Como"
+      },
+      immersive: "Celebração",
+      portrait: "Elegância Eterna"
+    },
+    chat: {
+      title: "Assistente Virtual",
+      open: "Abrir chat",
+      close: "Fechar chat",
+      placeholder: "Digite sua mensagem...",
+      send: "Enviar",
+      error: "Desculpe, ocorreu um erro. Por favor, tente novamente.",
+      disclaimer: "Respostas geradas por IA. Podem conter imprecisões."
+    }
+  },
+  en: {
+    menu: {
+      portfolio: 'Portfolio',
+      about: 'About Us',
+      testimonials: 'Testimonials',
+      contact: 'Contact',
+      albums: 'Albums/Books',
+      search: 'Search',
+      faq: 'FAQ',
+      close: 'Close',
+      privacy: 'Privacy Policy',
+      rights: 'Commercial Rights',
+      projects: 'Creative Projects',
+      instagram: 'Instagram'
+    },
+    nav: {
+      menu: 'Menu',
+      home: 'Home'
+    },
+    gallery: {
+      searchTitle: 'Search by',
+      searchPlaceholder: 'Type to search (e.g. Bride, Details...)',
+      rotatingWords: ["Moments", "Places", "People", "Stories", "Emotions", "Details"],
+      categories: {
+        "Todos": "All",
+        "Imprensa": "Press",
+        "Noiva": "Bride",
+        "Noivo": "Groom",
+        "Festa": "Party",
+        "Editorial": "Editorial",
+        "Detalhes": "Details",
+        "Preto & Branco": "Black & White"
+      },
+      noResults: "No moments found.",
+      clearFilters: "Clear Filters"
+    },
+    about: {
+      title: "My Story",
+      story: [
+        "Wedding photography has always been intertwined with my history, as if every click I make today was actually an echo of my childhood. I grew up surrounded by cameras, ceremonies, and celebrations. My parents—also passionate about the art of capturing moments—taught me to look beyond the image, to see the invisible: an emotional gaze, a subtle gesture, a moment of silence charged with meaning.",
+        "During the 15 years I have professionally walked this path, I have intensely lived the beauty of photography and discovered that it goes far beyond technique. I learned that the most beautiful light is the one born from the true connection between people. And that time, although relentless, cannot erase what is recorded with soul.",
+        "I have had the privilege of telling love stories in places like the United States, Morocco, the Czech Republic, Portugal, Italy, France, Uruguay, and Mexico. Each destination brought new perspectives, cultures, and inspirations, contributing to the refinement of my style—a signature I recognize and value today: Timeless Photography.",
+        "My work is guided by a constant search for authentic emotions. I believe in the power of images that withstand time, that do not follow fleeting trends, but remain beautiful, sensitive, and true over the years. This is what moves me: capturing what is eternal in the ephemeral."
+      ],
+      years: "Years of History",
+      countries: "Countries Photographed"
+    },
+    contact: {
+      title: "Contact\nUs",
+      direct: "Direct Contact",
+      whatsapp: "Start WhatsApp Chat",
+      infoText: "To contact LUCASLIMA or request a detailed quote for our wedding photography services, please fill out your information and we will get back to you within 24 hours.",
+      form: {
+        name: "Full Name",
+        email: "Email",
+        type: "Event Type",
+        date: "Date",
+        found: "How did you find us?",
+        message: "Message",
+        consent: "I agree that the information submitted above will be stored and used to communicate with me.",
+        submit: "Send Request",
+        types: ["Wedding", "Engagement", "Editorial"]
+      }
+    },
+    testimonials: {
+      title: "Testimonials"
+    },
+    faq: {
+      title: "Frequently Asked Questions",
+      items: [
+        {
+          question: "What is your photography style?",
+          answer: "My style is timeless, elegant, and deeply connected to each couple's story.\n\nI seek photography that goes beyond beautiful aesthetics: I want to record real feelings, spontaneous gestures, and the atmosphere of the day exactly as it happened—without stiff poses or excessive interference.\n\nI work in a documentary and artistic way, creating images that will continue to move you 10, 20, or 30 years from now.\nEach wedding is unique, and my photos reflect that: narrative, natural light, refined composition, and great sensitivity."
+        },
+        {
+          question: "Do you travel for international weddings?",
+          answer: "Yes, with pleasure.\nI photograph weddings in Brazil and abroad, accompanying couples who choose to celebrate their story in special destinations around the world.\n\nI already perform international weddings and destination weddings, taking care of all logistics so the experience is smooth and safe for you—from planning to the final delivery of images.\n\nJust tell me where your big day will be. 🌍"
+        },
+        {
+          question: "How does photo delivery work?",
+          answer: "After the wedding, I carefully curate all images to tell the full story of the day.\nYou receive:\n• Exclusive, elegant, and easy-to-use online gallery\n• High-resolution photos, ready for download\n• Secure long-term backup for total peace of mind\n\nThe average delivery time is up to 30 days, and each gallery is designed so you can relive every moment with the same emotion as the wedding day."
+        },
+        {
+          question: "Do you offer printed albums?",
+          answer: "Yes—and they are an essential part of the experience.\n\nMy albums are produced with the world's best materials, fully customized, with original design and premium finish.\nThey transform the wedding story into a timeless physical object that spans generations.\n\nIn addition to the main album, I also offer mini-albums for parents and options for boxes, special covers, and exclusive formats."
+        },
+        {
+          question: "How many photographers will be at my wedding?",
+          answer: "This depends on the size, dynamics, and proposal of your event.\nI normally work with 2 to 3 photographers, ensuring that all important moments are recorded with depth, sensitivity, and security.\n\nEach team is tailored to your wedding—nothing is standard, everything is personalized."
+        },
+        {
+          question: "How do we reserve the date?",
+          answer: "Booking is simple and secure:\n\n1. We talk to understand the history and project of your wedding\n2. We define the ideal package for you\n3. We send the contract\n4. The date is guaranteed upon signing the contract and paying the deposit\n\nFrom then on, you can count on my complete support until the big day."
+        }
+      ]
+    },
+    photobook: {
+      title: "Fine Art\nBooks",
+      quote: "\"A photograph not taken is a memory that does not exist. A photograph not printed is a memory that cannot be touched.\"",
+      collection: "The Signature Collection",
+      features: [
+        { title: "Cotton Paper", desc: "Museum-grade smooth texture, ensuring 100-year durability." },
+        { title: "Italian Linen", desc: "Handmade covers with the finest fabrics from Tuscany." },
+        { title: "Editorial Design", desc: "Clean and minimalist layouts that tell the story without distractions." }
+      ],
+      magazine: {
+        title: "The Magazine",
+        desc: "For couples who want something more contemporary, we offer the Editorial Magazine. Printed on heavy matte paper, it is perfect for leaving on the coffee table and sharing with friends in a relaxed and chic way.",
+        cta: "Request Quote"
+      }
+    },
+    details: {
+      back: "Back",
+      menu: "Menu",
+      credits: "Credits",
+      intro: {
+        location: "Villa Balbiano\nLake Como"
+      },
+      immersive: "Celebration",
+      portrait: "Timeless Elegance"
+    },
+    chat: {
+      title: "Virtual Assistant",
+      open: "Open chat",
+      close: "Close chat",
+      placeholder: "Type your message...",
+      send: "Send",
+      error: "Sorry, an error occurred. Please try again.",
+      disclaimer: "AI-generated responses. May contain inaccuracies."
+    }
+  }
+};
