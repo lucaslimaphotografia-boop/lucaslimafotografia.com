@@ -179,13 +179,17 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const uploadToCloudinary = async (file: File, folder?: string): Promise<string> => {
     const formData = new FormData();
     formData.append('file', file);
+    
+    // CRÍTICO: Upload preset é obrigatório para uploads unsigned
+    const uploadPreset = 'ml_default'; // Nome do preset configurado no Cloudinary
+    formData.append('upload_preset', uploadPreset);
+    
     if (folder) {
       formData.append('folder', folder);
     }
 
     // Usar upload preset do Cloudinary (unsigned)
     const cloudName = 'di6xabxne';
-    const uploadPreset = 'ml_default'; // Você pode criar um preset específico no Cloudinary
 
     const response = await fetch(
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
