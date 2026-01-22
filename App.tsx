@@ -116,7 +116,7 @@ export default function App() {
             <img 
               src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
               alt="LUCASLIMA STUDIO"
-              className="h-8 md:h-12 w-auto"
+              className="h-24 md:h-40 w-auto"
             />
         </div>
       )}
