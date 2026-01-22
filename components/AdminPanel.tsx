@@ -919,7 +919,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           )}
         </div>
-      </main>
 
         {/* Footer */}
         <div className="bg-white border-t border-gray-200 px-8 py-4 flex items-center justify-between sticky bottom-0">
