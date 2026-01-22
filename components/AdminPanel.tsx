@@ -676,7 +676,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex" style={{ background: '#f9fafb' }}>
-      {/* Sidebar */}
+      {/* Sidebar Navigation */}
       <aside className={`w-70 bg-gray-900 text-white fixed h-full overflow-y-auto transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`} style={{ width: '280px' }}>
         <div className="p-6 border-b border-white/10">
           <h2 className="text-xl font-semibold mb-1">Admin Panel</h2>
