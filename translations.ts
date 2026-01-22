@@ -39,6 +39,8 @@ export const translations = {
     },
     about: {
       title: "Sobre\nNós",
+      heroImage: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
+      philosophyImage: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115300/20251002_Lucas_Lima_000020_websize_rko65v.jpg",
       intro: {
         text: "O amor é uma troca intencional e compartilhada",
         subtext: "A essência do Lucas Lima Studio está fundamentada em algo igualmente profundo: o que recebemos, como fotógrafos de casamento, das pessoas apaixonadas, suas famílias, seus amigos — seus mundos inteiros."
@@ -208,6 +210,8 @@ export const translations = {
     },
     about: {
       title: "About\nUs",
+      heroImage: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
+      philosophyImage: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115300/20251002_Lucas_Lima_000020_websize_rko65v.jpg",
       intro: {
         text: "Love is a purposeful, shared exchange",
         subtext: "The Lucas Lima Studio essence is grounded on something just as profound: what we, as wedding photographers, receive from people in love, their families, their friends—their entire worlds."
