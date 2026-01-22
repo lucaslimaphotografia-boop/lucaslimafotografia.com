@@ -18,16 +18,72 @@ const getAlbumImages = (project: ImageItem): string[] => {
   return [project.url];
 };
 
+interface ImageInfo {
+  url: string;
+  index: number;
+  isVertical: boolean;
+}
+
 export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack, onMenuOpen, lang }) => {
   const t = translations[lang].details;
   const albumImages = getAlbumImages(project);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
+  const [imageOrientations, setImageOrientations] = useState<Map<number, boolean>>(new Map());
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<number>(0);
   const touchEndRef = useRef<number>(0);
 
-  const totalSlides = albumImages.length + 1; // +1 para o slide de introdução
+  // Detectar orientação das imagens
+  useEffect(() => {
+    const orientations = new Map<number, boolean>();
+    let loadedCount = 0;
+
+    albumImages.forEach((url, index) => {
+      const img = new Image();
+      img.onload = () => {
+        const isVertical = img.height > img.width;
+        orientations.set(index, isVertical);
+        loadedCount++;
+        
+        if (loadedCount === albumImages.length) {
+          setImageOrientations(orientations);
+        }
+      };
+      img.src = url;
+    });
+  }, [albumImages]);
+
+  // Agrupar imagens verticais de 2 em 2
+  const groupedSlides = React.useMemo(() => {
+    const groups: (string | string[])[] = [];
+    let i = 0;
+
+    while (i < albumImages.length) {
+      const isVertical = imageOrientations.get(i) ?? false;
+      
+      if (isVertical && i + 1 < albumImages.length) {
+        const nextIsVertical = imageOrientations.get(i + 1) ?? false;
+        if (nextIsVertical) {
+          // Duas verticais consecutivas - agrupar
+          groups.push([albumImages[i], albumImages[i + 1]]);
+          i += 2;
+        } else {
+          // Vertical seguida de horizontal - mostrar só a vertical
+          groups.push(albumImages[i]);
+          i += 1;
+        }
+      } else {
+        // Horizontal ou última imagem - mostrar individual
+        groups.push(albumImages[i]);
+        i += 1;
+      }
+    }
+
+    return groups;
+  }, [albumImages, imageOrientations]);
+
+  const totalSlides = groupedSlides.length + 1; // +1 para o slide de introdução
 
   // Parse project title para extrair nomes
   const parseTitle = (title?: string) => {
@@ -234,31 +290,80 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
       </section>
 
       {/* Photo Slides - Fullscreen */}
-      {albumImages.map((imageUrl, index) => {
-        const slideIndex = index + 1;
-        const isLoaded = imagesLoaded.has(slideIndex);
+      {groupedSlides.map((slide, groupIndex) => {
+        const slideIndex = groupIndex + 1;
+        const isGroup = Array.isArray(slide);
+        
+        if (isGroup && slide.length === 2) {
+          // Duas imagens verticais lado a lado (desktop)
+          const [img1, img2] = slide;
+          const img1Index = albumImages.indexOf(img1);
+          const img2Index = albumImages.indexOf(img2);
+          const img1Loaded = imagesLoaded.has(img1Index + 1);
+          const img2Loaded = imagesLoaded.has(img2Index + 1);
 
-        return (
-          <section 
-            key={index}
-            className="w-full h-screen snap-start relative bg-black flex items-center justify-center"
-          >
-            <div className="relative w-full h-full flex items-center justify-center">
-              {!isLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
-                  <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+          return (
+            <section 
+              key={groupIndex}
+              className="w-full h-screen snap-start relative bg-black flex items-center justify-center"
+            >
+              <div className="relative w-full h-full flex items-center justify-center gap-2 md:gap-4 px-2 md:px-4">
+                {(!img1Loaded || !img2Loaded) && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                    <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+                {/* Primeira imagem vertical */}
+                <div className="relative w-1/2 h-full flex items-center justify-center">
+                  <img 
+                    src={img1} 
+                    alt={`${project.title} - Photo ${img1Index + 1}`}
+                    className="w-full h-full object-contain"
+                    onLoad={() => handleImageLoad(img1Index + 1)}
+                    style={{ opacity: img1Loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+                  />
                 </div>
-              )}
-              <img 
-                src={imageUrl} 
-                alt={`${project.title} - Photo ${slideIndex}`}
-                className="w-full h-full object-contain"
-                onLoad={() => handleImageLoad(slideIndex)}
-                style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s' }}
-              />
-            </div>
-          </section>
-        );
+                {/* Segunda imagem vertical */}
+                <div className="relative w-1/2 h-full flex items-center justify-center">
+                  <img 
+                    src={img2} 
+                    alt={`${project.title} - Photo ${img2Index + 1}`}
+                    className="w-full h-full object-contain"
+                    onLoad={() => handleImageLoad(img2Index + 1)}
+                    style={{ opacity: img2Loaded ? 1 : 0, transition: 'opacity 0.5s' }}
+                  />
+                </div>
+              </div>
+            </section>
+          );
+        } else {
+          // Imagem única (horizontal ou vertical sozinha)
+          const imageUrl = Array.isArray(slide) ? slide[0] : slide;
+          const originalIndex = albumImages.indexOf(imageUrl);
+          const isLoaded = imagesLoaded.has(originalIndex + 1);
+
+          return (
+            <section 
+              key={groupIndex}
+              className="w-full h-screen snap-start relative bg-black flex items-center justify-center"
+            >
+              <div className="relative w-full h-full flex items-center justify-center">
+                {!isLoaded && (
+                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
+                    <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  </div>
+                )}
+                <img 
+                  src={imageUrl} 
+                  alt={`${project.title} - Photo ${originalIndex + 1}`}
+                  className="w-full h-full object-contain"
+                  onLoad={() => handleImageLoad(originalIndex + 1)}
+                  style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s' }}
+                />
+              </div>
+            </section>
+          );
+        }
       })}
 
       {/* Navigation Arrows (Desktop) */}
