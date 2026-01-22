@@ -66,7 +66,7 @@ INSTRUÇÕES:
 - Se não souber algo específico, direcione para o contato direto: contato@lucaslimafotografia.com`;
 
     const response = await anthropic.messages.create({
-      model: 'claude-3-5-sonnet-20241022',
+      model: 'claude-3-5-sonnet-20240620', // Modelo válido e disponível
       max_tokens: 1024,
       system: systemMessage,
       messages: messages.map((msg: any) => ({
