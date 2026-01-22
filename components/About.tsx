@@ -9,43 +9,51 @@ interface AboutProps {
 export const About: React.FC<AboutProps> = ({ lang }) => {
   const t = translations[lang].about;
 
-  return (
-    <div className="w-full min-h-screen bg-white flex flex-col md:flex-row">
-       {/* Left Image Section - Sticky on Desktop */}
-       <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative md:sticky md:top-0">
-          <img 
-            src="https://picsum.photos/seed/couple_studio/900/1600" 
-            alt="Photographer Portrait" 
-            className="w-full h-full object-cover grayscale" 
-          />
-       </div>
+  // Verificar se people existe e tem dados
+  const people = (t as any).people || [];
 
-       {/* Right Content Section */}
-       <div className="w-full md:w-1/2 min-h-screen md:h-auto md:min-h-screen px-8 py-20 md:p-24 flex flex-col justify-center bg-white">
-          <div className="mb-12 flex flex-col items-start leading-none text-gray-400">
-              <span className="text-lg font-black uppercase tracking-tighter text-black">LUCASLIMA</span>
-              <span className="text-[0.4rem] tracking-[0.3em] font-light mt-0.5 ml-0.5">STUDIO</span>
+  if (!people || !Array.isArray(people) || people.length === 0) {
+    return (
+      <div className="w-full min-h-screen bg-white flex items-center justify-center">
+        <p className="text-gray-500">Carregando informações...</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full min-h-screen bg-white">
+      {people.map((person: any, index: number) => (
+        <div 
+          key={index} 
+          className={`w-full min-h-screen flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}
+        >
+          {/* Image Section */}
+          <div className="w-full md:w-1/2 h-[50vh] md:h-screen relative">
+            <img 
+              src={person.image} 
+              alt={person.name} 
+              className="w-full h-full object-cover" 
+              loading="lazy"
+            />
           </div>
-          
-          <h2 className="text-5xl md:text-7xl font-serif italic mb-12 text-black">{t.title}</h2>
-          
-          <div className="space-y-6 text-lg md:text-xl leading-relaxed text-gray-800 font-light text-justify md:text-left">
-            {t.story.map((paragraph, index) => (
-                <p key={index}>{paragraph}</p>
-            ))}
+
+          {/* Content Section */}
+          <div className="w-full md:w-1/2 min-h-screen md:h-auto md:min-h-screen px-8 py-20 md:p-24 flex flex-col justify-center bg-white">
+            <div className="mb-8">
+              <h3 className="text-4xl md:text-5xl font-serif italic mb-6 text-black">{person.name}</h3>
+              {person.role && (
+                <p className="text-sm uppercase tracking-widest text-gray-500 font-bold mb-8">{person.role}</p>
+              )}
+            </div>
+            
+            <div className="space-y-6 text-lg md:text-xl leading-relaxed text-gray-800 font-light text-justify md:text-left">
+              {person.bio && Array.isArray(person.bio) && person.bio.map((paragraph: string, pIndex: number) => (
+                <p key={pIndex}>{paragraph}</p>
+              ))}
+            </div>
           </div>
-          
-          <div className="mt-16 grid grid-cols-2 gap-8 border-t border-gray-100 pt-8">
-             <div>
-                <span className="block text-4xl md:text-5xl font-serif italic mb-2 text-black">15</span>
-                <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">{t.years}</span>
-             </div>
-             <div>
-                <span className="block text-4xl md:text-5xl font-serif italic mb-2 text-black">8+</span>
-                <span className="text-xs uppercase tracking-widest text-gray-500 font-bold">{t.countries}</span>
-             </div>
-          </div>
-       </div>
+        </div>
+      ))}
     </div>
   );
 };

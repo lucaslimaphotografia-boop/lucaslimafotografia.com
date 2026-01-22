@@ -38,12 +38,35 @@ export const translations = {
       clearFilters: "Limpar Filtros"
     },
     about: {
-      title: "Minha História",
-      story: [
-        "A fotografia de casamento sempre esteve entrelaçada à minha história, como se cada clique que hoje faço fosse, na verdade, um eco da minha infância. Cresci cercado por câmeras, cerimônias e celebrações. Meus pais — também apaixonados pela arte de eternizar momentos — me ensinaram a olhar além da imagem, a enxergar o invisível: um olhar emocionado, um gesto sutil, um instante de silêncio carregado de significado.",
-        "Durante os 15 anos em que trilhei profissionalmente esse caminho, vivi intensamente a beleza da fotografia e descobri que ela vai muito além da técnica. Aprendi que a luz mais bonita é a que nasce da conexão verdadeira entre as pessoas. E que o tempo, embora incansável, não consegue apagar aquilo que é registrado com alma.",
-        "Tive o privilégio de contar histórias de amor em lugares como Estados Unidos, Marrocos, República Tcheca, Portugal, Itália, França, Uruguai e México. Cada destino trouxe novos olhares, culturas e inspirações, contribuindo para a lapidação do meu estilo — uma assinatura que hoje reconheço e valorizo: a Fotografia Atemporal.",
-        "Meu trabalho é guiado por uma busca constante por emoções autênticas. Acredito na força das imagens que resistem ao tempo, que não seguem modismos passageiros, mas que permanecem belas, sensíveis e verdadeiras ao longo dos anos. É isso que me move: capturar o que é eterno no efêmero."
+      title: "Sobre Nós",
+      people: [
+        {
+          name: "Juliana & Lucas Lima",
+          role: "Fotógrafos",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
+          bio: [
+            "A fotografia de casamento sempre esteve entrelaçada à nossa história, como se cada clique que hoje fazemos fosse, na verdade, um eco da nossa infância. Crescemos cercados por câmeras, cerimônias e celebrações. Nossos pais — também apaixonados pela arte de eternizar momentos — nos ensinaram a olhar além da imagem, a enxergar o invisível: um olhar emocionado, um gesto sutil, um instante de silêncio carregado de significado.",
+            "Durante os 15 anos em que trilhamos profissionalmente esse caminho, vivemos intensamente a beleza da fotografia e descobrimos que ela vai muito além da técnica. Aprendemos que a luz mais bonita é a que nasce da conexão verdadeira entre as pessoas. E que o tempo, embora incansável, não consegue apagar aquilo que é registrado com alma."
+          ]
+        },
+        {
+          name: "Lucas Lima",
+          role: "Fotógrafo",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115300/20251002_Lucas_Lima_000020_websize_rko65v.jpg",
+          bio: [
+            "Tive o privilégio de contar histórias de amor em lugares como Estados Unidos, Marrocos, República Tcheca, Portugal, Itália, França, Uruguai e México. Cada destino trouxe novos olhares, culturas e inspirações, contribuindo para a lapidação do meu estilo — uma assinatura que hoje reconheço e valorizo: a Fotografia Atemporal.",
+            "Meu trabalho é guiado por uma busca constante por emoções autênticas. Acredito na força das imagens que resistem ao tempo, que não seguem modismos passageiros, mas que permanecem belas, sensíveis e verdadeiras ao longo dos anos. É isso que me move: capturar o que é eterno no efêmero."
+          ]
+        },
+        {
+          name: "Juliana Lima",
+          role: "Fotógrafa",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
+          bio: [
+            "Com uma visão única e sensível, trabalho lado a lado para criar imagens que transcendem o momento e se tornam memórias eternas. Minha abordagem combina técnica refinada com uma atenção especial aos detalhes e às emoções genuínas de cada casal.",
+            "Acredito que cada casamento tem sua própria narrativa, e meu papel é capturar essa história de forma autêntica e artística, criando um legado visual que será valorizado por gerações."
+          ]
+        }
       ],
       years: "Anos de História",
       countries: "Países Fotografados"
@@ -169,12 +192,35 @@ export const translations = {
       clearFilters: "Clear Filters"
     },
     about: {
-      title: "My Story",
-      story: [
-        "Wedding photography has always been intertwined with my history, as if every click I make today was actually an echo of my childhood. I grew up surrounded by cameras, ceremonies, and celebrations. My parents—also passionate about the art of capturing moments—taught me to look beyond the image, to see the invisible: an emotional gaze, a subtle gesture, a moment of silence charged with meaning.",
-        "During the 15 years I have professionally walked this path, I have intensely lived the beauty of photography and discovered that it goes far beyond technique. I learned that the most beautiful light is the one born from the true connection between people. And that time, although relentless, cannot erase what is recorded with soul.",
-        "I have had the privilege of telling love stories in places like the United States, Morocco, the Czech Republic, Portugal, Italy, France, Uruguay, and Mexico. Each destination brought new perspectives, cultures, and inspirations, contributing to the refinement of my style—a signature I recognize and value today: Timeless Photography.",
-        "My work is guided by a constant search for authentic emotions. I believe in the power of images that withstand time, that do not follow fleeting trends, but remain beautiful, sensitive, and true over the years. This is what moves me: capturing what is eternal in the ephemeral."
+      title: "About Us",
+      people: [
+        {
+          name: "Juliana & Lucas Lima",
+          role: "Photographers",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
+          bio: [
+            "Wedding photography has always been intertwined with our history, as if every click we make today was actually an echo of our childhood. We grew up surrounded by cameras, ceremonies, and celebrations. Our parents—also passionate about the art of capturing moments—taught us to look beyond the image, to see the invisible: an emotional gaze, a subtle gesture, a moment of silence charged with meaning.",
+            "During the 15 years we have professionally walked this path, we have intensely lived the beauty of photography and discovered that it goes far beyond technique. We learned that the most beautiful light is the one born from the true connection between people. And that time, although relentless, cannot erase what is recorded with soul."
+          ]
+        },
+        {
+          name: "Lucas Lima",
+          role: "Photographer",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115300/20251002_Lucas_Lima_000020_websize_rko65v.jpg",
+          bio: [
+            "I have had the privilege of telling love stories in places like the United States, Morocco, the Czech Republic, Portugal, Italy, France, Uruguay, and Mexico. Each destination brought new perspectives, cultures, and inspirations, contributing to the refinement of my style—a signature I recognize and value today: Timeless Photography.",
+            "My work is guided by a constant search for authentic emotions. I believe in the power of images that withstand time, that do not follow fleeting trends, but remain beautiful, sensitive, and true over the years. This is what moves me: capturing what is eternal in the ephemeral."
+          ]
+        },
+        {
+          name: "Juliana Lima",
+          role: "Photographer",
+          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
+          bio: [
+            "With a unique and sensitive vision, I work side by side to create images that transcend the moment and become eternal memories. My approach combines refined technique with special attention to details and the genuine emotions of each couple.",
+            "I believe that each wedding has its own narrative, and my role is to capture this story authentically and artistically, creating a visual legacy that will be valued for generations."
+          ]
+        }
       ],
       years: "Years of History",
       countries: "Countries Photographed"
