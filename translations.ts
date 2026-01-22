@@ -26,13 +26,10 @@ export const translations = {
       rotatingWords: ["Momentos", "Lugares", "Pessoas", "Histórias", "Emoções", "Detalhes"],
       categories: {
         "Todos": "Todos",
-        "Imprensa": "Imprensa",
-        "Noiva": "Noiva",
-        "Noivo": "Noivo",
-        "Festa": "Festa",
-        "Editorial": "Editorial",
-        "Detalhes": "Detalhes",
-        "Preto & Branco": "Preto & Branco"
+        "Igreja": "Igreja",
+        "Campo": "Campo",
+        "Praia": "Praia",
+        "Hoteis": "Hoteis"
       },
       noResults: "Nenhum momento encontrado.",
       clearFilters: "Limpar Filtros"
@@ -197,13 +194,10 @@ export const translations = {
       rotatingWords: ["Moments", "Places", "People", "Stories", "Emotions", "Details"],
       categories: {
         "Todos": "All",
-        "Imprensa": "Press",
-        "Noiva": "Bride",
-        "Noivo": "Groom",
-        "Festa": "Party",
-        "Editorial": "Editorial",
-        "Detalhes": "Details",
-        "Preto & Branco": "Black & White"
+        "Igreja": "Church",
+        "Campo": "Field",
+        "Praia": "Beach",
+        "Hoteis": "Hotels"
       },
       noResults: "No moments found.",
       clearFilters: "Clear Filters"
