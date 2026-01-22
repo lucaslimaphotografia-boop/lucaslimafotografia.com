@@ -22,7 +22,7 @@ export const translations = {
     },
     gallery: {
       searchTitle: 'Busque por',
-      searchPlaceholder: 'Digite para buscar (ex: Noiva, Locais...)',
+      searchPlaceholder: 'Digite para buscar (ex: Hotel Rosewood, Trancoso, Marrakech...)',
       rotatingWords: ["Momentos", "Lugares", "Pessoas", "Histórias", "Emoções", "Detalhes"],
       categories: {
         "Todos": "Todos",
@@ -190,7 +190,7 @@ export const translations = {
     },
     gallery: {
       searchTitle: 'Search by',
-      searchPlaceholder: 'Type to search (e.g. Bride, Locations...)',
+      searchPlaceholder: 'Type to search (e.g. Hotel Rosewood, Trancoso, Marrakech...)',
       rotatingWords: ["Moments", "Places", "People", "Stories", "Emotions", "Details"],
       categories: {
         "Todos": "All",
