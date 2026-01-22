@@ -33,6 +33,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [newImageUrl, setNewImageUrl] = useState('');
   const [newImageTitle, setNewImageTitle] = useState('');
   const [newImageCategory, setNewImageCategory] = useState('Igreja');
+  const [newImageSubcategory, setNewImageSubcategory] = useState('');
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
   const [hasChanges, setHasChanges] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -125,6 +126,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       id: newId,
       url: newImageUrl,
       category: newImageCategory,
+      subcategory: newImageSubcategory.trim() || undefined,
       title: newImageTitle || undefined,
       album: newAlbumUrls.filter(url => url.trim()).length > 0 
         ? newAlbumUrls.filter(url => url.trim())
@@ -134,6 +136,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setGallery([...gallery, newImage]);
     setNewImageUrl('');
     setNewImageTitle('');
+    setNewImageSubcategory('');
     setNewAlbumUrls(['']);
     setShowAddForm(false);
     setHasChanges(true);
@@ -151,6 +154,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewImageUrl(item.url);
     setNewImageTitle(item.title || '');
     setNewImageCategory(item.category);
+    setNewImageSubcategory(item.subcategory || '');
     setNewAlbumUrls(item.album && item.album.length > 0 ? item.album : ['']);
     setShowAddForm(true);
   };
@@ -165,6 +169,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             url: newImageUrl,
             title: newImageTitle || undefined,
             category: newImageCategory,
+            subcategory: newImageSubcategory.trim() || undefined,
             album: newAlbumUrls.filter(url => url.trim()).length > 0 
               ? newAlbumUrls.filter(url => url.trim())
               : undefined
@@ -488,16 +493,51 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                       <label className="block text-sm font-medium mb-2">Categoria</label>
                       <select
                         value={newImageCategory}
-                        onChange={(e) => setNewImageCategory(e.target.value)}
+                        onChange={(e) => {
+                          setNewImageCategory(e.target.value);
+                          setNewImageSubcategory(''); // Reset subcategory when category changes
+                        }}
                         className="w-full px-4 py-2 border border-gray-300 rounded"
                       >
                         <option>Igreja</option>
                         <option>Campo</option>
                         <option>Praia</option>
                         <option>Hoteis</option>
+                        <option>Cidades</option>
                       </select>
                     </div>
                   </div>
+
+                  {/* Subcategory Field */}
+                  {(() => {
+                    const subcategories: { [key: string]: string[] } = {
+                      'Igreja': [],
+                      'Campo': ['Hotel Ort', 'Terras de Clara'],
+                      'Praia': ['Trancoso', 'Itacaré', 'Ilha Bela'],
+                      'Hoteis': ['Rosewood', 'Tangará', 'Txai'],
+                      'Cidades': ['São Paulo', 'Évora - Portugal']
+                    };
+                    const availableSubcategories = subcategories[newImageCategory] || [];
+                    
+                    if (availableSubcategories.length > 0) {
+                      return (
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Subcategoria (opcional)</label>
+                          <select
+                            value={newImageSubcategory}
+                            onChange={(e) => setNewImageSubcategory(e.target.value)}
+                            className="w-full px-4 py-2 border border-gray-300 rounded"
+                          >
+                            <option value="">Nenhuma</option>
+                            {availableSubcategories.map(subcat => (
+                              <option key={subcat} value={subcat}>{subcat}</option>
+                            ))}
+                          </select>
+                        </div>
+                      );
+                    }
+                    return null;
+                  })()}
 
                   <div>
                     <div className="flex justify-between items-center mb-2">
@@ -889,10 +929,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                 <button
                   onClick={() => {
                     setEditingItem(null);
-                    setNewImageUrl('');
-                    setNewImageTitle('');
-                    setNewImageCategory('Igreja');
-                    setNewAlbumUrls(['']);
+                  setNewImageUrl('');
+                  setNewImageTitle('');
+                  setNewImageCategory('Igreja');
+                  setNewImageSubcategory('');
+                  setNewAlbumUrls(['']);
                     setShowAddForm(true);
                     setActiveTab('pages');
                     setActiveSubTab('gallery');

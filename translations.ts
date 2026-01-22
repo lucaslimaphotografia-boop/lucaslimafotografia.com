@@ -29,7 +29,15 @@ export const translations = {
         "Igreja": "Igreja",
         "Campo": "Campo",
         "Praia": "Praia",
-        "Hoteis": "Hoteis"
+        "Hoteis": "Hoteis",
+        "Cidades": "Cidades"
+      },
+      subcategories: {
+        "Igreja": [],
+        "Campo": ["Hotel Ort", "Terras de Clara"],
+        "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
+        "Hoteis": ["Rosewood", "Tangará", "Txai"],
+        "Cidades": ["São Paulo", "Évora - Portugal"]
       },
       noResults: "Nenhum momento encontrado.",
       clearFilters: "Limpar Filtros"
@@ -197,7 +205,15 @@ export const translations = {
         "Igreja": "Church",
         "Campo": "Field",
         "Praia": "Beach",
-        "Hoteis": "Hotels"
+        "Hoteis": "Hotels",
+        "Cidades": "Cities"
+      },
+      subcategories: {
+        "Igreja": [],
+        "Campo": ["Hotel Ort", "Terras de Clara"],
+        "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
+        "Hoteis": ["Rosewood", "Tangará", "Txai"],
+        "Cidades": ["São Paulo", "Évora - Portugal"]
       },
       noResults: "No moments found.",
       clearFilters: "Clear Filters"

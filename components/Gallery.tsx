@@ -9,11 +9,13 @@ const sampleImages: ImageItem[] = imagesData.gallery as ImageItem[];
 export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
   const t = translations[lang].gallery;
   const [activeCategory, setActiveCategory] = useState("Todos");
+  const [activeSubcategory, setActiveSubcategory] = useState<string | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [wordIndex, setWordIndex] = useState(0);
 
   const categoriesKeys = Object.keys(t.categories);
   const rotatingWords = t.rotatingWords;
+  const subcategories = (t as any).subcategories || {};
 
   // Rotação automática das palavras
   useEffect(() => {
@@ -23,18 +25,25 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
     return () => clearInterval(interval);
   }, [rotatingWords.length]);
 
+  // Reset subcategory when category changes
+  useEffect(() => {
+    setActiveSubcategory(null);
+  }, [activeCategory]);
+
   const filteredImages = useMemo(() => {
     return sampleImages.filter(img => {
       const matchesCategory = activeCategory === "Todos" || img.category === activeCategory;
+      const matchesSubcategory = !activeSubcategory || img.subcategory === activeSubcategory;
       
       // We search in original data, but we could also search in translated values
       const matchesSearch = 
         (img.title?.toLowerCase().includes(searchTerm.toLowerCase()) || false) || 
-        img.category.toLowerCase().includes(searchTerm.toLowerCase());
+        img.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (img.subcategory?.toLowerCase().includes(searchTerm.toLowerCase()) || false);
       
-      return matchesCategory && matchesSearch;
+      return matchesCategory && matchesSubcategory && matchesSearch;
     });
-  }, [activeCategory, searchTerm]);
+  }, [activeCategory, activeSubcategory, searchTerm]);
 
   return (
     <div className="w-full min-h-screen bg-white pt-32 px-4 md:px-16 pb-20">
@@ -62,19 +71,44 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
           </div>
 
           {/* Filter Buttons */}
-          <div className="flex flex-wrap gap-4 md:gap-8">
-            {categoriesKeys.map(catKey => (
-              <button 
-                key={catKey}
-                onClick={() => {
-                   setActiveCategory(catKey);
-                }}
-                className={`uppercase text-xs md:text-sm font-bold tracking-widest transition-colors ${activeCategory === catKey ? 'text-black border-b-2 border-black pb-1' : 'text-gray-400 hover:text-gray-600'}`}
-              >
-                {/* Display translated category name */}
-                {t.categories[catKey as keyof typeof t.categories]}
-              </button>
-            ))}
+          <div className="flex flex-col gap-6">
+            {/* Main Categories */}
+            <div className="flex flex-wrap gap-4 md:gap-8">
+              {categoriesKeys.map(catKey => (
+                <button 
+                  key={catKey}
+                  onClick={() => {
+                     setActiveCategory(catKey);
+                     setActiveSubcategory(null);
+                  }}
+                  className={`uppercase text-xs md:text-sm font-bold tracking-widest transition-colors ${activeCategory === catKey ? 'text-black border-b-2 border-black pb-1' : 'text-gray-400 hover:text-gray-600'}`}
+                >
+                  {/* Display translated category name */}
+                  {t.categories[catKey as keyof typeof t.categories]}
+                </button>
+              ))}
+            </div>
+
+            {/* Subcategories */}
+            {activeCategory !== "Todos" && subcategories[activeCategory] && subcategories[activeCategory].length > 0 && (
+              <div className="flex flex-wrap gap-3 md:gap-4">
+                <button
+                  onClick={() => setActiveSubcategory(null)}
+                  className={`text-xs font-medium tracking-wide transition-colors ${!activeSubcategory ? 'text-black border-b border-black pb-1' : 'text-gray-500 hover:text-gray-700'}`}
+                >
+                  Todas
+                </button>
+                {subcategories[activeCategory].map((subcat: string) => (
+                  <button
+                    key={subcat}
+                    onClick={() => setActiveSubcategory(subcat)}
+                    className={`text-xs font-medium tracking-wide transition-colors ${activeSubcategory === subcat ? 'text-black border-b border-black pb-1' : 'text-gray-500 hover:text-gray-700'}`}
+                  >
+                    {subcat}
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -96,9 +130,16 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
                 <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="block text-white text-lg font-serif italic leading-none mb-1">{img.title}</span>
-                    <span className="bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
-                        {t.categories[img.category as keyof typeof t.categories] || img.category}
-                    </span>
+                    <div className="flex flex-col gap-1">
+                      <span className="bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
+                          {t.categories[img.category as keyof typeof t.categories] || img.category}
+                      </span>
+                      {img.subcategory && (
+                        <span className="bg-white/90 text-black text-[9px] font-medium px-2 py-0.5">
+                            {img.subcategory}
+                        </span>
+                      )}
+                    </div>
                 </div>
             </div>
             ))}
@@ -106,7 +147,7 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
       ) : (
         <div className="w-full h-64 flex flex-col items-center justify-center text-gray-400">
             <p className="text-xl font-serif italic">{t.noResults}</p>
-            <button onClick={() => {setSearchTerm(""); setActiveCategory("Todos")}} className="mt-4 text-xs font-bold uppercase tracking-widest underline text-black">{t.clearFilters}</button>
+            <button onClick={() => {setSearchTerm(""); setActiveCategory("Todos"); setActiveSubcategory(null);}} className="mt-4 text-xs font-bold uppercase tracking-widest underline text-black">{t.clearFilters}</button>
         </div>
       )}
     </div>

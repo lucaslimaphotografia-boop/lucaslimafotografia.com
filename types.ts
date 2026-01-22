@@ -16,6 +16,7 @@ export interface ImageItem {
   id: number;
   url: string;
   category: string;
+  subcategory?: string; // Subcategoria opcional (ex: "Rosewood" dentro de "Hoteis")
   title?: string;
   album?: string[]; // Array de URLs das fotos do álbum/projeto
 }
