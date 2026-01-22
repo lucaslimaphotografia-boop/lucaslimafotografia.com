@@ -32,7 +32,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newImageUrl, setNewImageUrl] = useState('');
   const [newImageTitle, setNewImageTitle] = useState('');
-  const [newImageCategory, setNewImageCategory] = useState('Festa');
+  const [newImageCategory, setNewImageCategory] = useState('Igreja');
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
   const [hasChanges, setHasChanges] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -491,13 +491,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                         onChange={(e) => setNewImageCategory(e.target.value)}
                         className="w-full px-4 py-2 border border-gray-300 rounded"
                       >
-                        <option>Festa</option>
-                        <option>Noiva</option>
-                        <option>Noivo</option>
-                        <option>Detalhes</option>
-                        <option>Editorial</option>
-                        <option>Preto & Branco</option>
-                        <option>Imprensa</option>
+                        <option>Igreja</option>
+                        <option>Campo</option>
+                        <option>Praia</option>
+                        <option>Hoteis</option>
                       </select>
                     </div>
                   </div>
@@ -894,7 +891,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                     setEditingItem(null);
                     setNewImageUrl('');
                     setNewImageTitle('');
-                    setNewImageCategory('Festa');
+                    setNewImageCategory('Igreja');
                     setNewAlbumUrls(['']);
                     setShowAddForm(true);
                     setActiveTab('pages');
