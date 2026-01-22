@@ -38,16 +38,21 @@ export const translations = {
       clearFilters: "Limpar Filtros"
     },
     about: {
-      title: "Sobre Nós",
+      title: "Sobre\nNós",
+      intro: {
+        text: "O amor é uma troca intencional e compartilhada",
+        subtext: "A essência do Lucas Lima Studio está fundamentada em algo igualmente profundo: o que recebemos, como fotógrafos de casamento, das pessoas apaixonadas, suas famílias, seus amigos — seus mundos inteiros."
+      },
       people: [
         {
           name: "Juliana & Lucas Lima",
-          role: "Fotógrafos",
+          role: "Fundadores",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
           bio: [
             "A fotografia de casamento sempre esteve entrelaçada à nossa história, como se cada clique que hoje fazemos fosse, na verdade, um eco da nossa infância. Crescemos cercados por câmeras, cerimônias e celebrações. Nossos pais — também apaixonados pela arte de eternizar momentos — nos ensinaram a olhar além da imagem, a enxergar o invisível: um olhar emocionado, um gesto sutil, um instante de silêncio carregado de significado.",
             "Durante os 15 anos em que trilhamos profissionalmente esse caminho, vivemos intensamente a beleza da fotografia e descobrimos que ela vai muito além da técnica. Aprendemos que a luz mais bonita é a que nasce da conexão verdadeira entre as pessoas. E que o tempo, embora incansável, não consegue apagar aquilo que é registrado com alma."
-          ]
+          ],
+          by: "Lucas Lima"
         },
         {
           name: "Lucas Lima",
@@ -56,18 +61,28 @@ export const translations = {
           bio: [
             "Tive o privilégio de contar histórias de amor em lugares como Estados Unidos, Marrocos, República Tcheca, Portugal, Itália, França, Uruguai e México. Cada destino trouxe novos olhares, culturas e inspirações, contribuindo para a lapidação do meu estilo — uma assinatura que hoje reconheço e valorizo: a Fotografia Atemporal.",
             "Meu trabalho é guiado por uma busca constante por emoções autênticas. Acredito na força das imagens que resistem ao tempo, que não seguem modismos passageiros, mas que permanecem belas, sensíveis e verdadeiras ao longo dos anos. É isso que me move: capturar o que é eterno no efêmero."
-          ]
+          ],
+          by: "Juliana Lima"
         },
         {
           name: "Juliana Lima",
-          role: "Fotógrafa",
+          role: "Fotógrafa & Diretora de Arte",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
           bio: [
             "Com uma visão única e sensível, trabalho lado a lado para criar imagens que transcendem o momento e se tornam memórias eternas. Minha abordagem combina técnica refinada com uma atenção especial aos detalhes e às emoções genuínas de cada casal.",
             "Acredito que cada casamento tem sua própria narrativa, e meu papel é capturar essa história de forma autêntica e artística, criando um legado visual que será valorizado por gerações."
-          ]
+          ],
+          by: "Lucas Lima"
         }
       ],
+      closing: {
+        text: [
+          "Documentar sua história vibrante e inestimável revela não apenas os valores e memórias de sua jornada compartilhada, mas também as raízes e heranças que os unem. Essas camadas de conexão brilham com a riqueza da fotografia natural, capturando a profundidade e a beleza de suas emoções de uma forma verdadeiramente sublime.",
+          "Criamos imagens de casamento banhadas em luz para preservar a essência deste dia momentoso — uma celebração do amor, da confiança e da crença inabalável nos melhores dias da vida, que formam a base de todos os seus amanhãs.",
+          "Em meio ao turbilhão de grandes momentos, seu gosto impecável merece simplicidade, não excesso. Como o diamante em seu dedo, nossas imagens são cuidadosamente elaboradas para fazer seu amor brilhar de forma brilhante.",
+          "Simplesmente nos deleitamos com a possibilidade de vocês. É por isso que transformamos nosso amor pela beleza em uma vida requintada, a de seus fotógrafos de casamento."
+        ]
+      },
       years: "Anos de História",
       countries: "Países Fotografados"
     },
@@ -192,16 +207,21 @@ export const translations = {
       clearFilters: "Clear Filters"
     },
     about: {
-      title: "About Us",
+      title: "About\nUs",
+      intro: {
+        text: "Love is a purposeful, shared exchange",
+        subtext: "The Lucas Lima Studio essence is grounded on something just as profound: what we, as wedding photographers, receive from people in love, their families, their friends—their entire worlds."
+      },
       people: [
         {
           name: "Juliana & Lucas Lima",
-          role: "Photographers",
+          role: "Founders",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
           bio: [
             "Wedding photography has always been intertwined with our history, as if every click we make today was actually an echo of our childhood. We grew up surrounded by cameras, ceremonies, and celebrations. Our parents—also passionate about the art of capturing moments—taught us to look beyond the image, to see the invisible: an emotional gaze, a subtle gesture, a moment of silence charged with meaning.",
             "During the 15 years we have professionally walked this path, we have intensely lived the beauty of photography and discovered that it goes far beyond technique. We learned that the most beautiful light is the one born from the true connection between people. And that time, although relentless, cannot erase what is recorded with soul."
-          ]
+          ],
+          by: "Lucas Lima"
         },
         {
           name: "Lucas Lima",
@@ -210,18 +230,28 @@ export const translations = {
           bio: [
             "I have had the privilege of telling love stories in places like the United States, Morocco, the Czech Republic, Portugal, Italy, France, Uruguay, and Mexico. Each destination brought new perspectives, cultures, and inspirations, contributing to the refinement of my style—a signature I recognize and value today: Timeless Photography.",
             "My work is guided by a constant search for authentic emotions. I believe in the power of images that withstand time, that do not follow fleeting trends, but remain beautiful, sensitive, and true over the years. This is what moves me: capturing what is eternal in the ephemeral."
-          ]
+          ],
+          by: "Juliana Lima"
         },
         {
           name: "Juliana Lima",
-          role: "Photographer",
+          role: "Photographer & Art Director",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
           bio: [
             "With a unique and sensitive vision, I work side by side to create images that transcend the moment and become eternal memories. My approach combines refined technique with special attention to details and the genuine emotions of each couple.",
             "I believe that each wedding has its own narrative, and my role is to capture this story authentically and artistically, creating a visual legacy that will be valued for generations."
-          ]
+          ],
+          by: "Lucas Lima"
         }
       ],
+      closing: {
+        text: [
+          "Documenting your vibrant and invaluable story reveals not only the values and memories of your shared journey but also the roots and heritage that bind you. These layers of connection shine with the richness of natural photography, capturing the depth and beauty of your emotions in a truly sublime way.",
+          "We create wedding images bathed in light to preserve the essence of this momentous day—a celebration of love, trust, and the unwavering belief in life's best days, which form the foundation of all your tomorrows.",
+          "Amid the whirlwind of grand moments, your impeccable taste deserves simplicity, over excess. Like the diamond on your finger, our imagery is carefully crafted to make your love shine brilliantly.",
+          "We simply delight in the possibility of you. That is why we've turned our love of beauty into an exquisite life, that of your wedding photographers."
+        ]
+      },
       years: "Years of History",
       countries: "Countries Photographed"
     },
