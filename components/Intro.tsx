@@ -66,19 +66,15 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
       <div className="logo-wrapper relative flex flex-col items-center z-10">
         <div className="logo-image relative" style={{ width: 'clamp(400px, 60vw, 900px)' }}>
           <img 
-            className="logo-main-img block w-full h-auto opacity-0"
+            className="logo-main-img block w-full h-auto"
             src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png" 
             alt="LUCASLIMA STUDIO"
-            style={{
-              transform: 'scale(0.95) translateY(15px)',
-              filter: 'drop-shadow(0 0 30px rgba(255, 255, 255, 0.2))',
-              clipPath: 'inset(0 0 35% 0)',
-              animation: 'logoEntrance 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards, revealFullLogo 1s ease-out 1.5s forwards'
-            }}
           />
+          {/* Efeito shimmer */}
+          <div className="shimmer-effect absolute top-0 left-0 w-4/5 h-full pointer-events-none"></div>
         </div>
         
-        <div className="decorative-line mt-8 transform scale-x-0 w-[200px] h-px bg-gradient-to-r from-transparent via-white/50 to-transparent animate-expandLine"></div>
+        <div className="decorative-line mt-8 transform scale-x-0 w-[200px] h-px bg-gradient-to-r from-transparent via-white/50 to-transparent"></div>
       </div>
 
       <style>{`
@@ -148,16 +144,10 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
           border-radius: 50%;
         }
 
-        .logo-image::after {
-          content: '';
-          position: absolute;
-          top: 0;
+        .shimmer-effect {
           left: -150%;
-          width: 80%;
-          height: 100%;
           background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
           animation: shimmer 1.8s ease-in-out 1.8s;
-          pointer-events: none;
         }
 
         .intro-container.fade-out {
