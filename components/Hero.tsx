@@ -51,12 +51,13 @@ export const Hero: React.FC = () => {
       {/* Overlay Gradient to make text readable */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/20 pointer-events-none"></div>
 
-      {/* Centered Overlay Text */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20 mix-blend-difference text-white">
-        <h1 className="text-5xl md:text-[10rem] font-black tracking-tighter uppercase text-center leading-none">
-          LUCASLIMA
-        </h1>
-        <span className="text-sm md:text-3xl tracking-[0.4em] font-light mt-2 md:mt-6">STUDIO</span>
+      {/* Centered Overlay Logo */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20 mix-blend-difference">
+        <img 
+          src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
+          alt="LUCASLIMA STUDIO"
+          className="w-[80%] max-w-[600px] md:max-w-[900px] h-auto"
+        />
       </div>
     </div>
   );

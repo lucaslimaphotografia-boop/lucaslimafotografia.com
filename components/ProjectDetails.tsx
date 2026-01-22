@@ -170,7 +170,11 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
 
       {/* Logo Top Center */}
       <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] text-center pointer-events-none">
-        <h1 className="font-bold uppercase tracking-tighter text-sm md:text-base text-white mix-blend-difference">LUCASLIMA</h1>
+        <img 
+          src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
+          alt="LUCASLIMA STUDIO"
+          className="h-6 md:h-8 w-auto mx-auto mix-blend-difference"
+        />
       </div>
 
       {/* Page Number Bottom Left */}

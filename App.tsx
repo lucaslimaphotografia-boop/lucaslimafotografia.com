@@ -110,13 +110,14 @@ export default function App() {
       {/* Fixed Header (Logo) */}
       {currentView !== ViewState.DETAILS && (
         <div 
-            className={`fixed top-8 left-8 z-40 cursor-pointer mix-blend-difference text-white group transition-opacity duration-1000 ${!introFinished && !fadeOut ? 'opacity-0' : 'opacity-100'}`} 
+            className={`fixed top-8 left-8 z-40 cursor-pointer mix-blend-difference group transition-opacity duration-1000 ${!introFinished && !fadeOut ? 'opacity-0' : 'opacity-100'}`} 
             onClick={() => setCurrentView(ViewState.HOME)}
         >
-            <div className="flex flex-col items-center">
-            <h1 className="font-black uppercase tracking-tighter text-2xl md:text-3xl leading-none">LUCASLIMA</h1>
-            <span className="text-[0.5rem] md:text-[0.6rem] tracking-[0.3em] font-light mt-1">STUDIO</span>
-            </div>
+            <img 
+              src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
+              alt="LUCASLIMA STUDIO"
+              className="h-8 md:h-12 w-auto"
+            />
         </div>
       )}
 

@@ -32,9 +32,12 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNav
     <div className="fixed inset-0 z-[60] bg-black text-white flex flex-col">
       {/* Header inside Menu */}
       <div className="flex justify-between items-center p-8">
-        <div className="flex flex-col items-center leading-none">
-            <span className="text-2xl font-black tracking-tighter uppercase">LUCASLIMA</span>
-            <span className="text-[0.5rem] tracking-[0.3em] font-light mt-1">STUDIO</span>
+        <div className="flex flex-col items-center">
+            <img 
+              src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
+              alt="LUCASLIMA STUDIO"
+              className="h-10 md:h-12 w-auto"
+            />
         </div>
         <button onClick={onClose} className="group flex items-center gap-2 cursor-pointer">
            <span className="uppercase text-sm tracking-widest font-bold group-hover:opacity-70">{t.close}</span>
