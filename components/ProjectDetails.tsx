@@ -169,7 +169,10 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
       </div>
 
       {/* Logo Top Center */}
-      <div className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] text-center pointer-events-none">
+      <div 
+        className="fixed top-8 left-1/2 -translate-x-1/2 z-[60] text-center cursor-pointer hover:opacity-80 transition-opacity"
+        onClick={onBack}
+      >
         <img 
           src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
           alt="LUCASLIMA STUDIO"

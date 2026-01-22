@@ -32,7 +32,12 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNav
     <div className="fixed inset-0 z-[60] bg-black text-white flex flex-col">
       {/* Header inside Menu */}
       <div className="flex justify-between items-center p-8">
-        <div className="flex flex-col items-center">
+        <div 
+          className="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity"
+          onClick={() => {
+            handleLinkClick(ViewState.HOME);
+          }}
+        >
             <img 
               src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
               alt="LUCASLIMA STUDIO"
