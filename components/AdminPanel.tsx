@@ -7,7 +7,7 @@ import {
   Settings, Eye, EyeOff, Upload, X, Check, Download, Loader2,
   FileText, PenTool, Palette, Bell, HelpCircle, User, ChevronRight,
   Home, ExternalLink, Globe, Search, Eye as EyeIcon, MoreVertical,
-  ChevronDown
+  ChevronDown, Menu
 } from 'lucide-react';
 
 interface AdminPanelProps {
@@ -17,10 +17,13 @@ interface AdminPanelProps {
 
 type AdminTab = 'pages' | 'content' | 'design' | 'settings';
 type AdminSubTab = 'gallery' | 'hero' | 'portfolio' | 'translations' | 'seo' | 'social' | 'analytics';
+type AdminSection = 'dashboard' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'seo' | 'contact' | 'social' | 'settings';
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [activeTab, setActiveTab] = useState<AdminTab>('pages');
   const [activeSubTab, setActiveSubTab] = useState<AdminSubTab>('gallery');
+  const [activeSection, setActiveSection] = useState<AdminSection>('dashboard');
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const [gallery, setGallery] = useState<ImageItem[]>(imagesData.gallery);
   const [hero, setHero] = useState<string[]>(imagesData.hero);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -49,13 +52,24 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     }
   }, []);
 
+  useEffect(() => {
+    if (activeSection === 'gallery') {
+      setActiveTab('pages');
+      setActiveSubTab('gallery');
+    }
+  }, [activeSection]);
+
   const handleLogin = () => {
     if (password === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       localStorage.setItem('admin_authenticated', 'true');
       setPassword('');
     } else {
-      alert('Senha incorreta');
+      const errorMsg = document.getElementById('errorMessage');
+      if (errorMsg) {
+        errorMsg.classList.remove('hidden');
+        setTimeout(() => errorMsg.classList.add('hidden'), 3000);
+      }
     }
   };
 
@@ -309,29 +323,64 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
   if (!isAuthenticated) {
     return (
-      <div className="fixed inset-0 bg-gray-50 z-[100] flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-xl max-w-md w-full mx-4">
-          <div className="text-center mb-6">
-            <div className="inline-block bg-black text-white text-2xl font-black px-4 py-2 mb-4">L</div>
-            <h2 className="text-2xl font-bold">Painel de Administração</h2>
-            <p className="text-gray-600 mt-2">Digite a senha para acessar</p>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+        <div className="bg-white rounded-3xl shadow-2xl overflow-hidden max-w-md w-full mx-4 animate-[slideUp_0.5s_ease]">
+          <div className="text-center text-white py-10 px-8" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+            <h1 className="text-2xl font-semibold mb-2">Painel Administrativo</h1>
+            <p className="opacity-90 text-sm">Lucas Lima Fotografia</p>
           </div>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
-            placeholder="Senha"
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:ring-2 focus:ring-black"
-            autoFocus
-          />
-          <button
-            onClick={handleLogin}
-            className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition-colors font-medium"
-          >
-            Entrar
-          </button>
+          <div className="p-8">
+            <div id="errorMessage" className="hidden bg-red-50 text-red-700 p-3 rounded-lg mb-5 text-sm">
+              Usuário ou senha incorretos
+            </div>
+            <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+              <div className="mb-6">
+                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">Usuário</label>
+                <input
+                  type="text"
+                  id="username"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Digite seu usuário"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                  autoFocus
+                />
+              </div>
+              <div className="mb-6">
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                <input
+                  type="password"
+                  id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && handleLogin()}
+                  placeholder="Digite sua senha"
+                  className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all"
+                />
+              </div>
+              <div className="flex items-center justify-between mb-6 text-sm">
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" className="w-4 h-4 cursor-pointer" />
+                  <span className="text-gray-600">Lembrar-me</span>
+                </label>
+                <a href="#" className="text-purple-600 font-medium hover:underline">Esqueceu a senha?</a>
+              </div>
+              <button
+                type="submit"
+                className="w-full py-3.5 text-white font-semibold rounded-lg transition-all hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0"
+                style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+              >
+                Entrar no Painel
+              </button>
+            </form>
+          </div>
         </div>
+        <style>{`
+          @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+        `}</style>
       </div>
     );
   }
@@ -603,142 +652,308 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     );
   };
 
-  return (
-    <div className="fixed inset-0 bg-gray-50 z-[100] flex flex-col">
-      {/* Top Header */}
-      <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="bg-black text-white text-xl font-black px-3 py-2 rounded">L</div>
-          <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 px-3 py-2 rounded transition-colors">
-            <Globe className="w-4 h-4 text-blue-600" />
-            <span className="font-medium">Website</span>
-            <ChevronDown className="w-4 h-4 text-gray-400" />
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
-            <HelpCircle className="w-5 h-5 text-gray-600" />
-          </button>
-          <button 
-            onClick={() => setShowNotifications(!showNotifications)}
-            className="p-2 hover:bg-gray-100 rounded-full transition-colors relative"
-          >
-            <Bell className="w-5 h-5 text-gray-600" />
-            <span className="absolute top-0 right-0 bg-green-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
-          </button>
-          <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-            <div className="w-8 h-8 bg-gray-300 rounded-full flex items-center justify-center">
-              <span className="text-sm font-medium text-gray-700">LL</span>
-            </div>
-          </button>
-        </div>
-      </div>
+  const showSection = (section: AdminSection) => {
+    setActiveSection(section);
+  };
 
-      {/* Secondary Navigation */}
-      <div className="bg-white border-b border-gray-200 px-6">
-        <div className="flex items-center gap-1">
-          <button
-            onClick={() => { setActiveTab('pages'); setActiveSubTab('gallery'); }}
-            className={`px-4 py-3 flex items-center gap-2 transition-colors relative ${
-              activeTab === 'pages' ? 'text-black' : 'text-gray-600 hover:text-black'
-            }`}
-          >
-            <FileText className="w-5 h-5" />
-            <span className="font-medium">Páginas</span>
-            {activeTab === 'pages' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500" />}
-          </button>
-          <button
-            onClick={() => setActiveTab('content')}
-            className={`px-4 py-3 flex items-center gap-2 transition-colors relative ${
-              activeTab === 'content' ? 'text-black' : 'text-gray-600 hover:text-black'
-            }`}
-          >
-            <PenTool className="w-5 h-5" />
-            <span className="font-medium">Conteúdo</span>
-            {activeTab === 'content' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500" />}
-          </button>
-          <button
-            onClick={() => setActiveTab('design')}
-            className={`px-4 py-3 flex items-center gap-2 transition-colors relative ${
-              activeTab === 'design' ? 'text-black' : 'text-gray-600 hover:text-black'
-            }`}
-          >
-            <Palette className="w-5 h-5" />
-            <span className="font-medium">Design</span>
-            {activeTab === 'design' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500" />}
-          </button>
-          <button
-            onClick={() => { setActiveTab('settings'); setActiveSubTab('seo'); }}
-            className={`px-4 py-3 flex items-center gap-2 transition-colors relative ${
-              activeTab === 'settings' ? 'text-black' : 'text-gray-600 hover:text-black'
-            }`}
-          >
-            <Settings className="w-5 h-5" />
-            <span className="font-medium">Configurações</span>
-            {activeTab === 'settings' && <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-green-500" />}
-          </button>
+  const getPageTitle = () => {
+    const titles: { [key: string]: string } = {
+      'dashboard': 'Dashboard',
+      'portfolio': 'Gerenciar Portfólio',
+      'about': 'Página Sobre',
+      'services': 'Serviços',
+      'testimonials': 'Depoimentos',
+      'blog': 'Blog',
+      'gallery': 'Galeria de Fotos',
+      'videos': 'Vídeos',
+      'seo': 'Configurações de SEO',
+      'contact': 'Mensagens de Contato',
+      'social': 'Redes Sociais',
+      'settings': 'Configurações Gerais'
+    };
+    return titles[activeSection] || 'Dashboard';
+  };
+
+  return (
+    <div className="fixed inset-0 z-[100] flex" style={{ background: '#f9fafb' }}>
+      {/* Sidebar */}
+      <aside className={`w-70 bg-gray-900 text-white fixed h-full overflow-y-auto transition-transform duration-300 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0`} style={{ width: '280px' }}>
+        <div className="p-6 border-b border-white/10">
+          <h2 className="text-xl font-semibold mb-1">Admin Panel</h2>
+          <p className="text-sm opacity-70">Lucas Lima Fotografia</p>
         </div>
-      </div>
+        <nav className="p-5">
+          <div className="mb-8">
+            <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Principal</div>
+            <button
+              onClick={() => showSection('dashboard')}
+              className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all ${
+                activeSection === 'dashboard' 
+                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="text-xl">📊</span>
+              <span>Dashboard</span>
+            </button>
+          </div>
+          <div className="mb-8">
+            <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Conteúdo</div>
+            {['portfolio', 'about', 'services', 'testimonials', 'blog'].map((section) => {
+              const icons: { [key: string]: string } = {
+                'portfolio': '🖼️',
+                'about': '👤',
+                'services': '⚙️',
+                'testimonials': '💬',
+                'blog': '📝'
+              };
+              const labels: { [key: string]: string } = {
+                'portfolio': 'Portfólio',
+                'about': 'Sobre',
+                'services': 'Serviços',
+                'testimonials': 'Depoimentos',
+                'blog': 'Blog'
+              };
+              return (
+                <button
+                  key={section}
+                  onClick={() => showSection(section as AdminSection)}
+                  className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all mb-1 ${
+                    activeSection === section 
+                      ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                      : 'text-white/80 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <span className="text-xl">{icons[section]}</span>
+                  <span>{labels[section]}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="mb-8">
+            <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Mídia</div>
+            {['gallery', 'videos'].map((section) => {
+              const icons: { [key: string]: string } = {
+                'gallery': '📷',
+                'videos': '🎥'
+              };
+              const labels: { [key: string]: string } = {
+                'gallery': 'Galeria de Fotos',
+                'videos': 'Vídeos'
+              };
+              return (
+                <button
+                  key={section}
+                  onClick={() => showSection(section as AdminSection)}
+                  className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all mb-1 ${
+                    activeSection === section 
+                      ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                      : 'text-white/80 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <span className="text-xl">{icons[section]}</span>
+                  <span>{labels[section]}</span>
+                </button>
+              );
+            })}
+          </div>
+          <div className="mb-8">
+            <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Configurações</div>
+            {['seo', 'contact', 'social', 'settings'].map((section) => {
+              const icons: { [key: string]: string } = {
+                'seo': '🔍',
+                'contact': '✉️',
+                'social': '🌐',
+                'settings': '⚙️'
+              };
+              const labels: { [key: string]: string } = {
+                'seo': 'SEO',
+                'contact': 'Contatos',
+                'social': 'Redes Sociais',
+                'settings': 'Configurações'
+              };
+              return (
+                <button
+                  key={section}
+                  onClick={() => showSection(section as AdminSection)}
+                  className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all mb-1 ${
+                    activeSection === section 
+                      ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                      : 'text-white/80 hover:bg-white/10 hover:text-white'
+                  }`}
+                >
+                  <span className="text-xl">{icons[section]}</span>
+                  <span>{labels[section]}</span>
+                </button>
+              );
+            })}
+          </div>
+        </nav>
+      </aside>
 
       {/* Main Content */}
-      <div className="flex-1 overflow-y-auto p-6">
-        {activeTab === 'pages' && (
-          <div className="mb-4">
-            <div className="flex gap-2">
-              <button
-                onClick={() => setActiveSubTab('gallery')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeSubTab === 'gallery' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Galeria
-              </button>
-              <button
-                onClick={() => setActiveSubTab('portfolio')}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  activeSubTab === 'portfolio' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                Portfólio
-              </button>
-            </div>
+      <main className="flex-1 ml-0 md:ml-70" style={{ marginLeft: sidebarOpen ? '280px' : '0' }}>
+        {/* Top Bar */}
+        <div className="bg-white px-8 py-5 flex justify-between items-center shadow-sm sticky top-0 z-50">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="md:hidden p-2 hover:bg-gray-100 rounded-lg"
+            >
+              <Menu className="w-6 h-6" />
+            </button>
+            <h1 className="text-2xl font-semibold text-gray-800">{getPageTitle()}</h1>
           </div>
-        )}
-        {renderContent()}
-      </div>
+          <div className="flex items-center gap-5">
+            <div className="flex items-center gap-3 cursor-pointer hover:bg-gray-100 px-4 py-2 rounded-lg transition-colors">
+              <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+                AL
+              </div>
+              <div>
+                <div className="font-semibold text-sm">Admin</div>
+                <div className="text-xs text-gray-500">Administrador</div>
+              </div>
+            </div>
+            <button
+              onClick={handleLogout}
+              className="px-5 py-2.5 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors font-medium"
+            >
+              Sair
+            </button>
+          </div>
+        </div>
 
-      {/* Footer */}
-      <div className="bg-white border-t border-gray-200 px-6 py-4 flex items-center justify-between">
-        <button
-          onClick={handlePreview}
-          className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center gap-2"
-        >
-          <EyeIcon className="w-4 h-4" />
-          Preview
-        </button>
-        <div className="flex items-center gap-4">
-          {hasChanges && (
-            <span className="text-sm text-yellow-600 flex items-center gap-2">
-              <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-              Alterações não salvas
-            </span>
+        {/* Content Area */}
+        <div className="p-8 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 80px)' }}>
+          {activeSection === 'dashboard' && (
+            <div>
+              {/* Stats Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mb-8">
+                {[
+                  { title: 'Total de Fotos', value: gallery.length, change: '+12% este mês', icon: '📷', color: 'bg-blue-100 text-blue-600' },
+                  { title: 'Projetos', value: gallery.filter(img => img.album).length, change: '+8% este mês', icon: '🎯', color: 'bg-green-100 text-green-600' },
+                  { title: 'Visualizações', value: '12.5K', change: '+23% este mês', icon: '👁️', color: 'bg-yellow-100 text-yellow-600' },
+                  { title: 'Contatos', value: '28', change: '+5% este mês', icon: '✉️', color: 'bg-purple-100 text-purple-600' }
+                ].map((stat, idx) => (
+                  <div key={idx} className="bg-white p-6 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="text-sm text-gray-500 font-medium">{stat.title}</span>
+                      <div className={`w-11 h-11 rounded-lg flex items-center justify-center text-xl ${stat.color}`}>
+                        {stat.icon}
+                      </div>
+                    </div>
+                    <div className="text-3xl font-bold text-gray-800 mb-1">{stat.value}</div>
+                    <div className="text-sm text-green-600">{stat.change}</div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Recent Activities */}
+              <div className="bg-white rounded-xl shadow-sm p-8">
+                <h3 className="text-lg font-semibold mb-6 text-gray-800">Últimas Atividades</h3>
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-gray-200">
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Tipo</th>
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Descrição</th>
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Data</th>
+                      <th className="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-4 px-4">📷 Foto</td>
+                      <td className="py-4 px-4">Nova foto adicionada ao portfólio</td>
+                      <td className="py-4 px-4 text-gray-600">22/01/2026</td>
+                      <td className="py-4 px-4"><span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">Publicado</span></td>
+                    </tr>
+                    <tr className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-4 px-4">📝 Blog</td>
+                      <td className="py-4 px-4">Novo artigo publicado</td>
+                      <td className="py-4 px-4 text-gray-600">21/01/2026</td>
+                      <td className="py-4 px-4"><span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-medium">Publicado</span></td>
+                    </tr>
+                    <tr className="hover:bg-gray-50">
+                      <td className="py-4 px-4">✉️ Contato</td>
+                      <td className="py-4 px-4">Nova solicitação de orçamento</td>
+                      <td className="py-4 px-4 text-gray-600">20/01/2026</td>
+                      <td className="py-4 px-4"><span className="bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-medium">Pendente</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           )}
+
+          {activeSection === 'gallery' && (
+            <div>
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-2xl font-semibold text-gray-800">Gerenciar Galeria</h2>
+                <button
+                  onClick={() => {
+                    setEditingItem(null);
+                    setNewImageUrl('');
+                    setNewImageTitle('');
+                    setNewImageCategory('Festa');
+                    setNewAlbumUrls(['']);
+                    setShowAddForm(true);
+                    setActiveTab('pages');
+                    setActiveSubTab('gallery');
+                  }}
+                  className="px-5 py-2.5 rounded-lg text-white font-medium transition-all hover:shadow-lg"
+                  style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}
+                >
+                  + Adicionar Foto
+                </button>
+              </div>
+              {renderContent()}
+            </div>
+          )}
+
+          {(activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
+            activeSection === 'testimonials' || activeSection === 'blog' || activeSection === 'videos' || 
+            activeSection === 'seo' || activeSection === 'contact' || activeSection === 'social' || 
+            activeSection === 'settings') && (
+            <div className="bg-white rounded-xl shadow-sm p-8">
+              <p className="text-gray-500 text-center py-12">Seção {getPageTitle()} em desenvolvimento</p>
+            </div>
+          )}
+        </div>
+      </main>
+
+        {/* Footer */}
+        <div className="bg-white border-t border-gray-200 px-8 py-4 flex items-center justify-between sticky bottom-0">
           <button
-            onClick={handlePublish}
-            className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 relative"
+            onClick={handlePreview}
+            className="px-6 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors font-medium flex items-center gap-2"
           >
-            Publicar
-            {hasChanges && <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>}
+            <EyeIcon className="w-4 h-4" />
+            Preview
           </button>
+          <div className="flex items-center gap-4">
+            {hasChanges && (
+              <span className="text-sm text-yellow-600 flex items-center gap-2">
+                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                Alterações não salvas
+              </span>
+            )}
+            <button
+              onClick={handlePublish}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 relative"
+            >
+              Publicar
+              {hasChanges && <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>}
+            </button>
+          </div>
+          <div className="text-sm text-gray-500 flex items-center gap-2">
+            <Globe className="w-4 h-4" />
+            <a href={window.location.origin} target="_blank" rel="noopener noreferrer" className="hover:underline">
+              {window.location.hostname}
+            </a>
+            <ExternalLink className="w-3 h-3" />
+          </div>
         </div>
-        <div className="text-sm text-gray-500 flex items-center gap-2">
-          <Globe className="w-4 h-4" />
-          <a href={window.location.origin} target="_blank" rel="noopener noreferrer" className="hover:underline">
-            {window.location.hostname}
-          </a>
-          <ExternalLink className="w-3 h-3" />
-        </div>
-      </div>
+      </main>
     </div>
   );
 };
