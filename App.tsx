@@ -12,6 +12,7 @@ import { MenuOverlay } from './components/MenuOverlay';
 import { VerticalNav } from './components/VerticalNav';
 import { ClaudeChat } from './components/ClaudeChat';
 import { AdminPanel } from './components/AdminPanel';
+import { Intro } from './components/Intro';
 import { Menu } from 'lucide-react';
 import { translations } from './translations';
 
@@ -23,21 +24,8 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState<ImageItem | null>(null);
   const [lang, setLang] = useState<Language>('pt');
 
-  // Intro Animation Logic
-  useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setFadeOut(true);
-    }, 2000);
-
-    const timer2 = setTimeout(() => {
-      setIntroFinished(true);
-    }, 3000);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
-  }, []);
+  // Intro Animation Logic - agora controlado pelo componente Intro
+  // Mantido para compatibilidade com outros componentes que dependem de introFinished
 
   const getTextColor = () => {
     if (currentView === ViewState.HOME) return 'white';
@@ -114,16 +102,9 @@ export default function App() {
   return (
     <div className="relative w-full min-h-screen bg-white transition-colors duration-500">
       
-      {/* Intro Overlay */}
+      {/* Intro Overlay com novo logo animado */}
       {!introFinished && (
-        <div 
-          className={`fixed inset-0 z-[100] bg-black flex items-center justify-center transition-opacity duration-1000 ease-in-out ${fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
-        >
-           <div className="flex flex-col items-center text-white animate-slide-up">
-              <h1 className="font-black uppercase tracking-tighter text-4xl md:text-6xl leading-none">LUCASLIMA</h1>
-              <span className="text-xs md:text-sm tracking-[0.5em] font-light mt-2">STUDIO</span>
-           </div>
-        </div>
+        <Intro onFinish={() => setIntroFinished(true)} />
       )}
 
       {/* Fixed Header (Logo) */}
