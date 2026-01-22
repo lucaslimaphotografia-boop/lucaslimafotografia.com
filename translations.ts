@@ -22,7 +22,7 @@ export const translations = {
     },
     gallery: {
       searchTitle: 'Busque por',
-      searchPlaceholder: 'Digite para buscar (ex: Noiva, Detalhes...)',
+      searchPlaceholder: 'Digite para buscar (ex: Noiva, Locais...)',
       rotatingWords: ["Momentos", "Lugares", "Pessoas", "Histórias", "Emoções", "Detalhes"],
       categories: {
         "Todos": "Todos",
@@ -193,7 +193,7 @@ export const translations = {
     },
     gallery: {
       searchTitle: 'Search by',
-      searchPlaceholder: 'Type to search (e.g. Bride, Details...)',
+      searchPlaceholder: 'Type to search (e.g. Bride, Locations...)',
       rotatingWords: ["Moments", "Places", "People", "Stories", "Emotions", "Details"],
       categories: {
         "Todos": "All",
