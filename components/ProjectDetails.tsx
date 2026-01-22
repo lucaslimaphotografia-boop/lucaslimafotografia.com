@@ -216,11 +216,11 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
         </div>
 
         {/* Right: Hero Image */}
-        <div className="w-full md:w-1/2 h-1/2 md:h-full relative order-1 md:order-2">
+        <div className="w-full md:w-1/2 h-1/2 md:h-full relative order-1 md:order-2 flex items-center justify-center bg-black">
           <img 
             src={project.url} 
             alt={project.title || 'Wedding'} 
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             onLoad={() => handleImageLoad(0)}
           />
         </div>
@@ -234,18 +234,18 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
         return (
           <section 
             key={index}
-            className="w-full h-screen snap-start relative bg-black"
+            className="w-full h-screen snap-start relative bg-black flex items-center justify-center"
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full flex items-center justify-center">
               {!isLoaded && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50 z-10">
                   <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 </div>
               )}
               <img 
                 src={imageUrl} 
                 alt={`${project.title} - Photo ${slideIndex}`}
-                className="w-full h-full object-cover"
+                className="w-full h-full object-contain"
                 onLoad={() => handleImageLoad(slideIndex)}
                 style={{ opacity: isLoaded ? 1 : 0, transition: 'opacity 0.5s' }}
               />
