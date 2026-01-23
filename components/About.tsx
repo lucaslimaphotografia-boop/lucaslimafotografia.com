@@ -47,7 +47,7 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
         <TypographyAnimation 
           text={typographyText}
           subtitle={typographySubtitle}
-          animationType="drop"
+          animationType="slide"
         />
       </section>
 
