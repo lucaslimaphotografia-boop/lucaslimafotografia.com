@@ -52,16 +52,6 @@ export const translations = {
       },
       people: [
         {
-          name: "Juliana & Lucas Lima",
-          role: "Fundadores",
-          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
-          bio: [
-            "A fotografia de casamento sempre esteve entrelaçada à nossa história, como se cada clique que hoje fazemos fosse, na verdade, um eco da nossa infância. Crescemos cercados por câmeras, cerimônias e celebrações. Nossos pais — também apaixonados pela arte de eternizar momentos — nos ensinaram a olhar além da imagem, a enxergar o invisível: um olhar emocionado, um gesto sutil, um instante de silêncio carregado de significado.",
-            "Durante os 15 anos em que trilhamos profissionalmente esse caminho, vivemos intensamente a beleza da fotografia e descobrimos que ela vai muito além da técnica. Aprendemos que a luz mais bonita é a que nasce da conexão verdadeira entre as pessoas. E que o tempo, embora incansável, não consegue apagar aquilo que é registrado com alma."
-          ],
-          by: "Lucas Lima"
-        },
-        {
           name: "Lucas Lima",
           role: "Fotógrafo",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115300/20251002_Lucas_Lima_000020_websize_rko65v.jpg",
@@ -227,16 +217,6 @@ export const translations = {
         subtext: "The Lucas Lima Studio essence is grounded on something just as profound: what we, as wedding photographers, receive from people in love, their families, their friends—their entire worlds."
       },
       people: [
-        {
-          name: "Juliana & Lucas Lima",
-          role: "Founders",
-          image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115299/20251002_Juliana_Lucas_Lima_000015_websize_vegwnf.jpg",
-          bio: [
-            "Wedding photography has always been intertwined with our history, as if every click we make today was actually an echo of our childhood. We grew up surrounded by cameras, ceremonies, and celebrations. Our parents—also passionate about the art of capturing moments—taught us to look beyond the image, to see the invisible: an emotional gaze, a subtle gesture, a moment of silence charged with meaning.",
-            "During the 15 years we have professionally walked this path, we have intensely lived the beauty of photography and discovered that it goes far beyond technique. We learned that the most beautiful light is the one born from the true connection between people. And that time, although relentless, cannot erase what is recorded with soul."
-          ],
-          by: "Lucas Lima"
-        },
         {
           name: "Lucas Lima",
           role: "Photographer",
