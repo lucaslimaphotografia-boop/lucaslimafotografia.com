@@ -141,7 +141,7 @@ export default function App() {
                 color={getTextColor()}
             />
             
-            {currentView !== ViewState.HOME && (
+            {currentView !== ViewState.HOME && currentView !== ViewState.ABOUT && (
                 <VerticalNav 
                 text={t.nav.home}
                 position="left" 
