@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
 import { translations } from '../translations';
-import { TypographyAnimation } from './TypographyAnimation';
 
 interface AboutProps {
   lang: Language;
@@ -40,19 +39,33 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
 
   return (
     <div className="w-full bg-white font-['Inter',sans-serif]">
-      {/* Hero Section with Typography Animation */}
-      <section className="mt-20 md:mt-24">
-        <TypographyAnimation 
-          text={lang === 'pt' 
-            ? ['FOTOGRAFIA', 'É UMA ARTE,', 'UMA EMOÇÃO', 'ETERNIZADA']
-            : ['PHOTOGRAPHY', 'IS AN ART,', 'AN EMOTION', 'ETERNALIZED']
-          }
-          subtitle={lang === 'pt'
-            ? 'CADA CASAMENTO É UMA HISTÓRIA ÚNICA. CADA MOMENTO É UMA OBRA DE ARTE. CADA FOTOGRAFIA É UMA MEMÓRIA PARA SEMPRE.'
-            : 'EACH WEDDING IS A UNIQUE STORY. EACH MOMENT IS A WORK OF ART. EACH PHOTOGRAPH IS A MEMORY FOREVER.'
-          }
-        />
-      </section>
+      {/* Hero Section with Image */}
+      {heroImage && (
+        <section className="mt-20 md:mt-24 w-full">
+          <img 
+            src={heroImage} 
+            alt="Hero" 
+            className="w-full h-[60vh] md:h-[80vh] object-cover"
+            loading="eager"
+          />
+        </section>
+      )}
+
+      {/* Introduction Section */}
+      {intro && (intro.text || intro.subtext) && (
+        <section className="max-w-4xl mx-auto px-4 md:px-10 py-16 md:py-24 text-center">
+          {intro.text && (
+            <h1 className="font-['Playfair_Display',serif] text-4xl md:text-6xl lg:text-7xl font-normal mb-6 md:mb-8 text-black leading-tight whitespace-pre-line">
+              {intro.text}
+            </h1>
+          )}
+          {intro.subtext && (
+            <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
+              {intro.subtext}
+            </p>
+          )}
+        </section>
+      )}
 
       {/* Team Section */}
       <section className="max-w-7xl mx-auto px-4 md:px-10 py-16 md:py-20">
@@ -106,6 +119,7 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
         <div className="max-w-4xl mx-auto">
           {philosophyImage && (
             <img 
+              key={philosophyImage}
               src={philosophyImage} 
               alt="Filosofia" 
               className="w-full max-w-5xl h-[50vh] md:h-[70vh] object-cover mx-auto mb-12 md:mb-16"
