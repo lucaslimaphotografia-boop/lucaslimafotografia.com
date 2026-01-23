@@ -51,22 +51,6 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
         />
       </section>
 
-      {/* Introduction Section */}
-      {intro && (intro.text || intro.subtext) && (
-        <section className="max-w-4xl mx-auto px-4 md:px-10 py-16 md:py-24 text-center">
-          {intro.text && (
-            <h1 className="font-['Playfair_Display',serif] text-4xl md:text-6xl lg:text-7xl font-normal mb-6 md:mb-8 text-black leading-tight whitespace-pre-line">
-              {intro.text}
-            </h1>
-          )}
-          {intro.subtext && (
-            <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto">
-              {intro.subtext}
-            </p>
-          )}
-        </section>
-      )}
-
       {/* Team Section */}
       <section className="max-w-7xl mx-auto px-4 md:px-10 py-16 md:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 lg:gap-20">
