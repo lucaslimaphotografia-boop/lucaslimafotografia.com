@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
 import { translations } from '../translations';
+import { TypographyAnimation } from './TypographyAnimation';
 
 interface AboutProps {
   lang: Language;
@@ -39,31 +40,18 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
 
   return (
     <div className="w-full bg-white font-['Inter',sans-serif]">
-      {/* Hero Section */}
-      <section className="mt-20 md:mt-24 px-4 md:px-10 py-16 md:py-20 text-center">
-        {heroImage && (
-          <img 
-            src={heroImage} 
-            alt="Fotografia de Casamento" 
-            className="w-full max-w-6xl h-[50vh] md:h-[60vh] object-cover mx-auto mb-12 md:mb-16 opacity-0 animate-[fadeIn_1s_ease_forwards]"
-          />
-        )}
-        
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-['Playfair_Display',serif] font-normal tracking-tight mb-6 md:mb-8 text-black leading-tight">
-          {t.title?.replace('\n', ' ')}
-        </h1>
-        
-        {intro.text && (
-          <p className="text-xl md:text-2xl lg:text-3xl font-light leading-relaxed text-gray-600 max-w-4xl mx-auto mb-4 italic">
-            {intro.text}
-          </p>
-        )}
-        
-        {intro.subtext && (
-          <p className="text-base md:text-lg lg:text-xl leading-relaxed text-gray-600 max-w-3xl mx-auto mt-8 md:mt-10">
-            {intro.subtext}
-          </p>
-        )}
+      {/* Hero Section with Typography Animation */}
+      <section className="mt-20 md:mt-24">
+        <TypographyAnimation 
+          text={lang === 'pt' 
+            ? ['FOTOGRAFIA', 'É UMA ARTE,', 'UMA EMOÇÃO', 'ETERNIZADA']
+            : ['PHOTOGRAPHY', 'IS AN ART,', 'AN EMOTION', 'ETERNALIZED']
+          }
+          subtitle={lang === 'pt'
+            ? 'CADA CASAMENTO É UMA HISTÓRIA ÚNICA. CADA MOMENTO É UMA OBRA DE ARTE. CADA FOTOGRAFIA É UMA MEMÓRIA PARA SEMPRE.'
+            : 'EACH WEDDING IS A UNIQUE STORY. EACH MOMENT IS A WORK OF ART. EACH PHOTOGRAPH IS A MEMORY FOREVER.'
+          }
+        />
       </section>
 
       {/* Team Section */}
@@ -160,29 +148,15 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
           >
             Instagram
           </a>
-          <a 
-            href="https://www.pinterest.com/lucaslimafotografia" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-black transition-colors text-sm md:text-base uppercase tracking-wide"
-          >
-            Pinterest
-          </a>
-          <a 
-            href="https://www.facebook.com/lucaslimafotografia" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-gray-600 hover:text-black transition-colors text-sm md:text-base uppercase tracking-wide"
-          >
-            Facebook
-          </a>
         </div>
       </section>
 
       {/* CTA Section */}
       <section className="py-16 md:py-24 px-4 md:px-10 text-center">
         <a 
-          href="#contact" 
+          href="https://wa.me/5511984920048" 
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-block px-12 md:px-16 py-4 md:py-5 bg-black text-white text-sm md:text-base uppercase tracking-widest border-2 border-black hover:bg-transparent hover:text-black transition-all duration-300"
         >
           Verificar Disponibilidade
