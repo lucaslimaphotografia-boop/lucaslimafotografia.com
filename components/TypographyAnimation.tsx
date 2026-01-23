@@ -40,7 +40,7 @@ export const TypographyAnimation: React.FC<TypographyAnimationProps> = ({
   };
 
   return (
-    <div className="w-full bg-white py-16 md:py-24 px-4 md:px-8">
+    <div className="w-full bg-white py-8 md:py-12 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="typography-art text-center">
           <div className={`main-text animation-${animationType}`}>
@@ -63,13 +63,13 @@ export const TypographyAnimation: React.FC<TypographyAnimationProps> = ({
         }
 
         .main-text {
-          font-size: clamp(4rem, 12vw, 14rem);
+          font-size: clamp(2.5rem, 6vw, 7rem);
           font-weight: 900;
           line-height: 0.95;
           letter-spacing: -0.02em;
           color: #000;
           position: relative;
-          margin-bottom: 60px;
+          margin-bottom: 40px;
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
@@ -84,7 +84,7 @@ export const TypographyAnimation: React.FC<TypographyAnimationProps> = ({
         }
 
         .subtitle {
-          font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+          font-size: clamp(0.75rem, 1.2vw, 0.95rem);
           font-weight: 700;
           letter-spacing: 0.02em;
           color: #000;
@@ -224,11 +224,11 @@ export const TypographyAnimation: React.FC<TypographyAnimationProps> = ({
 
         @media (max-width: 768px) {
           .main-text {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
           }
 
           .subtitle {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
           }
         }
       `}</style>
