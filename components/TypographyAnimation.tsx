@@ -65,17 +65,20 @@ export const TypographyAnimation: React.FC<TypographyAnimationProps> = ({
         .main-text {
           font-size: clamp(2.5rem, 6vw, 7rem);
           font-weight: 900;
-          line-height: 0.95;
+          line-height: 1.2;
           letter-spacing: -0.02em;
           color: #000;
           position: relative;
           margin-bottom: 40px;
           font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+          padding-top: 0.1em;
         }
 
         .word-line {
           display: block;
-          overflow: hidden;
+          overflow: visible;
+          padding-top: 0.05em;
+          padding-bottom: 0.05em;
         }
 
         .letter {
