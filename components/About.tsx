@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
 import { translations } from '../translations';
+import { TypographyAnimation } from './TypographyAnimation';
 
 interface AboutProps {
   lang: Language;
@@ -15,6 +16,8 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
   const closing = (t as any).closing || {};
   const heroImage = (t as any).heroImage || '';
   const philosophyImage = (t as any).philosophyImage || '';
+  const typographyText = (t as any).typographyText || ['FOTOGRAFIA', 'É UMA ARTE,', 'UMA EMOÇÃO', 'ETERNIZADA'];
+  const typographySubtitle = (t as any).typographySubtitle || 'CADA CASAMENTO É UMA HISTÓRIA ÚNICA. CADA MOMENTO É UMA OBRA DE ARTE. CADA FOTOGRAFIA É UMA MEMÓRIA PARA SEMPRE.';
 
   useEffect(() => {
     // Close mobile menu when clicking outside
@@ -39,17 +42,14 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
 
   return (
     <div className="w-full bg-white font-['Inter',sans-serif]">
-      {/* Hero Section with Image */}
-      {heroImage && (
-        <section className="mt-20 md:mt-24 w-full">
-          <img 
-            src={heroImage} 
-            alt="Hero" 
-            className="w-full h-[60vh] md:h-[80vh] object-cover"
-            loading="eager"
-          />
-        </section>
-      )}
+      {/* Hero Section with Typography Animation */}
+      <section className="mt-20 md:mt-24">
+        <TypographyAnimation 
+          text={typographyText}
+          subtitle={typographySubtitle}
+          animationType="drop"
+        />
+      </section>
 
       {/* Introduction Section */}
       {intro && (intro.text || intro.subtext) && (
