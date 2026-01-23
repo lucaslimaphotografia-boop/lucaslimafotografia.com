@@ -32,14 +32,23 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
 
   const filteredImages = useMemo(() => {
     return sampleImages.filter(img => {
-      const matchesCategory = activeCategory === "Todos" || img.category === activeCategory;
-      const matchesSubcategory = !activeSubcategory || img.subcategory === activeSubcategory;
+      // Suporta tanto string única quanto array de categorias
+      const imgCategories = Array.isArray(img.category) ? img.category : [img.category];
+      const matchesCategory = activeCategory === "Todos" || imgCategories.includes(activeCategory);
+      
+      // Suporta tanto string única quanto array de subcategorias
+      const imgSubcategories = img.subcategory 
+        ? (Array.isArray(img.subcategory) ? img.subcategory : [img.subcategory])
+        : [];
+      const matchesSubcategory = !activeSubcategory || imgSubcategories.includes(activeSubcategory);
       
       // We search in original data, but we could also search in translated values
+      const categorySearchText = imgCategories.join(' ').toLowerCase();
+      const subcategorySearchText = imgSubcategories.join(' ').toLowerCase();
       const matchesSearch = 
         (img.title?.toLowerCase().includes(searchTerm.toLowerCase()) || false) || 
-        img.category.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (img.subcategory?.toLowerCase().includes(searchTerm.toLowerCase()) || false);
+        categorySearchText.includes(searchTerm.toLowerCase()) ||
+        subcategorySearchText.includes(searchTerm.toLowerCase());
       
       return matchesCategory && matchesSubcategory && matchesSearch;
     });
@@ -131,14 +140,22 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
                 <div className="absolute bottom-4 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <span className="block text-white text-lg font-serif italic leading-none mb-1">{img.title}</span>
                     <div className="flex flex-col gap-1">
-                      <span className="bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
-                          {t.categories[img.category as keyof typeof t.categories] || img.category}
-                      </span>
-                      {img.subcategory && (
-                        <span className="bg-white/90 text-black text-[9px] font-medium px-2 py-0.5">
-                            {img.subcategory}
-                        </span>
-                      )}
+                      {(() => {
+                        const categories = Array.isArray(img.category) ? img.category : [img.category];
+                        return categories.map((cat, idx) => (
+                          <span key={idx} className="bg-white text-black text-[10px] font-bold px-2 py-1 uppercase tracking-wider">
+                            {t.categories[cat as keyof typeof t.categories] || cat}
+                          </span>
+                        ));
+                      })()}
+                      {img.subcategory && (() => {
+                        const subcategories = Array.isArray(img.subcategory) ? img.subcategory : [img.subcategory];
+                        return subcategories.map((subcat, idx) => (
+                          <span key={idx} className="bg-white/90 text-black text-[9px] font-medium px-2 py-0.5">
+                            {subcat}
+                          </span>
+                        ));
+                      })()}
                     </div>
                 </div>
             </div>

@@ -15,8 +15,8 @@ export type Language = 'pt' | 'en';
 export interface ImageItem {
   id: number;
   url: string;
-  category: string;
-  subcategory?: string; // Subcategoria opcional (ex: "Rosewood" dentro de "Hoteis")
+  category: string | string[]; // Categoria única ou múltiplas categorias
+  subcategory?: string | string[]; // Subcategoria opcional (pode ser única ou múltiplas)
   title?: string;
   album?: string[]; // Array de URLs das fotos do álbum/projeto
 }

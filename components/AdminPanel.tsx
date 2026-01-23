@@ -32,8 +32,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [showAddForm, setShowAddForm] = useState(false);
   const [newImageUrl, setNewImageUrl] = useState('');
   const [newImageTitle, setNewImageTitle] = useState('');
-  const [newImageCategory, setNewImageCategory] = useState('Igreja');
-  const [newImageSubcategory, setNewImageSubcategory] = useState('');
+  const [newImageCategories, setNewImageCategories] = useState<string[]>(['Igreja']);
+  const [newImageSubcategories, setNewImageSubcategories] = useState<string[]>([]);
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
   const [hasChanges, setHasChanges] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -120,13 +120,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       alert('Por favor, adicione uma URL de imagem');
       return;
     }
+    if (newImageCategories.length === 0) {
+      alert('Por favor, selecione pelo menos uma categoria');
+      return;
+    }
 
     const newId = Math.max(...gallery.map(img => img.id), 0) + 1;
     const newImage: ImageItem = {
       id: newId,
       url: newImageUrl,
-      category: newImageCategory,
-      subcategory: newImageSubcategory.trim() || undefined,
+      category: newImageCategories.length === 1 ? newImageCategories[0] : newImageCategories,
+      subcategory: newImageSubcategories.length > 0 
+        ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
+        : undefined,
       title: newImageTitle || undefined,
       album: newAlbumUrls.filter(url => url.trim()).length > 0 
         ? newAlbumUrls.filter(url => url.trim())
@@ -136,7 +142,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setGallery([...gallery, newImage]);
     setNewImageUrl('');
     setNewImageTitle('');
-    setNewImageSubcategory('');
+    setNewImageCategories(['Igreja']);
+    setNewImageSubcategories([]);
     setNewAlbumUrls(['']);
     setShowAddForm(false);
     setHasChanges(true);
@@ -153,14 +160,22 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setEditingItem(item);
     setNewImageUrl(item.url);
     setNewImageTitle(item.title || '');
-    setNewImageCategory(item.category);
-    setNewImageSubcategory(item.subcategory || '');
+    setNewImageCategories(Array.isArray(item.category) ? item.category : [item.category]);
+    setNewImageSubcategories(
+      item.subcategory 
+        ? (Array.isArray(item.subcategory) ? item.subcategory : [item.subcategory])
+        : []
+    );
     setNewAlbumUrls(item.album && item.album.length > 0 ? item.album : ['']);
     setShowAddForm(true);
   };
 
   const handleUpdateImage = () => {
     if (!editingItem || !newImageUrl.trim()) return;
+    if (newImageCategories.length === 0) {
+      alert('Por favor, selecione pelo menos uma categoria');
+      return;
+    }
 
     const updated = gallery.map(img => 
       img.id === editingItem.id 
@@ -168,8 +183,10 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             ...img,
             url: newImageUrl,
             title: newImageTitle || undefined,
-            category: newImageCategory,
-            subcategory: newImageSubcategory.trim() || undefined,
+            category: newImageCategories.length === 1 ? newImageCategories[0] : newImageCategories,
+            subcategory: newImageSubcategories.length > 0 
+              ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
+              : undefined,
             album: newAlbumUrls.filter(url => url.trim()).length > 0 
               ? newAlbumUrls.filter(url => url.trim())
               : undefined
@@ -490,21 +507,38 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Categoria</label>
-                      <select
-                        value={newImageCategory}
-                        onChange={(e) => {
-                          setNewImageCategory(e.target.value);
-                          setNewImageSubcategory(''); // Reset subcategory when category changes
-                        }}
-                        className="w-full px-4 py-2 border border-gray-300 rounded"
-                      >
-                        <option>Igreja</option>
-                        <option>Campo</option>
-                        <option>Praia</option>
-                        <option>Hoteis</option>
-                        <option>Cidades</option>
-                      </select>
+                      <label className="block text-sm font-medium mb-2">Categorias (pode selecionar múltiplas)</label>
+                      <div className="border border-gray-300 rounded p-3 space-y-2 max-h-40 overflow-y-auto">
+                        {['Igreja', 'Campo', 'Praia', 'Hoteis', 'Cidades'].map(cat => (
+                          <label key={cat} className="flex items-center space-x-2 cursor-pointer">
+                            <input
+                              type="checkbox"
+                              checked={newImageCategories.includes(cat)}
+                              onChange={(e) => {
+                                if (e.target.checked) {
+                                  setNewImageCategories([...newImageCategories, cat]);
+                                } else {
+                                  setNewImageCategories(newImageCategories.filter(c => c !== cat));
+                                  // Remove subcategorias da categoria removida
+                                  const subcategories: { [key: string]: string[] } = {
+                                    'Igreja': [],
+                                    'Campo': ['Hotel Ort', 'Terras de Clara'],
+                                    'Praia': ['Trancoso', 'Itacaré', 'Ilha Bela'],
+                                    'Hoteis': ['Rosewood', 'Tangará', 'Txai'],
+                                    'Cidades': ['São Paulo', 'Évora - Portugal']
+                                  };
+                                  const subcatsToRemove = subcategories[cat] || [];
+                                  setNewImageSubcategories(
+                                    newImageSubcategories.filter(sub => !subcatsToRemove.includes(sub))
+                                  );
+                                }
+                              }}
+                              className="rounded border-gray-300"
+                            />
+                            <span className="text-sm">{cat}</span>
+                          </label>
+                        ))}
+                      </div>
                     </div>
                   </div>
 
@@ -517,22 +551,41 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                       'Hoteis': ['Rosewood', 'Tangará', 'Txai'],
                       'Cidades': ['São Paulo', 'Évora - Portugal']
                     };
-                    const availableSubcategories = subcategories[newImageCategory] || [];
+                    
+                    // Coletar todas as subcategorias das categorias selecionadas
+                    const availableSubcategories: string[] = [];
+                    newImageCategories.forEach(cat => {
+                      const subcats = subcategories[cat] || [];
+                      subcats.forEach(sub => {
+                        if (!availableSubcategories.includes(sub)) {
+                          availableSubcategories.push(sub);
+                        }
+                      });
+                    });
                     
                     if (availableSubcategories.length > 0) {
                       return (
                         <div>
-                          <label className="block text-sm font-medium mb-2">Subcategoria (opcional)</label>
-                          <select
-                            value={newImageSubcategory}
-                            onChange={(e) => setNewImageSubcategory(e.target.value)}
-                            className="w-full px-4 py-2 border border-gray-300 rounded"
-                          >
-                            <option value="">Nenhuma</option>
+                          <label className="block text-sm font-medium mb-2">Subcategorias (pode selecionar múltiplas)</label>
+                          <div className="border border-gray-300 rounded p-3 space-y-2 max-h-40 overflow-y-auto">
                             {availableSubcategories.map(subcat => (
-                              <option key={subcat} value={subcat}>{subcat}</option>
+                              <label key={subcat} className="flex items-center space-x-2 cursor-pointer">
+                                <input
+                                  type="checkbox"
+                                  checked={newImageSubcategories.includes(subcat)}
+                                  onChange={(e) => {
+                                    if (e.target.checked) {
+                                      setNewImageSubcategories([...newImageSubcategories, subcat]);
+                                    } else {
+                                      setNewImageSubcategories(newImageSubcategories.filter(s => s !== subcat));
+                                    }
+                                  }}
+                                  className="rounded border-gray-300"
+                                />
+                                <span className="text-sm">{subcat}</span>
+                              </label>
                             ))}
-                          </select>
+                          </div>
                         </div>
                       );
                     }
@@ -630,7 +683,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                     </div>
                     <div className="p-3">
                       <h4 className="font-medium">{item.title || 'Sem título'}</h4>
-                      <p className="text-sm text-gray-500">{item.category}</p>
+                      <p className="text-sm text-gray-500">
+                        {Array.isArray(item.category) ? item.category.join(', ') : item.category}
+                        {item.subcategory && (
+                          <span className="ml-2 text-gray-400">
+                            ({Array.isArray(item.subcategory) ? item.subcategory.join(', ') : item.subcategory})
+                          </span>
+                        )}
+                      </p>
                       {item.album && (
                         <p className="text-xs text-gray-400 mt-1">{item.album.length} foto(s) no álbum</p>
                       )}
