@@ -781,6 +781,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
           </div>
         );
 
+  // Navegação entre seções do painel
   const showSection = (section: AdminSection) => {
     setActiveSection(section);
   };
