@@ -330,18 +330,18 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ image: imageDataUrl, folder: folder || 'portfolio' }),
     });
-    if (res.ok) {
-      const data = await res.json();
-      return data.url || data.secure_url || '';
-    }
+    // Ler o body só uma vez (evita "body stream already read")
     const text = await res.text();
-    let errData: { message?: string; error?: string } = {};
+    let data: { url?: string; secure_url?: string; message?: string; error?: string } = {};
     try {
-      errData = JSON.parse(text);
+      data = JSON.parse(text);
     } catch {
       // resposta não é JSON
     }
-    const msg = errData.message || errData.error || text || `Upload falhou: ${res.status}`;
+    if (res.ok) {
+      return data.url || data.secure_url || '';
+    }
+    const msg = data.message || data.error || text || `Upload falhou: ${res.status}`;
     throw new Error(msg);
   };
 
