@@ -78,9 +78,13 @@
       "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071414/portfolio/blob_qumu2o.jpg",
       "category": [
         "Igreja",
-        "Cidades"
+        "Cidades",
+        "Espaços de eventos"
       ],
-      "subcategory": "São Paulo",
+      "subcategory": [
+        "São Paulo",
+        "Clube Monte Líbano"
+      ],
       "title": "Kerlly & Rafael",
       "album": [
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071447/portfolio/albums/blob_icqhxa.jpg",
