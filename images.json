@@ -222,10 +222,10 @@
         "description": "100 fotos em 60 páginas",
         "details": "O equilíbrio perfeito entre formato e conteúdo. Ideal para quem busca harmonia visual em cada spread.",
         "images": [
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770075859/portfolio/photobook/blob_usvlya.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770075862/portfolio/photobook/blob_ll9zjx.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770075865/portfolio/photobook/blob_j2tzpb.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770075869/portfolio/photobook/blob_aaroz5.jpg"
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770076058/portfolio/photobook/blob_nf1v5v.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770076060/portfolio/photobook/blob_k4dvkz.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770076062/portfolio/photobook/blob_fckos2.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770076064/portfolio/photobook/blob_ckzw5h.jpg"
         ]
       },
       {
@@ -252,14 +252,22 @@
         "subtitle": "Grande Formato",
         "description": "100 fotos em 60 páginas",
         "details": "Nosso maior quadrado. Presença marcante para histórias que merecem destaque.",
-        "images": []
+        "images": [
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
+        ]
       },
       {
         "title": "15×15",
         "subtitle": "Mini Álbum",
         "description": "100 fotos em 60 páginas",
         "details": "Compacto, charmoso e perfeito para presentear. Memórias íntimas em formato delicado.",
-        "images": []
+        "images": [
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
+        ]
       }
     ]
   },
