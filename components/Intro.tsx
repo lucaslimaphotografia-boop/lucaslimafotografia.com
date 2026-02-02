@@ -30,26 +30,22 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
 
   return (
     <div ref={containerRef} className="intro-container fixed inset-0 z-[100] bg-black">
-      <div className="intro-content flex flex-col items-center justify-center h-full">
-        <div ref={textRef} className="intro-text text-center">
-          <img
-            src={LOGO_URL}
-            alt="LUCASLIMA STUDIO"
-            className="intro-logo block w-[80%] max-w-[600px] md:max-w-[900px] h-auto opacity-0"
-          />
-          <div className="intro-line w-0 h-px bg-white/60 opacity-0 mt-8"></div>
-        </div>
+      {/* Logo na mesma posição e tamanho do logo central da home (Hero) */}
+      <div className="intro-content absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <img
+          ref={textRef}
+          src={LOGO_URL}
+          alt="LUCASLIMA STUDIO"
+          className="intro-logo block w-[80%] max-w-[600px] md:max-w-[900px] h-auto opacity-0"
+        />
       </div>
+      <div className="intro-line absolute left-1/2 bottom-[28%] w-0 h-px bg-white/60 opacity-0 -translate-x-1/2" style={{ maxWidth: '200px' }}></div>
 
       <style>{`
         .intro-container {
           display: flex;
           align-items: center;
           justify-content: center;
-        }
-
-        .intro-content {
-          position: relative;
         }
 
         .intro-logo {
@@ -59,8 +55,6 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
         .intro-line {
           animation: expandLine 0.8s ease-out 1.2s forwards;
           max-width: 200px;
-          margin-left: auto;
-          margin-right: auto;
         }
 
         @keyframes fadeInUp {
