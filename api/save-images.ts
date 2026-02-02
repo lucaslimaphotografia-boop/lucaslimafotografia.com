@@ -35,7 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { gallery, hero, token } = req.body;
+    const { gallery, hero, photobook, testimonials, token } = req.body;
 
     if (!gallery || !Array.isArray(gallery)) {
       return res.status(400).json({ error: 'gallery (array) is required' });
@@ -66,7 +66,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     const path = 'images.json';
 
     const fileContent = JSON.stringify(
-      { gallery, hero: hero || [] },
+      {
+        gallery,
+        hero: hero || [],
+        photobook: photobook && photobook.albums ? photobook : { albums: [] },
+        testimonials: Array.isArray(testimonials) ? testimonials : []
+      },
       null,
       2
     );

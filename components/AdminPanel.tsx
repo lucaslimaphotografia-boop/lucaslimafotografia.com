@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ImageItem, Language } from '../types';
+import { ImageItem, Language, PhotobookAlbum, TestimonialItem } from '../types';
 import imagesData from '../images.json';
 import { translations } from '../translations';
 import { 
@@ -17,7 +17,7 @@ interface AdminPanelProps {
 
 type AdminTab = 'pages' | 'content' | 'design' | 'settings';
 type AdminSubTab = 'gallery' | 'hero' | 'portfolio' | 'translations' | 'seo' | 'social' | 'analytics';
-type AdminSection = 'dashboard' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'seo' | 'contact' | 'social' | 'settings';
+type AdminSection = 'dashboard' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'photobook' | 'seo' | 'contact' | 'social' | 'settings';
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [activeTab, setActiveTab] = useState<AdminTab>('pages');
@@ -26,6 +26,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [gallery, setGallery] = useState<ImageItem[]>(imagesData.gallery);
   const [hero, setHero] = useState<string[]>(imagesData.hero);
+  const [photobook, setPhotobook] = useState<{ albums: PhotobookAlbum[] }>(() => ({
+    albums: (imagesData as { photobook?: { albums: PhotobookAlbum[] } }).photobook?.albums ?? []
+  }));
+  const [testimonials, setTestimonials] = useState<TestimonialItem[]>(() =>
+    (imagesData as { testimonials?: TestimonialItem[] }).testimonials ?? []
+  );
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [editingItem, setEditingItem] = useState<ImageItem | null>(null);
@@ -42,8 +48,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishStatus, setPublishStatus] = useState<{ tokenSet?: boolean; repo?: string; error?: string } | null>(null);
+  const [uploadingPhotobookAlbum, setUploadingPhotobookAlbum] = useState<number | null>(null);
+  const [selectedPhotobookAlbumForUpload, setSelectedPhotobookAlbumForUpload] = useState<number | null>(null);
+  const [uploadingTestimonialImage, setUploadingTestimonialImage] = useState<number | null>(null);
+  const [selectedTestimonialForUpload, setSelectedTestimonialForUpload] = useState<number | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const albumFileInputRef = useRef<HTMLInputElement>(null);
+  const photobookFileInputRef = useRef<HTMLInputElement>(null);
+  const testimonialFileInputRef = useRef<HTMLInputElement>(null);
 
   // Senha padrão
   const ADMIN_PASSWORD = 'lucaslima2024';
@@ -108,7 +120,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
   const handleSave = async () => {
     try {
-      const updatedData = { gallery, hero };
+      const updatedData = { gallery, hero, photobook, testimonials };
       localStorage.setItem('admin_images_backup', JSON.stringify(updatedData));
       const blob = new Blob([JSON.stringify(updatedData, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
@@ -124,16 +136,18 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     }
   };
 
-  const publishToSite = async (payload?: { gallery: ImageItem[]; hero: string[] }): Promise<boolean> => {
+  const publishToSite = async (payload?: { gallery?: ImageItem[]; hero?: string[]; photobook?: { albums: PhotobookAlbum[] }; testimonials?: TestimonialItem[] }): Promise<boolean> => {
     setPublishing(true);
     try {
       const token = sessionStorage.getItem('admin_token') || ADMIN_PASSWORD;
       const g = payload?.gallery ?? gallery;
       const h = payload?.hero ?? hero;
+      const pb = payload?.photobook ?? photobook;
+      const tb = payload?.testimonials ?? testimonials;
       const res = await fetch('/api/save-images', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ gallery: g, hero: h, token })
+        body: JSON.stringify({ gallery: g, hero: h, photobook: pb, testimonials: tb, token })
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -145,7 +159,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
         return false;
       }
       if (payload) {
-        setGallery(payload.gallery);
+        if (payload.gallery) setGallery(payload.gallery);
+        if (payload.photobook) setPhotobook(payload.photobook);
+        if (payload.testimonials) setTestimonials(payload.testimonials);
         setEditingItem(null);
         setShowAddForm(false);
       }
@@ -432,6 +448,72 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const removeHeroImage = (index: number) => {
     setHero(hero.filter((_, i) => i !== index));
     setHasChanges(true);
+  };
+
+  const updatePhotobookAlbumImages = (albumIndex: number, images: string[]) => {
+    setPhotobook(prev => ({
+      albums: prev.albums.map((a, i) => i === albumIndex ? { ...a, images } : a)
+    }));
+    setHasChanges(true);
+  };
+
+  const handlePhotobookAlbumUpload = async (albumIndex: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []) as File[];
+    if (files.length === 0) return;
+    setUploadingPhotobookAlbum(albumIndex);
+    try {
+      const urls: string[] = [];
+      for (const file of files) {
+        if (!file.type.startsWith('image/')) continue;
+        if (file.size > 10 * 1024 * 1024) continue;
+        const url = await uploadToCloudinary(file, 'portfolio/photobook');
+        urls.push(url);
+      }
+      const album = photobook.albums[albumIndex];
+      if (album && urls.length > 0) {
+        updatePhotobookAlbumImages(albumIndex, [...album.images, ...urls]);
+        alert(`✅ ${urls.length} foto(s) adicionada(s) ao álbum ${album.title}`);
+      }
+    } catch (err: any) {
+      alert('❌ Erro ao fazer upload: ' + (err?.message || err));
+    } finally {
+      setUploadingPhotobookAlbum(null);
+      if (photobookFileInputRef.current) photobookFileInputRef.current.value = '';
+    }
+  };
+
+  const updateTestimonial = (index: number, next: TestimonialItem) => {
+    setTestimonials(prev => prev.map((t, i) => i === index ? next : t));
+    setHasChanges(true);
+  };
+
+  const addTestimonial = () => {
+    setTestimonials(prev => [...prev, {
+      names_pt: '', names_en: '', location_pt: '', location_en: '',
+      quote_pt: '', quote_en: '', image: ''
+    }]);
+    setHasChanges(true);
+  };
+
+  const removeTestimonial = (index: number) => {
+    setTestimonials(prev => prev.filter((_, i) => i !== index));
+    setHasChanges(true);
+  };
+
+  const handleTestimonialImageUpload = async (testimonialIndex: number, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    setUploadingTestimonialImage(testimonialIndex);
+    try {
+      const url = await uploadToCloudinary(file, 'portfolio/testimonials');
+      updateTestimonial(testimonialIndex, { ...testimonials[testimonialIndex], image: url });
+      alert('✅ Foto do depoimento enviada com sucesso!');
+    } catch (err: any) {
+      alert('❌ Erro ao fazer upload: ' + (err?.message || err));
+    } finally {
+      setUploadingTestimonialImage(null);
+      if (testimonialFileInputRef.current) testimonialFileInputRef.current.value = '';
+    }
   };
 
   if (!isAuthenticated) {
@@ -805,6 +887,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       'blog': 'Blog',
       'gallery': 'Galeria de Fotos',
       'videos': 'Vídeos',
+      'photobook': 'Álbuns/Livros',
       'seo': 'Configurações de SEO',
       'contact': 'Mensagens de Contato',
       'social': 'Redes Sociais',
@@ -871,13 +954,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
           </div>
           <div className="mb-8">
             <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Mídia</div>
-            {['gallery', 'videos'].map((section) => {
+            {['gallery', 'photobook', 'videos'].map((section) => {
               const icons: { [key: string]: string } = {
                 'gallery': '📷',
+                'photobook': '📚',
                 'videos': '🎥'
               };
               const labels: { [key: string]: string } = {
                 'gallery': 'Galeria de Fotos',
+                'photobook': 'Álbuns/Livros',
                 'videos': 'Vídeos'
               };
               return (
@@ -1061,8 +1146,209 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           )}
 
+          {activeSection === 'photobook' && (
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2">Álbuns/Livros</h2>
+              <p className="text-sm text-gray-500 mb-6">Edite as fotos de cada formato de álbum (30×30, 30×40, etc.). Adicione URLs ou faça upload — depois clique em Publicar.</p>
+              <input
+                ref={photobookFileInputRef}
+                type="file"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => {
+                  const idx = selectedPhotobookAlbumForUpload;
+                  if (idx !== null) handlePhotobookAlbumUpload(idx, e);
+                  setSelectedPhotobookAlbumForUpload(null);
+                }}
+              />
+              {photobook.albums.length === 0 ? (
+                <p className="text-gray-500 py-8">Nenhum álbum na página Álbuns/Livros. Adicione em <code>images.json</code> com <code>photobook.albums</code>.</p>
+              ) : (
+                photobook.albums.map((album, idx) => (
+                  <div key={idx} className="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
+                    <h3 className="text-lg font-bold text-gray-800 mb-1">{album.title}</h3>
+                    <p className="text-sm text-gray-500 mb-4">{album.subtitle}</p>
+                    <div className="space-y-2 mb-4">
+                      {album.images.map((url, imgIdx) => (
+                        <div key={imgIdx} className="flex gap-2 items-center">
+                          {url && url.startsWith('http') && (
+                            <img src={url} alt="" className="w-16 h-16 object-cover rounded flex-shrink-0" />
+                          )}
+                          <input
+                            value={url}
+                            onChange={(e) => {
+                              const next = [...album.images];
+                              next[imgIdx] = e.target.value;
+                              updatePhotobookAlbumImages(idx, next);
+                            }}
+                            placeholder={`URL da foto ${imgIdx + 1}`}
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded text-sm"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => updatePhotobookAlbumImages(idx, album.images.filter((_, i) => i !== imgIdx))}
+                            className="text-red-600 hover:text-red-800 p-2"
+                            aria-label="Remover"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                    <div className="flex gap-2 flex-wrap">
+                      <button
+                        type="button"
+                        onClick={() => updatePhotobookAlbumImages(idx, [...album.images, ''])}
+                        className="text-sm text-blue-600 hover:text-blue-800"
+                      >
+                        + Adicionar URL
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedPhotobookAlbumForUpload(idx);
+                          photobookFileInputRef.current?.click();
+                        }}
+                        className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                      >
+                        <Upload className="w-4 h-4" />
+                        {uploadingPhotobookAlbum === idx ? 'Enviando...' : 'Upload múltiplo'}
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
+          {activeSection === 'testimonials' && (
+            <div>
+              <h2 className="text-2xl font-semibold text-gray-800 mb-2">Depoimentos</h2>
+              <p className="text-sm text-gray-500 mb-6">Edite os depoimentos da página Depoimentos. Campos em PT e EN. Depois clique em Publicar.</p>
+              <input
+                ref={testimonialFileInputRef}
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={(e) => {
+                  const idx = selectedTestimonialForUpload;
+                  if (idx !== null) handleTestimonialImageUpload(idx, e);
+                  setSelectedTestimonialForUpload(null);
+                }}
+              />
+              <div className="mb-4">
+                <button
+                  type="button"
+                  onClick={addTestimonial}
+                  className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                >
+                  <Plus className="w-4 h-4" />
+                  Adicionar depoimento
+                </button>
+              </div>
+              {testimonials.length === 0 ? (
+                <p className="text-gray-500 py-8">Nenhum depoimento. Clique em &quot;Adicionar depoimento&quot;.</p>
+              ) : (
+                testimonials.map((t, idx) => (
+                  <div key={idx} className="bg-white border border-gray-200 rounded-xl p-6 mb-6 shadow-sm">
+                    <div className="flex justify-between items-center mb-4">
+                      <span className="font-bold text-gray-800">Depoimento {idx + 1}</span>
+                      <button
+                        type="button"
+                        onClick={() => removeTestimonial(idx)}
+                        className="text-red-600 hover:text-red-800 p-1"
+                        aria-label="Remover"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Nomes (PT)</label>
+                        <input
+                          value={t.names_pt}
+                          onChange={(e) => updateTestimonial(idx, { ...t, names_pt: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          placeholder="Ex: Mariana & Felipe"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Nomes (EN)</label>
+                        <input
+                          value={t.names_en}
+                          onChange={(e) => updateTestimonial(idx, { ...t, names_en: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          placeholder="Mariana & Felipe"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Local (PT)</label>
+                        <input
+                          value={t.location_pt}
+                          onChange={(e) => updateTestimonial(idx, { ...t, location_pt: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          placeholder="Ex: Toscana, Itália"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs font-medium text-gray-500 mb-1">Local (EN)</label>
+                        <input
+                          value={t.location_en}
+                          onChange={(e) => updateTestimonial(idx, { ...t, location_en: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          placeholder="Tuscany, Italy"
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-xs font-medium text-gray-500 mb-1">Depoimento (PT)</label>
+                      <textarea
+                        value={t.quote_pt}
+                        onChange={(e) => updateTestimonial(idx, { ...t, quote_pt: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm min-h-[80px]"
+                        placeholder="Texto do depoimento em português"
+                      />
+                    </div>
+                    <div className="mb-4">
+                      <label className="block text-xs font-medium text-gray-500 mb-1">Depoimento (EN)</label>
+                      <textarea
+                        value={t.quote_en}
+                        onChange={(e) => updateTestimonial(idx, { ...t, quote_en: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded text-sm min-h-[80px]"
+                        placeholder="Testimonial text in English"
+                      />
+                    </div>
+                    <div className="flex gap-2 items-center flex-wrap">
+                      {t.image && t.image.startsWith('http') && (
+                        <img src={t.image} alt="" className="w-20 h-20 object-cover rounded flex-shrink-0" />
+                      )}
+                      <input
+                        value={t.image}
+                        onChange={(e) => updateTestimonial(idx, { ...t, image: e.target.value })}
+                        placeholder="URL da foto do casal"
+                        className="flex-1 min-w-[200px] px-3 py-2 border border-gray-300 rounded text-sm"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedTestimonialForUpload(idx);
+                          testimonialFileInputRef.current?.click();
+                        }}
+                        className="text-sm text-blue-600 hover:text-blue-800 flex items-center gap-1 whitespace-nowrap"
+                      >
+                        <Upload className="w-4 h-4" />
+                        {uploadingTestimonialImage === idx ? 'Enviando...' : 'Upload'}
+                      </button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </div>
+          )}
+
           {(activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
-            activeSection === 'testimonials' || activeSection === 'blog' || activeSection === 'videos' || 
+            activeSection === 'blog' || activeSection === 'videos' || 
             activeSection === 'seo' || activeSection === 'contact' || activeSection === 'social' || 
             activeSection === 'settings') && (
             <div className="bg-white rounded-xl shadow-sm p-8">

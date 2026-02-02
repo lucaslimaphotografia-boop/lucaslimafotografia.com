@@ -21,6 +21,26 @@ export interface ImageItem {
   album?: string[]; // Array de URLs das fotos do álbum/projeto
 }
 
+/** Álbum da página Álbuns/Livros (Photobook) */
+export interface PhotobookAlbum {
+  title: string;
+  subtitle: string;
+  description: string;
+  details: string;
+  images: string[];
+}
+
+/** Depoimento (página Depoimentos) — campos em PT e EN */
+export interface TestimonialItem {
+  names_pt: string;
+  names_en: string;
+  location_pt: string;
+  location_en: string;
+  quote_pt: string;
+  quote_en: string;
+  image: string;
+}
+
 export interface NavItem {
   label: string;
   view: ViewState;
