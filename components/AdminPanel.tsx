@@ -298,40 +298,29 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewAlbumUrls(newAlbumUrls.filter((_, i) => i !== index));
   };
 
+  const fileToDataUrl = (file: File): Promise<string> =>
+    new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = () => reject(new Error('Falha ao ler o arquivo'));
+      reader.readAsDataURL(file);
+    });
+
   const uploadToCloudinary = async (file: File, folder?: string): Promise<string> => {
-    const formData = new FormData();
-    formData.append('file', file);
-    
-    const uploadPreset = 'ml_default';
-    formData.append('upload_preset', uploadPreset);
-    
-    if (folder) {
-      formData.append('folder', folder);
+    // Enviar pela API do Vercel (mesma origem) para evitar CORS e "Failed to fetch"
+    const imageDataUrl = await fileToDataUrl(file);
+    const res = await fetch('/api/upload-cloudinary', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ image: imageDataUrl, folder: folder || 'portfolio' }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      return data.url || data.secure_url || '';
     }
-
-    const cloudName = 'di6xabxne';
-
-    const response = await fetch(
-      `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
-      {
-        method: 'POST',
-        body: formData,
-      }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      let errorMessage = `Upload failed: ${errorText}`;
-      
-      if (errorText.includes('whitelisted')) {
-        errorMessage = `❌ Erro de Configuração!\n\nO preset "${uploadPreset}" precisa estar configurado como "Unsigned" no Cloudinary.\n\n🔧 Como corrigir:\n1. Acesse: https://cloudinary.com/console\n2. Vá em Settings → Upload → Upload presets\n3. Encontre o preset "${uploadPreset}"\n4. Edite e configure "Signing mode" como "Unsigned"\n5. Salve e tente novamente`;
-      }
-      
-      throw new Error(errorMessage);
-    }
-
-    const data = await response.json();
-    return data.secure_url.replace('/upload/', '/upload/w_1200,q_auto,f_auto/');
+    const errData = await res.json().catch(() => ({}));
+    const msg = errData.message || errData.error || (await res.text()) || `Upload falhou: ${res.status}`;
+    throw new Error(msg);
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
