@@ -334,8 +334,14 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       const data = await res.json();
       return data.url || data.secure_url || '';
     }
-    const errData = await res.json().catch(() => ({}));
-    const msg = errData.message || errData.error || (await res.text()) || `Upload falhou: ${res.status}`;
+    const text = await res.text();
+    let errData: { message?: string; error?: string } = {};
+    try {
+      errData = JSON.parse(text);
+    } catch {
+      // resposta não é JSON
+    }
+    const msg = errData.message || errData.error || text || `Upload falhou: ${res.status}`;
     throw new Error(msg);
   };
 
