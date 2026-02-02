@@ -30,14 +30,16 @@ export const translations = {
         "Campo": "Campo",
         "Praia": "Praia",
         "Hoteis": "Hoteis",
-        "Cidades": "Cidades"
+        "Cidades": "Cidades",
+        "Espaços de eventos": "Espaços de eventos"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"]
+        "Cidades": ["São Paulo", "Évora - Portugal"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
       },
       noResults: "Nenhum momento encontrado.",
       clearFilters: "Limpar Filtros"
@@ -198,14 +200,16 @@ export const translations = {
         "Campo": "Field",
         "Praia": "Beach",
         "Hoteis": "Hotels",
-        "Cidades": "Cities"
+        "Cidades": "Cities",
+        "Espaços de eventos": "Event Venues"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"]
+        "Cidades": ["São Paulo", "Évora - Portugal"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
       },
       noResults: "No moments found.",
       clearFilters: "Clear Filters"
