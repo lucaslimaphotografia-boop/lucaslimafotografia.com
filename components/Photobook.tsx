@@ -1,83 +1,27 @@
 import React, { useState } from 'react';
 import { ArrowRight, Phone, Mail, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Language } from '../types';
+import imagesData from '../images.json';
 
 interface PhotobookProps {
   lang: Language;
 }
 
+const DEFAULT_ALBUMS = [
+  { title: '30×30', subtitle: 'Formato Quadrado Clássico', description: '100 fotos em 60 páginas', details: 'O equilíbrio perfeito entre formato e conteúdo. Ideal para quem busca harmonia visual em cada spread.', images: [] as string[] },
+  { title: '30×40', subtitle: 'Panorâmico', description: '100 fotos em 60 páginas', details: 'Formato horizontal que valoriza paisagens e momentos amplos. Perfeito para casamentos ao ar livre.', images: [] as string[] },
+  { title: '40×30', subtitle: 'Vertical', description: '100 fotos em 60 páginas', details: 'O formato vertical exclusivo que destaca retratos e momentos especiais com elegância.', images: [] as string[] },
+  { title: '35×35', subtitle: 'Grande Formato', description: '100 fotos em 60 páginas', details: 'Nosso maior quadrado. Presença marcante para histórias que merecem destaque.', images: [] as string[] },
+  { title: '15×15', subtitle: 'Mini Álbum', description: '100 fotos em 60 páginas', details: 'Compacto, charmoso e perfeito para presentear. Memórias íntimas em formato delicado.', images: [] as string[] }
+];
+
 export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
 
-  // Imagens dos álbuns
-  const albumImages = {
-    "30×30": [
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-    ],
-    "30×40": [
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107303/LL209855_cuw82m.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107303/LL209843_ghcu4x.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107303/LL209848_e2dodx.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107303/LL209835_nyurjz.jpg"
-    ],
-    "40×30": [
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-    ],
-    "35×35": [
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-    ],
-    "15×15": [
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-      "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-    ]
-  };
-
-  const albums = [
-    {
-      title: "30×30",
-      subtitle: "Formato Quadrado Clássico",
-      description: "100 fotos em 60 páginas",
-      details: "O equilíbrio perfeito entre formato e conteúdo. Ideal para quem busca harmonia visual em cada spread.",
-      images: albumImages["30×30"]
-    },
-    {
-      title: "30×40",
-      subtitle: "Panorâmico",
-      description: "100 fotos em 60 páginas",
-      details: "Formato horizontal que valoriza paisagens e momentos amplos. Perfeito para casamentos ao ar livre.",
-      images: albumImages["30×40"]
-    },
-    {
-      title: "40×30",
-      subtitle: "Vertical",
-      description: "100 fotos em 60 páginas",
-      details: "O formato vertical exclusivo que destaca retratos e momentos especiais com elegância.",
-      images: albumImages["40×30"]
-    },
-    {
-      title: "35×35",
-      subtitle: "Grande Formato",
-      description: "100 fotos em 60 páginas",
-      details: "Nosso maior quadrado. Presença marcante para histórias que merecem destaque.",
-      images: albumImages["35×35"]
-    },
-    {
-      title: "15×15",
-      subtitle: "Mini Álbum",
-      description: "100 fotos em 60 páginas",
-      details: "Compacto, charmoso e perfeito para presentear. Memórias íntimas em formato delicado.",
-      images: albumImages["15×15"]
-    }
-  ];
+  const albums = (imagesData as { photobook?: { albums?: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook?.albums?.length
+    ? (imagesData as { photobook: { albums: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook.albums
+    : DEFAULT_ALBUMS;
 
   const nextImage = (albumIndex: number, totalImages: number) => {
     setCurrentImageIndex(prev => ({
@@ -208,7 +152,7 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
                     <div className="aspect-[4/3] bg-neutral-200 relative overflow-hidden">
                       {/* Imagem atual */}
                       <img 
-                        src={album.images[getCurrentImage(index)]}
+                        src={album.images[getCurrentImage(index)] || 'https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg'}
                         alt={`${album.title} - Imagem ${getCurrentImage(index) + 1}`}
                         className="absolute inset-0 w-full h-full object-cover transition-opacity duration-300"
                         loading="lazy"
@@ -216,6 +160,7 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
                     </div>
                     
                     {/* Controles de navegação */}
+                    {album.images.length > 0 && (
                     <div className="absolute top-1/2 -translate-y-1/2 left-0 right-0 flex justify-between px-4">
                       <button
                         onClick={() => prevImage(index, album.images.length)}
@@ -233,8 +178,10 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
                         <ChevronRight className="w-5 h-5 text-neutral-900" />
                       </button>
                     </div>
+                    )}
 
                     {/* Indicadores de paginação */}
+                    {album.images.length > 0 && (
                     <div className="flex gap-2 justify-center mt-4">
                       {album.images.map((_, imgIndex) => (
                         <button
@@ -252,6 +199,7 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
                         />
                       ))}
                     </div>
+                    )}
                   </div>
 
                   {/* Informações do Álbum */}
