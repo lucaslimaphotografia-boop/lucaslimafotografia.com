@@ -252,22 +252,14 @@
         "subtitle": "Grande Formato",
         "description": "100 fotos em 60 páginas",
         "details": "Nosso maior quadrado. Presença marcante para histórias que merecem destaque.",
-        "images": [
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-        ]
+        "images": []
       },
       {
         "title": "15×15",
         "subtitle": "Mini Álbum",
         "description": "100 fotos em 60 páginas",
         "details": "Compacto, charmoso e perfeito para presentear. Memórias íntimas em formato delicado.",
-        "images": [
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/v1769107313/placeholder.jpg"
-        ]
+        "images": []
       }
     ]
   },
