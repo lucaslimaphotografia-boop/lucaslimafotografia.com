@@ -780,53 +780,6 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           </div>
         );
-      }
-    }
-
-    if (activeTab === 'settings') {
-      return (
-        <div>
-          <h2 className="text-3xl font-bold mb-6">Configurações</h2>
-          <div className="space-y-4">
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Site Settings</h3>
-              <div className="space-y-3">
-                {['Domain', 'SEO Manager', 'Blog', 'Social', 'Tracking & Analytics', 'Advanced'].map((item) => (
-                  <button
-                    key={item}
-                    className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors group"
-                  >
-                    <span className="font-medium">{item}</span>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-black" />
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className="bg-white rounded-lg border border-gray-200 p-6">
-              <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-4">Tools</h3>
-              <div className="space-y-3">
-                {['Form Submissions', 'Draft Sites', 'Trash'].map((item) => (
-                  <button
-                    key={item}
-                    className="w-full flex items-center justify-between p-3 hover:bg-gray-50 rounded-lg transition-colors group"
-                  >
-                    <span className="font-medium">{item}</span>
-                    <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-black" />
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      );
-    }
-
-    return (
-      <div className="flex items-center justify-center h-64">
-        <p className="text-gray-400">Conteúdo em desenvolvimento</p>
-      </div>
-    );
-  };
 
   const showSection = (section: AdminSection) => {
     setActiveSection(section);
