@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import imagesData from '../images.json';
+import type { ImageItem } from '../types';
 
-// Using images from images.json for consistency
-const heroImages: string[] = imagesData.hero;
+// Fotos dos álbuns (url principal + todas as fotos de cada álbum) para o hero
+function getHeroImagesFromGallery(gallery: ImageItem[]): string[] {
+  const urls: string[] = [];
+  gallery.forEach((item) => {
+    urls.push(item.url);
+    if (item.album && Array.isArray(item.album)) {
+      item.album.forEach((u) => urls.push(u));
+    }
+  });
+  return urls;
+}
 
-// Split images into 3 columns
-const col1 = heroImages.slice(0, 4);
-const col2 = heroImages.slice(4, 8);
-const col3 = heroImages.slice(8, 12);
+// Número de colunas no grid (5 fileiras para preencher a home)
+const NUM_COLUMNS = 5;
 
 interface ColumnProps {
   images: string[];
@@ -35,17 +43,44 @@ const ImageColumn: React.FC<ColumnProps> = ({ images, animationClass }) => {
   );
 };
 
+const animationClasses = [
+  'animate-scroll-down-slow',
+  'animate-scroll-down',
+  'animate-scroll-down-slow',
+  'animate-scroll-down',
+  'animate-scroll-down-slow',
+];
+
 export const Hero: React.FC = () => {
+  const columns = useMemo(() => {
+    const gallery = (imagesData as { gallery: ImageItem[] }).gallery;
+    const allImages = getHeroImagesFromGallery(gallery);
+    const heroFallback = (imagesData as { hero?: string[] }).hero;
+    const images = allImages.length > 0
+      ? allImages
+      : (heroFallback && heroFallback.length > 0 ? heroFallback : []);
+    if (images.length === 0) return Array(NUM_COLUMNS).fill([]).map(() => []);
+    // Distribuir em round-robin para não deixar coluna vazia
+    const cols: string[][] = Array.from({ length: NUM_COLUMNS }, () => []);
+    images.forEach((url, i) => {
+      cols[i % NUM_COLUMNS].push(url);
+    });
+    return cols;
+  }, []);
+
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black text-white">
       
-      {/* Background Scrolling Grid */}
-      <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 gap-0 opacity-40">
-        <ImageColumn images={col1} animationClass="animate-scroll-down-slow" />
-        <div className="hidden md:block">
-           <ImageColumn images={col2} animationClass="animate-scroll-down" />
-        </div>
-        <ImageColumn images={col3} animationClass="animate-scroll-down-slow" />
+      {/* Background Scrolling Grid - 5 colunas para preencher a home */}
+      <div className="absolute inset-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-0 opacity-40">
+        {columns.map((imgs, idx) => (
+          <div key={idx} className={idx >= 3 ? 'hidden lg:block' : ''}>
+            <ImageColumn
+              images={imgs.length > 0 ? imgs : (columns[0]?.length ? columns[0] : (imagesData as { hero?: string[] }).hero || [])}
+              animationClass={animationClasses[idx % animationClasses.length]}
+            />
+          </div>
+        ))}
       </div>
 
       {/* Overlay Gradient to make text readable */}
