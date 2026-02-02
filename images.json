@@ -78,13 +78,9 @@
       "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071414/portfolio/blob_qumu2o.jpg",
       "category": [
         "Igreja",
-        "Cidades",
-        "Espaços de eventos"
+        "Cidades"
       ],
-      "subcategory": [
-        "São Paulo",
-        "Clube Monte Líbano"
-      ],
+      "subcategory": "São Paulo",
       "title": "Kerlly & Rafael",
       "album": [
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071447/portfolio/albums/blob_icqhxa.jpg",
@@ -122,38 +118,6 @@
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071499/portfolio/albums/blob_pc2r2e.jpg",
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071501/portfolio/albums/blob_wc8u5g.jpg",
         "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071503/portfolio/albums/blob_ustybt.jpg"
-      ]
-    },
-    {
-      "id": 17,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071638/portfolio/blob_unmjej.jpg",
-      "category": [
-        "Igreja",
-        "Cidades"
-      ],
-      "subcategory": "São Paulo",
-      "title": "Marcela & Felipe",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071672/portfolio/albums/blob_bu5qhz.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071673/portfolio/albums/blob_wosyeh.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071675/portfolio/albums/blob_bqtu1z.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071676/portfolio/albums/blob_dxoere.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071678/portfolio/albums/blob_aksig9.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071680/portfolio/albums/blob_kbn83o.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071681/portfolio/albums/blob_o92ezh.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071683/portfolio/albums/blob_elip9c.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071684/portfolio/albums/blob_lrclqr.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071686/portfolio/albums/blob_dusioj.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071688/portfolio/albums/blob_vgatrx.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071689/portfolio/albums/blob_dw7su7.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071691/portfolio/albums/blob_mvijry.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071692/portfolio/albums/blob_t16wms.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071694/portfolio/albums/blob_bw9mus.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071695/portfolio/albums/blob_m2wgsf.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071697/portfolio/albums/blob_fqgbxb.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071699/portfolio/albums/blob_copfwc.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071701/portfolio/albums/blob_wz0ypk.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770071702/portfolio/albums/blob_lbaqil.jpg"
       ]
     }
   ],
