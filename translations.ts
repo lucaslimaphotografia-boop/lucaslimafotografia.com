@@ -65,7 +65,7 @@ export const translations = {
         },
         {
           name: "Juliana Lima",
-          role: "Fotógrafa & Diretora de Arte",
+          role: "Diretora de Arte",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
           bio: [
             "Com uma visão única e sensível, trabalho lado a lado para criar imagens que transcendem o momento e se tornam memórias eternas. Minha abordagem combina técnica refinada com uma atenção especial aos detalhes e às emoções genuínas de cada casal.",
@@ -233,7 +233,7 @@ export const translations = {
         },
         {
           name: "Juliana Lima",
-          role: "Photographer & Art Director",
+          role: "Art Director",
           image: "https://res.cloudinary.com/di6xabxne/image/upload/v1769115301/20251002_Juliana_Lima_000014_websize_m0zbly.jpg",
           bio: [
             "With a unique and sensitive vision, I work side by side to create images that transcend the moment and become eternal memories. My approach combines refined technique with special attention to details and the genuine emotions of each couple.",

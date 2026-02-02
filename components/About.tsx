@@ -75,6 +75,7 @@ export const About: React.FC<AboutProps> = ({ lang }) => {
                 src={person.image} 
                 alt={person.name} 
                 className="w-full h-[400px] md:h-[600px] object-cover my-6 md:my-8 grayscale-[10%] hover:grayscale-0 transition-all duration-300"
+                style={person.name === 'Juliana Lima' ? { objectPosition: 'center 55%' } : undefined}
                 loading="lazy"
               />
               

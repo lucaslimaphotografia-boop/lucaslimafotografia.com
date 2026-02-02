@@ -26,15 +26,18 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
     };
   }, [onFinish]);
 
+  const LOGO_URL = 'https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png';
+
   return (
-    <div ref={containerRef} className="intro-container fixed inset-0 z-[100] bg-white">
-      {/* Texto centralizado */}
+    <div ref={containerRef} className="intro-container fixed inset-0 z-[100] bg-black">
       <div className="intro-content flex flex-col items-center justify-center h-full">
         <div ref={textRef} className="intro-text text-center">
-          <h1 className="intro-title text-black font-light tracking-[0.2em] uppercase text-4xl md:text-6xl lg:text-7xl mb-4 opacity-0">
-            LUCASLIMA
-          </h1>
-          <div className="intro-line w-0 h-px bg-black opacity-0"></div>
+          <img
+            src={LOGO_URL}
+            alt="LUCASLIMA STUDIO"
+            className="intro-logo block w-full max-w-[min(85vw,560px)] h-auto opacity-0"
+          />
+          <div className="intro-line w-0 h-px bg-white/60 opacity-0 mt-8"></div>
         </div>
       </div>
 
@@ -49,17 +52,15 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
           position: relative;
         }
 
-        .intro-title {
+        .intro-logo {
           animation: fadeInUp 1s ease-out 0.3s forwards;
-          letter-spacing: 0.15em;
-          font-weight: 300;
-          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         .intro-line {
           animation: expandLine 0.8s ease-out 1.2s forwards;
           max-width: 200px;
-          margin: 0 auto;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         @keyframes fadeInUp {
@@ -96,9 +97,8 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
         }
 
         @media (max-width: 768px) {
-          .intro-title {
-            font-size: 2rem;
-            letter-spacing: 0.1em;
+          .intro-logo {
+            max-width: 80vw;
           }
 
           .intro-line {
