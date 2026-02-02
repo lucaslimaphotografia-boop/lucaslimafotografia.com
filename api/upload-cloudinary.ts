@@ -52,11 +52,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       formData.append('public_id', publicId);
     }
 
-    // Otimizações automáticas
-    formData.append('transformation', JSON.stringify([
-      { width: 1200, quality: 'auto', fetch_format: 'auto' }
-    ]));
-
     const uploadResponse = await fetch(
       `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       {
