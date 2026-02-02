@@ -81,30 +81,38 @@ Painel de administração estilo WordPress para gerenciar o conteúdo do site se
 
 ## 💾 Como Salvar Alterações
 
-### Passo 1: Fazer Alterações
+### Opção A: Publicar direto no site (recomendado)
+
+1. Faça as alterações na **Galeria** ou **Página Inicial**
+2. Clique em **"Publicar"** (botão verde no topo)
+3. O painel envia os dados para o repositório no GitHub e o Vercel faz o deploy em 1–2 minutos
+4. **Nada de baixar** `images.json` nem fazer commit manual
+
+**Requisito:** configurar **uma vez** no Vercel:
+
+1. **GitHub:** crie um Personal Access Token em [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens) com permissão **repo**
+2. **Vercel:** no projeto → **Settings** → **Environment Variables** → adicione:
+   - **Name:** `GITHUB_TOKEN`
+   - **Value:** (cole o token do GitHub)
+   - **Environment:** Production (e Preview se quiser)
+3. **Vercel:** em **Settings** → **Environment Variables** → marque **"Automatically expose System Environment Variables"** (para a API saber qual repositório atualizar)
+4. Faça um **novo deploy** (Deployments → ⋮ no último deploy → Redeploy) para as variáveis valerem
+
+Se o **Publicar** falhar (ex.: "GITHUB_TOKEN is not set"), use a Opção B abaixo.
+
+### Opção B: Baixar e atualizar manualmente
 
 1. Edite as fotos na aba **Galeria**
 2. Adicione/remova fotos da **Página Inicial**
-3. Veja o indicador **"● Alterações não salvas"** no topo
-
-### Passo 2: Salvar
-
-1. Clique no botão **"Salvar"** (canto superior direito)
-2. Um arquivo `images.json` será baixado automaticamente
-3. **Substitua** o arquivo `images.json` no projeto pelo arquivo baixado
-
-### Passo 3: Atualizar o Site
-
-1. **Commit e push:**
+3. Clique em **"Publicar"** — se a API não estiver configurada, o painel oferece **baixar** o `images.json`
+4. **Substitua** o arquivo `images.json` no projeto pelo arquivo baixado
+5. **Commit e push:**
    ```bash
    git add images.json
    git commit -m "Update images from admin panel"
    git push origin main
    ```
-
-2. **Aguarde o deploy** no Vercel (automático)
-
-3. **Teste o site** para verificar as mudanças
+6. Aguarde o deploy no Vercel
 
 ## 🎨 Interface do Painel
 
@@ -150,12 +158,24 @@ Quando adicionar/editar uma foto:
 - Limpe o cache do navegador
 - Tente em modo anônimo
 
-### "Alterações não aparecem no site"
+### "Alterações não aparecem" / "Não está fazendo alteração no Vercel"
 
-- Verifique se fez commit e push
-- Verifique se o Vercel fez deploy
-- Limpe o cache do navegador
-- Aguarde alguns minutos (CDN pode ter cache)
+1. **Veja o status no painel:** na seção **Galeria de Fotos** aparece um aviso verde (configurado) ou amarelo/vermelho (problema). Use isso para saber o que falta.
+
+2. **Use o painel no site em produção:** acesse pelo domínio do Vercel (ex: `seu-site.vercel.app`), não em `localhost` — a API só existe no Vercel.
+
+3. **GITHUB_TOKEN obrigatório:**
+   - GitHub: [Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens) → Generate new token (classic) → marque **repo**.
+   - Vercel: **Settings** → **Environment Variables** → **Add:** Name `GITHUB_TOKEN`, Value = token do GitHub, Environment **Production** (e Preview se quiser).
+   - Depois: **Deployments** → ⋮ no último deploy → **Redeploy** (senão a variável não vale no servidor).
+
+4. **Repositório correto:** em Vercel → **Settings** → **Environment Variables** → marque **"Automatically expose System Environment Variables"**. O painel mostra "Repositório: owner/repo" — esse repo tem que ser o **mesmo** do projeto no Vercel. Se for outro (ex: seu repo é `seu-usuario/portfólio-lucas-lima-site`), defina manualmente:
+   - `GITHUB_REPO_OWNER` = seu usuário ou org no GitHub
+   - `GITHUB_REPO_NAME` = nome exato do repositório
+
+5. **Confirme o deploy:** após clicar em Publicar, em Vercel → **Deployments** deve aparecer um novo deploy em 1–2 min. Se não aparecer, o push foi para outro repo ou o token não tem permissão.
+
+6. **Fallback:** se não conseguir configurar, use **Publicar** → quando der erro, o painel oferece **baixar** o `images.json`; substitua no projeto e faça `git add images.json && git commit -m "Update" && git push`.
 
 ### "Arquivo não baixa ao salvar"
 

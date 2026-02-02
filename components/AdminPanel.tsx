@@ -40,6 +40,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
   const [uploadingAlbum, setUploadingAlbum] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishStatus, setPublishStatus] = useState<{ tokenSet?: boolean; repo?: string; error?: string } | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const albumFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -60,10 +62,34 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     }
   }, [activeSection]);
 
+  // Verificar status da publicação (só funciona no site em produção no Vercel)
+  useEffect(() => {
+    if (!isAuthenticated || activeSection !== 'gallery') return;
+    const token = sessionStorage.getItem('admin_token') || ADMIN_PASSWORD;
+    fetch(`/api/save-images?token=${encodeURIComponent(token)}`)
+      .then((res) => res.json().catch(() => ({})))
+      .then((data) => {
+        if (data.ok) setPublishStatus({ tokenSet: data.tokenSet, repo: data.repo });
+        else setPublishStatus({ error: data.message || data.error || 'API indisponível' });
+      })
+      .catch(() => setPublishStatus({ error: 'Use o painel no site em produção (Vercel), não em localhost.' }));
+  }, [isAuthenticated, activeSection]);
+
+  const openAddForm = () => {
+    setEditingItem(null);
+    setNewImageUrl('');
+    setNewImageTitle('');
+    setNewImageCategories(['Igreja']);
+    setNewImageSubcategories([]);
+    setNewAlbumUrls(['']);
+    setShowAddForm(true);
+  };
+
   const handleLogin = () => {
     if (password === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       localStorage.setItem('admin_authenticated', 'true');
+      sessionStorage.setItem('admin_token', password);
       setPassword('');
     } else {
       const errorMsg = document.getElementById('errorMessage');
@@ -77,17 +103,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const handleLogout = () => {
     setIsAuthenticated(false);
     localStorage.removeItem('admin_authenticated');
+    sessionStorage.removeItem('admin_token');
   };
 
   const handleSave = async () => {
     try {
-      const updatedData = {
-        gallery,
-        hero
-      };
-
+      const updatedData = { gallery, hero };
       localStorage.setItem('admin_images_backup', JSON.stringify(updatedData));
-      
       const blob = new Blob([JSON.stringify(updatedData, null, 2)], { type: 'application/json' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
@@ -95,51 +117,112 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       a.download = 'images.json';
       a.click();
       URL.revokeObjectURL(url);
-
       setHasChanges(false);
-      
       alert(`✅ Dados salvos!\n\n📥 O arquivo images.json foi baixado.\n\n📋 Próximos passos:\n1. Substitua o arquivo images.json no projeto\n2. git add images.json\n3. git commit -m "Update images"\n4. git push origin main\n5. Aguarde o deploy no Vercel (~1-2 min)`);
     } catch (error) {
       alert('❌ Erro ao salvar: ' + error);
     }
   };
 
-  const handlePublish = () => {
-    if (hasChanges) {
-      handleSave();
+  const publishToSite = async (payload?: { gallery: ImageItem[]; hero: string[] }): Promise<boolean> => {
+    setPublishing(true);
+    try {
+      const token = sessionStorage.getItem('admin_token') || ADMIN_PASSWORD;
+      const g = payload?.gallery ?? gallery;
+      const h = payload?.hero ?? hero;
+      const res = await fetch('/api/save-images', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ gallery: g, hero: h, token })
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const baseMsg = data.message || data.error || res.statusText;
+        const extra = res.status === 404
+          ? '\n\n💡 A publicação automática só funciona no site em produção (Vercel). Está testando localmente? Acesse o painel pelo seu domínio (ex: seu-site.vercel.app) ou use "Baixar JSON" e faça git push manual.'
+          : '\n\nSe o servidor pedir GITHUB_TOKEN, configure em Vercel → Project → Settings → Environment Variables.';
+        alert(`❌ Erro ao publicar\n\n${baseMsg}${extra}`);
+        return false;
+      }
+      if (payload) {
+        setGallery(payload.gallery);
+        setEditingItem(null);
+        setShowAddForm(false);
+      }
+      setHasChanges(false);
+      alert(`✅ ${data.message || 'Site atualizado!'}\n\n${data.repo ? `Repositório atualizado: ${data.repo}\n\n` : ''}O deploy no Vercel deve levar 1–2 minutos.`);
+      return true;
+    } finally {
+      setPublishing(false);
     }
-    alert('🚀 Publicando alterações...\n\nAs alterações serão aplicadas após o deploy automático.');
+  };
+
+  const handlePublish = async () => {
+    if (editingItem && showAddForm) {
+      if (!newImageUrl.trim() || newImageCategories.length === 0) {
+        alert('Preencha a URL e pelo menos uma categoria.');
+        return;
+      }
+      const updatedGallery = gallery.map(img =>
+        img.id === editingItem.id
+          ? {
+              ...img,
+              url: newImageUrl,
+              title: newImageTitle || undefined,
+              category: newImageCategories.length === 1 ? newImageCategories[0] : newImageCategories,
+              subcategory: newImageSubcategories.length > 0
+                ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
+                : undefined,
+              album: newAlbumUrls.filter(u => u.trim()).length > 0 ? newAlbumUrls.filter(u => u.trim()) : undefined
+            }
+          : img
+      );
+      const ok = await publishToSite({ gallery: updatedGallery, hero });
+      if (!ok) {
+        handleUpdateImage();
+        handleSave();
+      }
+      return;
+    }
+    if (hasChanges) {
+      const ok = await publishToSite();
+      if (!ok) handleSave();
+    } else {
+      alert('💡 Nenhuma alteração pendente.\n\nEdite uma foto e clique em "Atualizar", ou adicione uma nova e clique em "Adicionar". Depois clique em "Publicar".');
+    }
   };
 
   const handlePreview = () => {
     window.open(window.location.origin, '_blank');
   };
 
-  const handleAddImage = () => {
+  const handleAddImage = (e?: React.MouseEvent) => {
+    e?.preventDefault();
     if (!newImageUrl.trim()) {
-      alert('Por favor, adicione uma URL de imagem');
+      alert('Por favor, adicione uma URL da foto principal.');
       return;
     }
     if (newImageCategories.length === 0) {
-      alert('Por favor, selecione pelo menos uma categoria');
+      alert('Por favor, selecione pelo menos uma categoria.');
       return;
     }
 
-    const newId = Math.max(...gallery.map(img => img.id), 0) + 1;
+    const ids = gallery.map(img => img.id);
+    const newId = ids.length > 0 ? Math.max(...ids, 0) + 1 : 1;
     const newImage: ImageItem = {
       id: newId,
-      url: newImageUrl,
+      url: newImageUrl.trim(),
       category: newImageCategories.length === 1 ? newImageCategories[0] : newImageCategories,
       subcategory: newImageSubcategories.length > 0 
         ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
         : undefined,
-      title: newImageTitle || undefined,
+      title: newImageTitle?.trim() || undefined,
       album: newAlbumUrls.filter(url => url.trim()).length > 0 
         ? newAlbumUrls.filter(url => url.trim())
         : undefined
     };
 
-    setGallery([...gallery, newImage]);
+    setGallery(prev => [...prev, newImage]);
     setNewImageUrl('');
     setNewImageTitle('');
     setNewImageCategories(['Igreja']);
@@ -147,6 +230,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewAlbumUrls(['']);
     setShowAddForm(false);
     setHasChanges(true);
+    alert('✅ Álbum adicionado à lista!\n\nClique em "Publicar" (botão verde no rodapé) para atualizar o site.');
   };
 
   const handleDeleteImage = (id: number) => {
@@ -407,38 +491,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     );
   }
 
-  const renderContent = () => {
-    if (activeTab === 'pages') {
-      if (activeSubTab === 'gallery') {
-        return (
-          <div>
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-3xl font-bold">Galeria</h2>
-              <button
-                onClick={() => {
-                  setEditingItem(null);
-                  setNewImageUrl('');
-                  setNewImageTitle('');
-                  setNewImageCategory('Festa');
-                  setNewAlbumUrls(['']);
-                  setShowAddForm(true);
-                }}
-                className="bg-black text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-800 transition-colors font-medium"
-              >
-                <Plus className="w-4 h-4" />
-                Adicionar Foto
-              </button>
-            </div>
+  const renderGalleryContent = () => (
+    <div>
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-3xl font-bold">Galeria</h2>
+        <button
+          type="button"
+          onClick={openAddForm}
+          className="bg-black text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-800 transition-colors font-medium"
+        >
+          <Plus className="w-4 h-4" />
+          Novo álbum
+        </button>
+      </div>
 
-            {showAddForm && (
+      {showAddForm && (
               <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6 shadow-sm">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-bold">{editingItem ? 'Editar Foto' : 'Nova Foto'}</h3>
-                  <button onClick={() => setShowAddForm(false)} className="text-gray-400 hover:text-black">
+                  <h3 className="text-lg font-bold">{editingItem ? 'Editar Foto' : 'Novo álbum'}</h3>
+                  <button type="button" onClick={() => setShowAddForm(false)} className="text-gray-400 hover:text-black">
                     <X className="w-5 h-5" />
                   </button>
                 </div>
-
+                {!editingItem && (
+                  <p className="text-sm text-gray-500 mb-4">Preencha a foto principal, título, categorias e (opcional) as URLs do álbum. Depois clique em &quot;Adicionar álbum&quot; e em &quot;Publicar&quot; para atualizar o site.</p>
+                )}
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium mb-2">Foto Principal *</label>
@@ -458,7 +535,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                         <div className="flex flex-col items-center gap-2">
                           <img src={newImageUrl} alt="Preview" className="max-h-32 rounded" />
                           <span className="text-sm text-green-600">✓ Foto carregada</span>
-                          <button onClick={() => setNewImageUrl('')} className="text-xs text-red-600 hover:text-red-800">
+                          <button type="button" onClick={() => setNewImageUrl('')} className="text-xs text-red-600 hover:text-red-800">
                             Remover
                           </button>
                         </div>
@@ -627,26 +704,28 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                           className="flex-1 px-4 py-2 border border-gray-300 rounded text-sm"
                         />
                         {newAlbumUrls.length > 1 && (
-                          <button onClick={() => removeAlbumUrl(index)} className="text-red-600 hover:text-red-800">
+                          <button type="button" onClick={() => removeAlbumUrl(index)} className="text-red-600 hover:text-red-800">
                             <Trash2 className="w-4 h-4" />
                           </button>
                         )}
                       </div>
                     ))}
-                    <button onClick={addAlbumUrl} className="text-sm text-blue-600 hover:text-blue-800 mt-2">
+                    <button type="button" onClick={addAlbumUrl} className="text-sm text-blue-600 hover:text-blue-800 mt-2">
                       + Adicionar URL
                     </button>
                   </div>
 
                   <div className="flex gap-2 pt-4">
                     <button
-                      onClick={editingItem ? handleUpdateImage : handleAddImage}
+                      type="button"
+                      onClick={(e) => (editingItem ? handleUpdateImage() : handleAddImage(e))}
                       className="bg-black text-white px-6 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-800 transition-colors"
                     >
                       <Check className="w-4 h-4" />
-                      {editingItem ? 'Atualizar' : 'Adicionar'}
+                      {editingItem ? 'Atualizar' : 'Adicionar álbum'}
                     </button>
                     <button
+                      type="button"
                       onClick={() => setShowAddForm(false)}
                       className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg hover:bg-gray-300 transition-colors"
                     >
@@ -989,11 +1068,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                 <button
                   onClick={() => {
                     setEditingItem(null);
-                  setNewImageUrl('');
-                  setNewImageTitle('');
-                  setNewImageCategory('Igreja');
-                  setNewImageSubcategory('');
-                  setNewAlbumUrls(['']);
+                    setNewImageUrl('');
+                    setNewImageTitle('');
+                    setNewImageCategories(['Igreja']);
+                    setNewImageSubcategories([]);
+                    setNewAlbumUrls(['']);
                     setShowAddForm(true);
                     setActiveTab('pages');
                     setActiveSubTab('gallery');
@@ -1004,7 +1083,18 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                   + Adicionar Foto
                 </button>
               </div>
-              {renderContent()}
+              {publishStatus && (
+                <div className={`mb-6 rounded-lg border px-4 py-3 text-sm ${publishStatus.error ? 'bg-red-50 border-red-200 text-red-800' : publishStatus.tokenSet ? 'bg-green-50 border-green-200 text-green-800' : 'bg-amber-50 border-amber-200 text-amber-800'}`}>
+                  {publishStatus.error ? (
+                    <p><strong>Publicação automática:</strong> {publishStatus.error}</p>
+                  ) : publishStatus.tokenSet ? (
+                    <p><strong>✓ Configurado.</strong> Repositório: <code className="bg-white/70 px-1 rounded">{publishStatus.repo}</code> — ao clicar em Publicar, o Vercel fará o deploy em 1–2 min.</p>
+                  ) : (
+                    <p><strong>⚠ Token não configurado.</strong> As alterações não vão para o Vercel. No Vercel → Project → Settings → Environment Variables, adicione <code className="bg-white/70 px-1 rounded">GITHUB_TOKEN</code> (token do GitHub com permissão <strong>repo</strong>). Depois faça um Redeploy.</p>
+                  )}
+                </div>
+              )}
+              {renderGalleryContent()}
             </div>
           )}
 
@@ -1036,10 +1126,12 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             )}
             <button
               onClick={handlePublish}
-              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 relative"
+              disabled={publishing}
+              className="px-6 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium flex items-center gap-2 relative disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              Publicar
-              {hasChanges && <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>}
+              {publishing ? <Loader2 className="w-4 h-4 animate-spin" /> : null}
+              {publishing ? 'Publicando...' : 'Publicar'}
+              {hasChanges && !publishing && <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"></span>}
             </button>
           </div>
           <div className="text-sm text-gray-500 flex items-center gap-2">

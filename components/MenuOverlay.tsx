@@ -41,7 +41,7 @@ export const MenuOverlay: React.FC<MenuOverlayProps> = ({ isOpen, onClose, onNav
             <img 
               src="https://res.cloudinary.com/di6xabxne/image/upload/v1769109817/LOGO_BRANCO_PNG_qsi22a.png"
               alt="LUCASLIMA STUDIO"
-              className="h-10 md:h-12 w-auto"
+              className="h-24 md:h-32 w-auto"
             />
         </div>
         <button onClick={onClose} className="group flex items-center gap-2 cursor-pointer">
