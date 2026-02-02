@@ -90,13 +90,18 @@ Painel de administração estilo WordPress para gerenciar o conteúdo do site se
 
 **Requisito:** configurar **uma vez** no Vercel:
 
-1. **GitHub:** crie um Personal Access Token em [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens) com permissão **repo**
+1. **GitHub — token com permissão de escrita no repo:**
+   - Acesse [GitHub → Settings → Developer settings → Personal access tokens](https://github.com/settings/tokens)
+   - **Tokens (classic)** → **Generate new token (classic)**
+   - Marque a permissão **repo** (acesso completo a repositórios privados e push)
+   - Gere e **copie** o token (ele só aparece uma vez)
+   - O token precisa ser da **mesma conta** que é dona do repositório (`lucaslimaphotografia-boop/lucaslimafotografia.com`)
 2. **Vercel:** no projeto → **Settings** → **Environment Variables** → adicione:
    - **Name:** `GITHUB_TOKEN`
    - **Value:** (cole o token do GitHub)
    - **Environment:** Production (e Preview se quiser)
-3. **Vercel:** em **Settings** → **Environment Variables** → marque **"Automatically expose System Environment Variables"** (para a API saber qual repositório atualizar)
-4. Faça um **novo deploy** (Deployments → ⋮ no último deploy → Redeploy) para as variáveis valerem
+3. **Vercel:** em **Settings** → **Environment Variables** → marque **"Automatically expose System Environment Variables"**
+4. **Redeploy:** Deployments → ⋮ no último deploy → **Redeploy** (senão a variável não vale no servidor)
 
 Se o **Publicar** falhar (ex.: "GITHUB_TOKEN is not set"), use a Opção B abaixo.
 
@@ -176,6 +181,16 @@ Quando adicionar/editar uma foto:
 5. **Confirme o deploy:** após clicar em Publicar, em Vercel → **Deployments** deve aparecer um novo deploy em 1–2 min. Se não aparecer, o push foi para outro repo ou o token não tem permissão.
 
 6. **Fallback:** se não conseguir configurar, use **Publicar** → quando der erro, o painel oferece **baixar** o `images.json`; substitua no projeto e faça `git add images.json && git commit -m "Update" && git push`.
+
+### "Resource not accessible by personal access token"
+
+O token do GitHub não tem permissão para escrever no repositório. Corrija assim:
+
+1. **Token classic (recomendado):** em [GitHub → Personal access tokens](https://github.com/settings/tokens), crie um **token (classic)** com a permissão **repo** marcada (não use só "public_repo" se o repo for privado).
+2. **Conta certa:** o token tem que ser da **conta que é dona do repo** (ex.: `lucaslimaphotografia-boop`). Se o repo for de outra conta/org, gere o token logado nessa conta.
+3. **Token fine-grained:** se estiver usando token fine-grained, ele precisa de **Contents: Read and write** no repositório `lucaslimaphotografia-boop/lucaslimafotografia.com`.
+4. **Atualize no Vercel:** Settings → Environment Variables → edite `GITHUB_TOKEN` e cole o novo token → salve.
+5. **Redeploy:** Deployments → ⋮ → Redeploy para o servidor usar o token novo.
 
 ### "Arquivo não baixa ao salvar"
 

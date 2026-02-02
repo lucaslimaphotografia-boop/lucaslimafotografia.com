@@ -369,13 +369,31 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
     setUploadingAlbum(true);
     try {
-      const uploadPromises = files.map(file => uploadToCloudinary(file, 'portfolio/albums'));
-      const urls = await Promise.all(uploadPromises);
+      // Upload em sequência para evitar "Failed to fetch" (muitas requisições em paralelo)
+      const urls: string[] = [];
+      const fileList = files as File[];
+      for (const file of fileList) {
+        if (!file.type.startsWith('image/')) continue;
+        if (file.size > 10 * 1024 * 1024) {
+          alert(`Arquivo "${file.name}" ignorado: máximo 10MB.`);
+          continue;
+        }
+        const url = await uploadToCloudinary(file, 'portfolio/albums');
+        urls.push(url);
+      }
       const currentUrls = newAlbumUrls.filter(url => url.trim());
       setNewAlbumUrls([...currentUrls, ...urls]);
-      alert(`✅ ${urls.length} foto(s) enviada(s) com sucesso!`);
+      if (urls.length > 0) {
+        alert(`✅ ${urls.length} foto(s) enviada(s) com sucesso!`);
+      } else {
+        alert('Nenhuma imagem válida foi enviada. Use arquivos de imagem (máx. 10MB cada).');
+      }
     } catch (error: any) {
-      alert('❌ Erro ao fazer upload: ' + error.message);
+      const msg = error?.message || 'Erro desconhecido';
+      const dica = msg.includes('fetch') || msg.includes('Network')
+        ? '\n\nDica: tente enviar menos fotos de uma vez (ex.: 5) ou verifique sua conexão.'
+        : '';
+      alert('❌ Erro ao fazer upload: ' + msg + dica);
     } finally {
       setUploadingAlbum(false);
       if (albumFileInputRef.current) {
