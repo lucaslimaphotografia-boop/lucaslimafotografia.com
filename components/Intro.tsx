@@ -35,7 +35,7 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
           <img
             src={LOGO_URL}
             alt="LUCASLIMA STUDIO"
-            className="intro-logo block w-full max-w-[min(85vw,560px)] h-auto opacity-0"
+            className="intro-logo block w-[80%] max-w-[600px] md:max-w-[900px] h-auto opacity-0"
           />
           <div className="intro-line w-0 h-px bg-white/60 opacity-0 mt-8"></div>
         </div>
@@ -97,10 +97,6 @@ export const Intro: React.FC<IntroProps> = ({ onFinish }) => {
         }
 
         @media (max-width: 768px) {
-          .intro-logo {
-            max-width: 80vw;
-          }
-
           .intro-line {
             max-width: 150px;
           }
