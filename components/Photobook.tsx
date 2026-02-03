@@ -7,6 +7,11 @@ interface PhotobookProps {
   lang: Language;
 }
 
+const OUR_BOOK_VIDEO = {
+  mp4: 'https://res.cloudinary.com/di6xabxne/video/upload/c_fill,w_900,h_1200,q_auto:good,vc_h264,f_mp4/v1770134964/LL_-_Logo_hq8w6i.mp4',
+  poster: 'https://res.cloudinary.com/di6xabxne/video/upload/c_fill,w_900,h_1200,q_auto,f_jpg,so_0/v1770134964/LL_-_Logo_hq8w6i.jpg'
+};
+
 const DEFAULT_ALBUMS = [
   { title: '30×30', subtitle: 'Formato Quadrado Clássico', description: '100 fotos em 60 páginas', details: 'O equilíbrio perfeito entre formato e conteúdo. Ideal para quem busca harmonia visual em cada spread.', images: [] as string[] },
   { title: '30×40', subtitle: 'Panorâmico', description: '100 fotos em 60 páginas', details: 'Formato horizontal que valoriza paisagens e momentos amplos. Perfeito para casamentos ao ar livre.', images: [] as string[] },
@@ -122,18 +127,16 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
 
             <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden">
               <video
-                className="absolute inset-0 h-full w-full object-cover"
+                className="absolute inset-0 block h-full w-full object-cover"
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload="auto"
+                preload="metadata"
+                poster={OUR_BOOK_VIDEO.poster}
                 aria-label="Vídeo do Our Book"
               >
-                <source
-                  src="https://res.cloudinary.com/di6xabxne/video/upload/f_mp4,vc_h264/q_auto/LL_-_Logo_hq8w6i.mp4"
-                  type="video/mp4"
-                />
+                <source src={OUR_BOOK_VIDEO.mp4} type="video/mp4" />
                 <source
                   src="https://res.cloudinary.com/di6xabxne/video/upload/v1770134964/LL_-_Logo_hq8w6i.mp4"
                   type="video/mp4; codecs=hvc1"
