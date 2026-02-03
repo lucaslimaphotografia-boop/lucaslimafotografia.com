@@ -14,6 +14,16 @@ function getHeroImagesFromGallery(gallery: ImageItem[]): string[] {
   return urls;
 }
 
+// Embaralhar array (Fisher–Yates) para ordem aleatória no hero
+function shuffleArray<T>(arr: T[]): T[] {
+  const out = [...arr];
+  for (let i = out.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [out[i], out[j]] = [out[j], out[i]];
+  }
+  return out;
+}
+
 // Número de colunas no grid (5 fileiras para preencher a home)
 const NUM_COLUMNS = 5;
 
@@ -56,10 +66,11 @@ export const Hero: React.FC = () => {
     const gallery = (imagesData as { gallery: ImageItem[] }).gallery;
     const allImages = getHeroImagesFromGallery(gallery);
     const heroFallback = (imagesData as { hero?: string[] }).hero;
-    const images = allImages.length > 0
+    const raw = allImages.length > 0
       ? allImages
       : (heroFallback && heroFallback.length > 0 ? heroFallback : []);
-    if (images.length === 0) return Array(NUM_COLUMNS).fill([]).map(() => []);
+    if (raw.length === 0) return Array(NUM_COLUMNS).fill([]).map(() => []);
+    const images = shuffleArray(raw);
     // Distribuir em round-robin para não deixar coluna vazia
     const cols: string[][] = Array.from({ length: NUM_COLUMNS }, () => []);
     images.forEach((url, i) => {
