@@ -415,7 +415,8 @@
           "Praia": "Praia",
           "Hoteis": "Hoteis",
           "Cidades": "Cidades",
-          "Espaços de eventos": "Espaços de eventos"
+          "Espaços de eventos": "Espaços de eventos",
+          "Noivado": "Noivado"
         },
         "subcategories": {
           "Igreja": [],
@@ -435,13 +436,16 @@
           ],
           "Cidades": [
             "São Paulo",
-            "Évora - Portugal"
+            "Évora - Portugal",
+            "Houston - EUA"
           ],
           "Espaços de eventos": [
             "Clube Monte Líbano",
             "Hípica Paulista",
-            "Fundação Luisa Oscar Americano"
-          ]
+            "Fundação Luisa Oscar Americano",
+            "Casa Charlô"
+          ],
+          "Noivado": []
         },
         "noResults": "Nenhum momento encontrado.",
         "clearFilters": "Limpar Filtros"
@@ -628,7 +632,8 @@
           "Praia": "Beach",
           "Hoteis": "Hotels",
           "Cidades": "Cities",
-          "Espaços de eventos": "Event Venues"
+          "Espaços de eventos": "Event Venues",
+          "Noivado": "Engagement"
         },
         "subcategories": {
           "Igreja": [],
@@ -648,13 +653,16 @@
           ],
           "Cidades": [
             "São Paulo",
-            "Évora - Portugal"
+            "Évora - Portugal",
+            "Houston - EUA"
           ],
           "Espaços de eventos": [
             "Clube Monte Líbano",
             "Hípica Paulista",
-            "Fundação Luisa Oscar Americano"
-          ]
+            "Fundação Luisa Oscar Americano",
+            "Casa Charlô"
+          ],
+          "Noivado": []
         },
         "noResults": "No moments found.",
         "clearFilters": "Clear Filters"
