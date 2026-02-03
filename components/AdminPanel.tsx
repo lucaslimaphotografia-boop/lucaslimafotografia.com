@@ -856,7 +856,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Categorias (pode selecionar múltiplas)</label>
-                      <div className="border border-gray-300 rounded p-3 space-y-2 max-h-40 overflow-y-auto">
+                      <div className="border border-gray-300 rounded p-3 space-y-2 max-h-56 overflow-y-auto">
                         {['Igreja', 'Campo', 'Praia', 'Hoteis', 'Cidades', 'Espaços de eventos', 'Noivado'].map(cat => (
                           <label key={cat} className="flex items-center space-x-2 cursor-pointer">
                             <input
@@ -919,7 +919,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                       return (
                         <div>
                           <label className="block text-sm font-medium mb-2">Subcategorias (pode selecionar múltiplas)</label>
-                          <div className="border border-gray-300 rounded p-3 space-y-2 max-h-40 overflow-y-auto">
+                          <div className="border border-gray-300 rounded p-3 space-y-2 max-h-56 overflow-y-auto">
                             {availableSubcategories.map(subcat => (
                               <label key={subcat} className="flex items-center space-x-2 cursor-pointer">
                                 <input
