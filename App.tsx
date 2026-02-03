@@ -10,7 +10,6 @@ import { FAQ } from './components/FAQ';
 import { Photobook } from './components/Photobook';
 import { MenuOverlay } from './components/MenuOverlay';
 import { VerticalNav } from './components/VerticalNav';
-import { ClaudeChat } from './components/ClaudeChat';
 import { AdminPanel } from './components/AdminPanel';
 import { Intro } from './components/Intro';
 import { Menu } from 'lucide-react';
@@ -179,9 +178,6 @@ export default function App() {
         lang={lang}
         onAdminAccess={() => setCurrentView(ViewState.ADMIN)}
       />
-
-      {/* Claude Chat */}
-      <ClaudeChat lang={lang} />
 
     </div>
   );

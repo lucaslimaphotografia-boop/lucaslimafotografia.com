@@ -411,10 +411,6 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
         </button>
       )}
 
-      {/* Mobile Hint */}
-      <div className="fixed bottom-20 left-1/2 -translate-x-1/2 z-[60] text-white/60 text-xs uppercase tracking-widest text-center md:hidden pointer-events-none">
-        Tap to see more
-      </div>
     </div>
   );
 };
