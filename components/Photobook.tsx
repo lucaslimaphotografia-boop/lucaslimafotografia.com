@@ -121,6 +121,14 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
             </div>
 
             <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden">
+              <video
+                className="absolute inset-0 h-full w-full object-cover"
+                src="https://res.cloudinary.com/di6xabxne/video/upload/v1770134964/LL_-_Logo_hq8w6i.mp4"
+                autoPlay
+                muted
+                loop
+                playsInline
+              />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
