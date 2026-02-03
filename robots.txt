@@ -1,0 +1,29 @@
+# robots.txt para lucaslimafotografia.com
+# Otimizado para SEO
+
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemaps
+Sitemap: https://lucaslimafotografia.com/sitemap.xml
+Sitemap: https://lucaslimafotografia.com/sitemap-images.xml
+
+# Crawl delay para bots específicos (opcional)
+User-agent: Googlebot
+Crawl-delay: 0
+
+User-agent: Bingbot
+Crawl-delay: 1
+
+# Bloquear bots indesejados
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
