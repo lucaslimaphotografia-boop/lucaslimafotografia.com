@@ -295,7 +295,42 @@
         "x": 50,
         "y": 50
       },
-      "displaySize": "large"
+      "displaySize": "medium"
+    },
+    {
+      "id": 22,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158548/portfolio/blob_jiwdyz.jpg",
+      "category": "Praia",
+      "subcategory": "Ilha Bela",
+      "title": "Sarah e Luis",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158616/portfolio/albums/blob_ngvi7y.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158617/portfolio/albums/blob_chvy1v.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158618/portfolio/albums/blob_qu1m17.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158619/portfolio/albums/blob_jy2h1h.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158620/portfolio/albums/blob_qji5me.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158621/portfolio/albums/blob_mhsgb0.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158623/portfolio/albums/blob_jiholf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158624/portfolio/albums/blob_vkkfxm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158625/portfolio/albums/blob_wps53v.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158627/portfolio/albums/blob_p4gzmj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158628/portfolio/albums/blob_y3dkzv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158630/portfolio/albums/blob_prvvmx.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158631/portfolio/albums/blob_g44zd1.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158632/portfolio/albums/blob_qicgi4.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158633/portfolio/albums/blob_hnvduq.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158635/portfolio/albums/blob_bpwjvh.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158636/portfolio/albums/blob_bad8z7.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158638/portfolio/albums/blob_bzbikt.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158639/portfolio/albums/blob_xorhuv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158641/portfolio/albums/blob_chpygq.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158643/portfolio/albums/blob_xvcjqp.jpg"
+      ],
+      "focalPoint": {
+        "x": 50,
+        "y": 75
+      },
+      "displaySize": "medium"
     }
   ],
   "hero": [
