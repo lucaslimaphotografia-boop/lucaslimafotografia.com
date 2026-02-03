@@ -857,7 +857,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                     <div>
                       <label className="block text-sm font-medium mb-2">Categorias (pode selecionar múltiplas)</label>
                       <div className="border border-gray-300 rounded p-3 space-y-2 max-h-40 overflow-y-auto">
-                        {['Igreja', 'Campo', 'Praia', 'Hoteis', 'Cidades', 'Espaços de eventos'].map(cat => (
+                        {['Igreja', 'Campo', 'Praia', 'Hoteis', 'Cidades', 'Espaços de eventos', 'Noivado'].map(cat => (
                           <label key={cat} className="flex items-center space-x-2 cursor-pointer">
                             <input
                               type="checkbox"
@@ -873,8 +873,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                                     'Campo': ['Hotel Ort', 'Terras de Clara'],
                                     'Praia': ['Trancoso', 'Itacaré', 'Ilha Bela'],
                                     'Hoteis': ['Rosewood', 'Tangará', 'Txai'],
-                                    'Cidades': ['São Paulo', 'Évora - Portugal'],
-                                    'Espaços de eventos': ['Clube Monte Líbano', 'Hípica Paulista', 'Fundação Luisa Oscar Americano']
+                                    'Cidades': ['São Paulo', 'Évora - Portugal', 'Houston - EUA'],
+                                    'Espaços de eventos': ['Clube Monte Líbano', 'Hípica Paulista', 'Fundação Luisa Oscar Americano', 'Casa Charlô'],
+                                    'Noivado': []
                                   };
                                   const subcatsToRemove = subcategories[cat] || [];
                                   setNewImageSubcategories(
@@ -898,8 +899,9 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                       'Campo': ['Hotel Ort', 'Terras de Clara'],
                       'Praia': ['Trancoso', 'Itacaré', 'Ilha Bela'],
                       'Hoteis': ['Rosewood', 'Tangará', 'Txai'],
-                      'Cidades': ['São Paulo', 'Évora - Portugal'],
-                      'Espaços de eventos': ['Clube Monte Líbano', 'Hípica Paulista', 'Fundação Luisa Oscar Americano']
+                      'Cidades': ['São Paulo', 'Évora - Portugal', 'Houston - EUA'],
+                      'Espaços de eventos': ['Clube Monte Líbano', 'Hípica Paulista', 'Fundação Luisa Oscar Americano', 'Casa Charlô'],
+                      'Noivado': []
                     };
                     
                     // Coletar todas as subcategorias das categorias selecionadas

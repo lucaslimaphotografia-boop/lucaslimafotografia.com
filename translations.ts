@@ -31,15 +31,17 @@ export const translations = {
         "Praia": "Praia",
         "Hoteis": "Hoteis",
         "Cidades": "Cidades",
-        "Espaços de eventos": "Espaços de eventos"
+        "Espaços de eventos": "Espaços de eventos",
+        "Noivado": "Noivado"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"],
-        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
+        "Cidades": ["São Paulo", "Évora - Portugal", "Houston - EUA"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano", "Casa Charlô"],
+        "Noivado": []
       },
       noResults: "Nenhum momento encontrado.",
       clearFilters: "Limpar Filtros"
@@ -202,15 +204,17 @@ export const translations = {
         "Praia": "Beach",
         "Hoteis": "Hotels",
         "Cidades": "Cities",
-        "Espaços de eventos": "Event Venues"
+        "Espaços de eventos": "Event Venues",
+        "Noivado": "Engagement"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"],
-        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
+        "Cidades": ["São Paulo", "Évora - Portugal", "Houston - EUA"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano", "Casa Charlô"],
+        "Noivado": []
       },
       noResults: "No moments found.",
       clearFilters: "Clear Filters"
