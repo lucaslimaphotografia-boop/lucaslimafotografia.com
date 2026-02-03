@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucas Lima Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+      
+      body {
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+      }
+      
+      .font-serif {
+        font-family: 'Playfair Display', serif;
+      }
+
+      /* Custom scrollbar to match the minimal aesthetic */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #000;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #333;
+      }
+
+      /* Text Reveal Animation */
+      @keyframes slideUpFade {
+        0% {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-slide-up {
+        animation: slideUpFade 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      /* Infinite Vertical Scroll Animation */
+      @keyframes scrollDown {
+        0% {
+          transform: translateY(-50%);
+        }
+        100% {
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes scrollUp {
+        0% {
+          transform: translateY(0);
+        }
+        100% {
+          transform: translateY(-50%);
+        }
+      }
+
+      .animate-scroll-down {
+        animation: scrollDown 140s linear infinite;
+      }
+      
+      .animate-scroll-down-slow {
+        animation: scrollDown 180s linear infinite;
+      }
+
+      .animate-scroll-up {
+        animation: scrollUp 80s linear infinite;
+      }
+
+      /* Pause animation on hover if desired, usually distinct for background */
+      /* .group:hover .animate-scroll-down { animation-play-state: paused; } */
+
+      /* Hide scrollbar but keep functionality */
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Smooth scroll snap */
+      .snap-y {
+        scroll-snap-type: y mandatory;
+      }
+      .snap-start {
+        scroll-snap-align: start;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

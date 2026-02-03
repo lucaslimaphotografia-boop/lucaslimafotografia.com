@@ -75,7 +75,11 @@ INSTRUÇÕES:
       }))
     });
 
-    const content = response.content[0].text;
+    const firstBlock = response.content[0];
+    const content =
+      firstBlock && 'text' in firstBlock && typeof (firstBlock as { text: string }).text === 'string'
+        ? (firstBlock as { text: string }).text
+        : '';
 
     return res.status(200).json({ content });
   } catch (error: any) {
