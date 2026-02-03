@@ -322,9 +322,67 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       reader.readAsDataURL(file);
     });
 
+  // Comprimir/redimensionar imagem para caber no limite do Vercel (~4.5 MB)
+  const compressImageForUpload = (file: File): Promise<string> => {
+    const MAX_SIZE_BYTES = 3 * 1024 * 1024; // ~3 MB (payload base64 fica dentro do limite)
+    const MAX_DIM = 1920;
+    const JPEG_QUALITY = 0.85;
+
+    if (file.size <= MAX_SIZE_BYTES && !file.type.includes('png')) {
+      return fileToDataUrl(file);
+    }
+
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const url = URL.createObjectURL(file);
+      img.onload = () => {
+        URL.revokeObjectURL(url);
+        let w = img.width;
+        let h = img.height;
+        if (w > MAX_DIM || h > MAX_DIM) {
+          if (w > h) {
+            h = Math.round((h * MAX_DIM) / w);
+            w = MAX_DIM;
+          } else {
+            w = Math.round((w * MAX_DIM) / h);
+            h = MAX_DIM;
+          }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Canvas não disponível'));
+          return;
+        }
+        ctx.drawImage(img, 0, 0, w, h);
+        canvas.toBlob(
+          (blob) => {
+            if (!blob) {
+              reject(new Error('Falha ao comprimir'));
+              return;
+            }
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result as string);
+            reader.onerror = () => reject(new Error('Falha ao ler o blob'));
+            reader.readAsDataURL(blob);
+          },
+          'image/jpeg',
+          JPEG_QUALITY
+        );
+      };
+      img.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('Falha ao carregar a imagem'));
+      };
+      img.src = url;
+    });
+  };
+
   const uploadToCloudinary = async (file: File, folder?: string): Promise<string> => {
-    // Enviar pela API do Vercel (mesma origem) para evitar CORS e "Failed to fetch"
-    const imageDataUrl = await fileToDataUrl(file);
+    // Enviar pela API do Vercel (mesma origem) para evitar CORS; comprimir para caber no limite
+    const imageDataUrl = await compressImageForUpload(file);
     const res = await fetch('/api/upload-cloudinary', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
