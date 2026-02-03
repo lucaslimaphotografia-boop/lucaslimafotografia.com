@@ -279,21 +279,34 @@
         "subtitle": "Vertical",
         "description": "100 fotos em 60 páginas",
         "details": "O formato vertical exclusivo que destaca retratos e momentos especiais com elegância.",
-        "images": []
+        "images": [
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078069/portfolio/photobook/blob_upnrhx.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078078/portfolio/photobook/blob_vbdcvw.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078079/portfolio/photobook/blob_zkre0t.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078081/portfolio/photobook/blob_y0ztvw.jpg"
+        ]
       },
       {
         "title": "35×35",
         "subtitle": "Grande Formato",
         "description": "100 fotos em 60 páginas",
         "details": "Nosso maior quadrado. Presença marcante para histórias que merecem destaque.",
-        "images": []
+        "images": [
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078113/portfolio/photobook/blob_otnd5c.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078115/portfolio/photobook/blob_pc8akb.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078116/portfolio/photobook/blob_nb0f9a.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078118/portfolio/photobook/blob_qqzzay.jpg"
+        ]
       },
       {
         "title": "15×15",
         "subtitle": "Mini Álbum",
         "description": "100 fotos em 60 páginas",
         "details": "Compacto, charmoso e perfeito para presentear. Memórias íntimas em formato delicado.",
-        "images": []
+        "images": [
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078153/portfolio/photobook/blob_dpopll.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078154/portfolio/photobook/blob_oa8oka.jpg"
+        ]
       }
     ]
   },
@@ -303,8 +316,8 @@
       "names_en": "Fernanda & Lucas",
       "location_pt": "Rosewood, São Paulo",
       "location_en": "Rosewood, São Paulo",
-      "quote_pt": "\"Lucas, quero agradecer pelo trabalho incrível na festa! Você e sua equipe foram extremamente profissionais, amigáveis e proativos. Simplesmente impecáveis!\nNão tenho nem palavras para descrever a quantidade de elogios que recebi pelas fotos. Minhas amigas amaram e acharam você muito talentoso. Sem dúvida, contratar você foi uma das escolhas mais acertadas do casamento, e também uma das mais importantes, pois vou guardar essas fotos para sempre.\nEstou muito feliz com o resultado. Muito obrigada!\"",
-      "quote_en": "\"Lucas, I want to thank you for the incredible work at the party! You and your team were extremely professional, friendly, and proactive. Simply impeccable!\nI can't even put into words the amount of compliments I received about the photos. My friends loved them and thought you were very talented. Without a doubt, hiring you was one of the best decisions for the wedding and also one of the most important ones, since I'll treasure these photos forever.\nI'm so happy with the results. Thank you so much!\"",
+      "quote_pt": "\"Lucas, quero agradecer pelo trabalho incrível na festa! Você e sua equipe foram extremamente profissionais, amigáveis e proativos. Simplesmente impecáveis!\nNão tenho nem palavras para descrever a quantidade de elogios que recebi pelas fotos. Minhas amigas amaram e acharam você muito talentoso. Sem dúvida, contratar você foi uma das escolhas mais acertadas do casamento – e também uma das mais importantes, pois vou guardar essas fotos para sempre.\nEstou muito feliz com o resultado. Muito obrigada!\"",
+      "quote_en": "\"Lucas, I want to thank you for the incredible work at the party! You and your team were extremely professional, friendly, and proactive. Simply impeccable!\nI can't even put into words the amount of compliments I received about the photos. My friends loved them and thought you were very talented. Without a doubt, hiring you was one of the best decisions for the wedding – and also one of the most important ones, since I'll treasure these photos forever.\nI'm so happy with the results. Thank you so much!\"",
       "image": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770077144/portfolio/testimonials/blob_zdyvi9.jpg"
     }
   ]
