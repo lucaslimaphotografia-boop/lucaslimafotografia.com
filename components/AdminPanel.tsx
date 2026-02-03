@@ -17,7 +17,7 @@ interface AdminPanelProps {
 
 type AdminTab = 'pages' | 'content' | 'design' | 'settings';
 type AdminSubTab = 'gallery' | 'hero' | 'portfolio' | 'translations' | 'seo' | 'social' | 'analytics';
-type AdminSection = 'dashboard' | 'home' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'photobook' | 'faq' | 'seo' | 'contact' | 'social' | 'settings';
+type AdminSection = 'dashboard' | 'intro' | 'home' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'photobook' | 'faq' | 'seo' | 'contact' | 'social' | 'settings';
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [activeTab, setActiveTab] = useState<AdminTab>('pages');
@@ -1035,6 +1035,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const getPageTitle = () => {
     const titles: { [key: string]: string } = {
       'dashboard': 'Dashboard',
+      'intro': 'Intro / Tela de entrada',
       'home': 'Página Inicial',
       'portfolio': 'Gerenciar Portfólio',
       'about': 'Página Sobre',
@@ -1074,6 +1075,17 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             >
               <span className="text-xl">📊</span>
               <span>Dashboard</span>
+            </button>
+            <button
+              onClick={() => showSection('intro')}
+              className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all mb-1 ${
+                activeSection === 'intro' 
+                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="text-xl">✨</span>
+              <span>Intro</span>
             </button>
             <button
               onClick={() => showSection('home')}
@@ -1517,7 +1529,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           )}
 
-          {(activeSection === 'home' || activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
+          {(activeSection === 'intro' || activeSection === 'home' || activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
             activeSection === 'blog' || activeSection === 'videos' || activeSection === 'faq' ||
             activeSection === 'seo' || activeSection === 'contact' || activeSection === 'social' || 
             activeSection === 'settings') && (
