@@ -12,6 +12,12 @@ export enum ViewState {
 
 export type Language = 'pt' | 'en';
 
+/** Ponto focal da foto de capa (%), para object-position no CSS */
+export interface FocalPoint {
+  x: number; // 0–100 (horizontal)
+  y: number; // 0–100 (vertical)
+}
+
 export interface ImageItem {
   id: number;
   url: string;
@@ -19,6 +25,8 @@ export interface ImageItem {
   subcategory?: string | string[]; // Subcategoria opcional (pode ser única ou múltiplas)
   title?: string;
   album?: string[]; // Array de URLs das fotos do álbum/projeto
+  /** Ponto focal da foto de capa no portfólio (opcional; padrão centro) */
+  focalPoint?: FocalPoint;
 }
 
 /** Álbum da página Álbuns/Livros (Photobook) */

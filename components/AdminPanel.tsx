@@ -41,6 +41,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [newImageCategories, setNewImageCategories] = useState<string[]>(['Igreja']);
   const [newImageSubcategories, setNewImageSubcategories] = useState<string[]>([]);
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
+  const [newFocalPointX, setNewFocalPointX] = useState(50);
+  const [newFocalPointY, setNewFocalPointY] = useState(50);
   const [hasChanges, setHasChanges] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
@@ -94,6 +96,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewImageCategories(['Igreja']);
     setNewImageSubcategories([]);
     setNewAlbumUrls(['']);
+    setNewFocalPointX(50);
+    setNewFocalPointY(50);
     setShowAddForm(true);
   };
 
@@ -189,7 +193,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
               subcategory: newImageSubcategories.length > 0
                 ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
                 : undefined,
-              album: newAlbumUrls.filter(u => u.trim()).length > 0 ? newAlbumUrls.filter(u => u.trim()) : undefined
+              album: newAlbumUrls.filter(u => u.trim()).length > 0 ? newAlbumUrls.filter(u => u.trim()) : undefined,
+              focalPoint: { x: newFocalPointX, y: newFocalPointY }
             }
           : img
       );
@@ -235,7 +240,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       title: newImageTitle?.trim() || undefined,
       album: newAlbumUrls.filter(url => url.trim()).length > 0 
         ? newAlbumUrls.filter(url => url.trim())
-        : undefined
+        : undefined,
+      focalPoint: { x: newFocalPointX, y: newFocalPointY }
     };
 
     setGallery(prev => [...prev, newImage]);
@@ -267,6 +273,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
         : []
     );
     setNewAlbumUrls(item.album && item.album.length > 0 ? item.album : ['']);
+    setNewFocalPointX(item.focalPoint?.x ?? 50);
+    setNewFocalPointY(item.focalPoint?.y ?? 50);
     setShowAddForm(true);
   };
 
@@ -289,7 +297,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
               : undefined,
             album: newAlbumUrls.filter(url => url.trim()).length > 0 
               ? newAlbumUrls.filter(url => url.trim())
-              : undefined
+              : undefined,
+            focalPoint: { x: newFocalPointX, y: newFocalPointY }
           }
         : img
     );
@@ -748,6 +757,62 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                         placeholder="https://exemplo.com/foto.jpg"
                         className="w-full px-4 py-2 border border-gray-300 rounded text-sm"
                       />
+                    </div>
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium mb-2">Ponto focal da capa</label>
+                      <p className="text-xs text-gray-500 mb-2">Define qual parte da foto fica mais visível no card do portfólio (X e Y em %).</p>
+                      <div className="flex flex-wrap gap-2 mb-2">
+                        {[
+                          { label: 'Canto sup. esq.', x: 25, y: 25 },
+                          { label: 'Topo', x: 50, y: 25 },
+                          { label: 'Canto sup. dir.', x: 75, y: 25 },
+                          { label: 'Esquerda', x: 25, y: 50 },
+                          { label: 'Centro', x: 50, y: 50 },
+                          { label: 'Direita', x: 75, y: 50 },
+                          { label: 'Canto inf. esq.', x: 25, y: 75 },
+                          { label: 'Base', x: 50, y: 75 },
+                          { label: 'Canto inf. dir.', x: 75, y: 75 }
+                        ].map((preset) => (
+                          <button
+                            key={preset.label}
+                            type="button"
+                            onClick={() => { setNewFocalPointX(preset.x); setNewFocalPointY(preset.y); }}
+                            className={`text-xs px-2 py-1 rounded border ${
+                              newFocalPointX === preset.x && newFocalPointY === preset.y
+                                ? 'bg-black text-white border-black'
+                                : 'bg-white border-gray-300 hover:border-gray-500'
+                            }`}
+                          >
+                            {preset.label}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="flex gap-4 items-center">
+                        <div className="flex items-center gap-2">
+                          <label className="text-xs text-gray-600">X:</label>
+                          <input
+                            type="number"
+                            min={0}
+                            max={100}
+                            value={newFocalPointX}
+                            onChange={(e) => setNewFocalPointX(Math.max(0, Math.min(100, Number(e.target.value) || 50)))}
+                            className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
+                          />
+                          <span className="text-xs text-gray-500">%</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <label className="text-xs text-gray-600">Y:</label>
+                          <input
+                            type="number"
+                            min={0}
+                            max={100}
+                            value={newFocalPointY}
+                            onChange={(e) => setNewFocalPointY(Math.max(0, Math.min(100, Number(e.target.value) || 50)))}
+                            className="w-16 px-2 py-1 border border-gray-300 rounded text-sm"
+                          />
+                          <span className="text-xs text-gray-500">%</span>
+                        </div>
+                      </div>
                     </div>
                   </div>
 
