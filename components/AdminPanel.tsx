@@ -324,11 +324,11 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
 
   // Comprimir/redimensionar imagem para caber no limite do Vercel (~4.5 MB)
   const compressImageForUpload = (file: File): Promise<string> => {
-    const MAX_SIZE_BYTES = 3 * 1024 * 1024; // ~3 MB (payload base64 fica dentro do limite)
-    const MAX_DIM = 1920;
-    const JPEG_QUALITY = 0.85;
+    const SKIP_COMPRESS_BYTES = 800 * 1024; // Só envia sem comprimir se < 800 KB
+    const MAX_DIM = 1400; // Redimensionar para caber no payload
+    const JPEG_QUALITY = 0.78;
 
-    if (file.size <= MAX_SIZE_BYTES && !file.type.includes('png')) {
+    if (file.size <= SKIP_COMPRESS_BYTES && !file.type.includes('png')) {
       return fileToDataUrl(file);
     }
 
@@ -361,6 +361,32 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
           (blob) => {
             if (!blob) {
               reject(new Error('Falha ao comprimir'));
+              return;
+            }
+            // Se ainda passar de ~3 MB (payload base64 ~4 MB), reduzir mais
+            if (blob.size > 2.8 * 1024 * 1024) {
+              const scale = Math.sqrt((2.5 * 1024 * 1024) / blob.size);
+              const w2 = Math.max(800, Math.round(w * scale));
+              const h2 = Math.max(600, Math.round(h * scale));
+              canvas.width = w2;
+              canvas.height = h2;
+              ctx.drawImage(img, 0, 0, w, h, 0, 0, w2, h2);
+              canvas.toBlob(
+                (blob2) => {
+                  if (!blob2) {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result as string);
+                    reader.readAsDataURL(blob);
+                    return;
+                  }
+                  const reader = new FileReader();
+                  reader.onload = () => resolve(reader.result as string);
+                  reader.onerror = () => reject(new Error('Falha ao ler o blob'));
+                  reader.readAsDataURL(blob2);
+                },
+                'image/jpeg',
+                0.75
+              );
               return;
             }
             const reader = new FileReader();

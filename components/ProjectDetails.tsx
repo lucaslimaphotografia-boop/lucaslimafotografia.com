@@ -30,11 +30,23 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
   const [currentSlide, setCurrentSlide] = useState(0);
   const [imagesLoaded, setImagesLoaded] = useState<Set<number>>(new Set());
   const [imageOrientations, setImageOrientations] = useState<Map<number, boolean>>(new Map());
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 768 : false);
   const containerRef = useRef<HTMLDivElement>(null);
   const touchStartRef = useRef<number>(0);
   const touchEndRef = useRef<number>(0);
+  const scrollRafRef = useRef<number | null>(null);
+  const lastSlideRef = useRef(0);
 
-  // Detectar orientação das imagens
+  // Detectar mobile
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  // Detectar orientação das imagens (só usado no desktop para agrupar)
   useEffect(() => {
     const orientations = new Map<number, boolean>();
     let loadedCount = 0;
@@ -54,8 +66,11 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
     });
   }, [albumImages]);
 
-  // Agrupar imagens verticais de 2 em 2
+  // Desktop: agrupar verticais de 2 em 2. Mobile: uma foto por slide (sem agrupar)
   const groupedSlides = React.useMemo(() => {
+    if (isMobile) {
+      return albumImages.map((url) => url);
+    }
     const groups: (string | string[])[] = [];
     let i = 0;
 
@@ -65,23 +80,20 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
       if (isVertical && i + 1 < albumImages.length) {
         const nextIsVertical = imageOrientations.get(i + 1) ?? false;
         if (nextIsVertical) {
-          // Duas verticais consecutivas - agrupar
           groups.push([albumImages[i], albumImages[i + 1]]);
           i += 2;
         } else {
-          // Vertical seguida de horizontal - mostrar só a vertical
           groups.push(albumImages[i]);
           i += 1;
         }
       } else {
-        // Horizontal ou última imagem - mostrar individual
         groups.push(albumImages[i]);
         i += 1;
       }
     }
 
     return groups;
-  }, [albumImages, imageOrientations]);
+  }, [albumImages, imageOrientations, isMobile]);
 
   const totalSlides = groupedSlides.length + 1; // +1 para o slide de introdução
 
@@ -103,6 +115,7 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
 
   // Scroll to slide
   useEffect(() => {
+    lastSlideRef.current = currentSlide;
     if (containerRef.current) {
       const slides = containerRef.current.querySelectorAll('section');
       if (slides[currentSlide]) {
@@ -154,30 +167,40 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
     }
   };
 
-  // Track scroll position to update current slide
+  // Track scroll position to update current slide (throttled com RAF para rolagem suave)
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     const handleScroll = () => {
-      const slides = container.querySelectorAll('section');
-      const containerTop = container.scrollTop;
-      const containerHeight = container.clientHeight;
+      if (scrollRafRef.current != null) return;
+      scrollRafRef.current = requestAnimationFrame(() => {
+        scrollRafRef.current = null;
+        const slides = container.querySelectorAll('section');
+        const containerTop = container.scrollTop;
+        const containerHeight = container.clientHeight;
+        const viewportCenter = containerTop + containerHeight / 2;
 
-      slides.forEach((slide, index) => {
-        const slideTop = (slide as HTMLElement).offsetTop;
-        const slideHeight = slide.clientHeight;
-        const slideCenter = slideTop + slideHeight / 2;
-
-        if (containerTop + containerHeight / 2 >= slideTop && 
-            containerTop + containerHeight / 2 < slideTop + slideHeight) {
-          setCurrentSlide(index);
+        for (let index = 0; index < slides.length; index++) {
+          const slide = slides[index] as HTMLElement;
+          const slideTop = slide.offsetTop;
+          const slideHeight = slide.clientHeight;
+          if (viewportCenter >= slideTop && viewportCenter < slideTop + slideHeight) {
+            if (lastSlideRef.current !== index) {
+              lastSlideRef.current = index;
+              setCurrentSlide(index);
+            }
+            break;
+          }
         }
       });
     };
 
-    container.addEventListener('scroll', handleScroll);
-    return () => container.removeEventListener('scroll', handleScroll);
+    container.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      container.removeEventListener('scroll', handleScroll);
+      if (scrollRafRef.current != null) cancelAnimationFrame(scrollRafRef.current);
+    };
   }, []);
 
   // Image loading handler
@@ -193,7 +216,8 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 bg-black z-50 overflow-y-auto snap-y snap-mandatory scroll-smooth no-scrollbar"
+      className="fixed inset-0 bg-black z-50 overflow-y-auto overflow-x-hidden snap-y snap-mandatory no-scrollbar overscroll-none"
+      style={{ WebkitOverflowScrolling: 'touch', scrollBehavior: 'smooth' }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
