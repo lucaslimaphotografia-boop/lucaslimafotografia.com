@@ -267,16 +267,6 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
         </span>
       </div>
 
-      {/* Credits Bottom Right */}
-      <div className="fixed bottom-8 right-8 z-[60] text-white mix-blend-difference hidden md:block">
-        <span 
-          className="font-bold text-xs uppercase tracking-widest"
-          style={{ writingMode: 'vertical-rl' }}
-        >
-          {t.credits}
-        </span>
-      </div>
-
       {/* Progress Indicator */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-white/10 z-[61]">
         <div 
@@ -290,9 +280,6 @@ export const ProjectDetails: React.FC<ProjectDetailsProps> = ({ project, onBack,
         {/* Left: Text Content */}
         <div className="w-full md:w-1/2 h-1/2 md:h-full flex flex-col items-center justify-center p-8 md:p-20 relative order-2 md:order-1">
           <div className="text-center text-white">
-            <span className="block text-xs font-bold uppercase tracking-[0.3em] mb-6 md:mb-8 text-white/60 whitespace-pre-line">
-              {project.category || t.intro.location}
-            </span>
             <h1 className="text-5xl md:text-8xl lg:text-9xl font-serif italic mb-2 leading-none">
               {first} <span className="text-3xl md:text-5xl lg:text-6xl not-italic font-light">&</span>
             </h1>
