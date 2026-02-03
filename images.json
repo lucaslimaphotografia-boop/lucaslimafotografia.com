@@ -295,60 +295,77 @@
         "x": 50,
         "y": 50
       },
-      "displaySize": "medium"
+      "displaySize": "large"
     },
     {
       "id": 22,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158548/portfolio/blob_jiwdyz.jpg",
-      "category": "Praia",
-      "subcategory": "Ilha Bela",
-      "title": "Sarah e Luis",
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161426/portfolio/blob_eocuep.jpg",
+      "category": "Noivado",
+      "title": "Noivado | Kerlly e Rafael",
       "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158616/portfolio/albums/blob_ngvi7y.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158617/portfolio/albums/blob_chvy1v.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158618/portfolio/albums/blob_qu1m17.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158619/portfolio/albums/blob_jy2h1h.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158620/portfolio/albums/blob_qji5me.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158621/portfolio/albums/blob_mhsgb0.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158623/portfolio/albums/blob_jiholf.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158624/portfolio/albums/blob_vkkfxm.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158625/portfolio/albums/blob_wps53v.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158627/portfolio/albums/blob_p4gzmj.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158628/portfolio/albums/blob_y3dkzv.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158630/portfolio/albums/blob_prvvmx.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158631/portfolio/albums/blob_g44zd1.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158632/portfolio/albums/blob_qicgi4.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158633/portfolio/albums/blob_hnvduq.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158635/portfolio/albums/blob_bpwjvh.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158636/portfolio/albums/blob_bad8z7.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158638/portfolio/albums/blob_bzbikt.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158639/portfolio/albums/blob_xorhuv.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158641/portfolio/albums/blob_chpygq.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770158643/portfolio/albums/blob_xvcjqp.jpg"
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161463/portfolio/albums/blob_yeqiq6.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161465/portfolio/albums/blob_guknwo.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161466/portfolio/albums/blob_t1fz8c.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161467/portfolio/albums/blob_u1kckr.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161468/portfolio/albums/blob_okjyem.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161470/portfolio/albums/blob_fi1o7s.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161471/portfolio/albums/blob_urdzzm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161472/portfolio/albums/blob_mbrvju.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161474/portfolio/albums/blob_szx0bq.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161475/portfolio/albums/blob_nu6fzj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161476/portfolio/albums/blob_ixzqxp.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161478/portfolio/albums/blob_hdqp3r.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161479/portfolio/albums/blob_pe29tp.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161482/portfolio/albums/blob_jbu3n0.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161483/portfolio/albums/blob_h2z9ac.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161484/portfolio/albums/blob_zahkrs.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161486/portfolio/albums/blob_nzahi7.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161487/portfolio/albums/blob_riehzw.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161488/portfolio/albums/blob_bzkbfk.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161490/portfolio/albums/blob_lfwdth.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161491/portfolio/albums/blob_mxsd11.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161493/portfolio/albums/blob_tlcg0b.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161494/portfolio/albums/blob_vy3cjg.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161495/portfolio/albums/blob_hol60u.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161497/portfolio/albums/blob_kipiom.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161498/portfolio/albums/blob_dyvfqy.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161499/portfolio/albums/blob_vwujp0.jpg"
       ],
       "focalPoint": {
         "x": 50,
-        "y": 75
+        "y": 50
       },
       "displaySize": "medium"
     },
     {
       "id": 23,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159277/portfolio/blob_s7kz99.jpg",
-      "category": "Espaços de eventos",
-      "subcategory": "Fundação Luisa Oscar Americano",
-      "title": "Gabriela e Rodrigo",
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161590/portfolio/blob_cdjrf7.jpg",
+      "category": [
+        "Igreja",
+        "Espaços de eventos"
+      ],
+      "subcategory": "Clube Monte Líbano",
+      "title": "Carolina & Gabriel",
       "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159325/portfolio/albums/blob_csbfs7.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159327/portfolio/albums/blob_otxzwf.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159328/portfolio/albums/blob_pqydq8.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159329/portfolio/albums/blob_pj79my.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159330/portfolio/albums/blob_ujck23.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159331/portfolio/albums/blob_ge8hlg.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159333/portfolio/albums/blob_abhzj9.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159334/portfolio/albums/blob_gvbj0i.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159335/portfolio/albums/blob_hf56ue.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159336/portfolio/albums/blob_l6bkw3.jpg"
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161633/portfolio/albums/blob_um8eg1.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161635/portfolio/albums/blob_l4kl82.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161636/portfolio/albums/blob_cgqp7j.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161637/portfolio/albums/blob_vwtnlb.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161639/portfolio/albums/blob_tfgrwy.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161640/portfolio/albums/blob_jwk7g9.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161642/portfolio/albums/blob_fvqti5.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161643/portfolio/albums/blob_aesapk.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161644/portfolio/albums/blob_t83wj8.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161646/portfolio/albums/blob_yyeu46.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161647/portfolio/albums/blob_n4l0di.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161648/portfolio/albums/blob_lnmw9c.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161650/portfolio/albums/blob_dgthcj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161651/portfolio/albums/blob_x5xjic.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161653/portfolio/albums/blob_bvae5l.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161654/portfolio/albums/blob_xogcdu.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161656/portfolio/albums/blob_uvjaob.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161657/portfolio/albums/blob_ualjp4.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161658/portfolio/albums/blob_isdjjg.jpg"
       ],
       "focalPoint": {
         "x": 50,
@@ -358,20 +375,60 @@
     },
     {
       "id": 24,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159361/portfolio/blob_mioamr.jpg",
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161752/portfolio/blob_vwey0j.jpg",
+      "category": [
+        "Igreja",
+        "Hoteis"
+      ],
+      "subcategory": "Rosewood",
+      "title": "Carol & Gabriel",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161805/portfolio/albums/blob_dtwysr.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161806/portfolio/albums/blob_wzzhhk.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161808/portfolio/albums/blob_wwlnjc.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161809/portfolio/albums/blob_hfdolw.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161811/portfolio/albums/blob_i6sndh.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161812/portfolio/albums/blob_zjvj6n.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161813/portfolio/albums/blob_twufmm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161815/portfolio/albums/blob_okkac1.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161816/portfolio/albums/blob_dztqj1.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161817/portfolio/albums/blob_aenbbr.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161819/portfolio/albums/blob_nnie57.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161820/portfolio/albums/blob_pgriyj.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161822/portfolio/albums/blob_y60gw5.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161823/portfolio/albums/blob_cifzbt.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161824/portfolio/albums/blob_mjg0wm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161825/portfolio/albums/blob_mcruvq.jpg"
+      ],
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "displaySize": "medium"
+    },
+    {
+      "id": 25,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161880/portfolio/blob_nh23aq.jpg",
       "category": "Campo",
       "subcategory": "Terras de Clara",
-      "title": "Ligia e Mattheus",
+      "title": "Isabela & Neto",
       "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159411/portfolio/albums/blob_o34fwv.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159412/portfolio/albums/blob_jdodpo.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159413/portfolio/albums/blob_xtoqa8.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159414/portfolio/albums/blob_w7knnx.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159418/portfolio/albums/blob_eao917.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159419/portfolio/albums/blob_t81lw6.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159420/portfolio/albums/blob_icazh6.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159422/portfolio/albums/blob_eofkqi.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159423/portfolio/albums/blob_e3mnnq.jpg"
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161895/portfolio/albums/blob_wrrgyf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161897/portfolio/albums/blob_rmamrv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161898/portfolio/albums/blob_l2bh5m.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161899/portfolio/albums/blob_akzkv2.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161900/portfolio/albums/blob_waxqlm.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161901/portfolio/albums/blob_uad1ak.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161902/portfolio/albums/blob_w3opa1.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161904/portfolio/albums/blob_t2o4h9.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161905/portfolio/albums/blob_n89h2i.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161906/portfolio/albums/blob_o5trvv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161907/portfolio/albums/blob_dzcuqd.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161909/portfolio/albums/blob_oxegtn.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161910/portfolio/albums/blob_hh86jc.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161912/portfolio/albums/blob_ct9nge.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161913/portfolio/albums/blob_ikzal4.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161914/portfolio/albums/blob_awbc2z.jpg"
       ],
       "focalPoint": {
         "x": 50,
@@ -497,7 +554,8 @@
           "Praia": "Praia",
           "Hoteis": "Hoteis",
           "Cidades": "Cidades",
-          "Espaços de eventos": "Espaços de eventos"
+          "Espaços de eventos": "Espaços de eventos",
+          "Noivado": "Noivado"
         },
         "subcategories": {
           "Igreja": [],
@@ -517,13 +575,16 @@
           ],
           "Cidades": [
             "São Paulo",
-            "Évora - Portugal"
+            "Évora - Portugal",
+            "Houston - EUA"
           ],
           "Espaços de eventos": [
             "Clube Monte Líbano",
             "Hípica Paulista",
-            "Fundação Luisa Oscar Americano"
-          ]
+            "Fundação Luisa Oscar Americano",
+            "Casa Charlô"
+          ],
+          "Noivado": []
         },
         "noResults": "Nenhum momento encontrado.",
         "clearFilters": "Limpar Filtros"
@@ -710,7 +771,8 @@
           "Praia": "Beach",
           "Hoteis": "Hotels",
           "Cidades": "Cities",
-          "Espaços de eventos": "Event Venues"
+          "Espaços de eventos": "Event Venues",
+          "Noivado": "Engagement"
         },
         "subcategories": {
           "Igreja": [],
@@ -730,13 +792,16 @@
           ],
           "Cidades": [
             "São Paulo",
-            "Évora - Portugal"
+            "Évora - Portugal",
+            "Houston - EUA"
           ],
           "Espaços de eventos": [
             "Clube Monte Líbano",
             "Hípica Paulista",
-            "Fundação Luisa Oscar Americano"
-          ]
+            "Fundação Luisa Oscar Americano",
+            "Casa Charlô"
+          ],
+          "Noivado": []
         },
         "noResults": "No moments found.",
         "clearFilters": "Clear Filters"
