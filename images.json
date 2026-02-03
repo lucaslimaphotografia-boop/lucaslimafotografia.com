@@ -331,6 +331,30 @@
         "y": 75
       },
       "displaySize": "medium"
+    },
+    {
+      "id": 23,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159277/portfolio/blob_s7kz99.jpg",
+      "category": "Espaços de eventos",
+      "subcategory": "Fundação Luisa Oscar Americano",
+      "title": "Gabriela e Rodrigo",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159325/portfolio/albums/blob_csbfs7.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159327/portfolio/albums/blob_otxzwf.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159328/portfolio/albums/blob_pqydq8.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159329/portfolio/albums/blob_pj79my.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159330/portfolio/albums/blob_ujck23.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159331/portfolio/albums/blob_ge8hlg.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159333/portfolio/albums/blob_abhzj9.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159334/portfolio/albums/blob_gvbj0i.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159335/portfolio/albums/blob_hf56ue.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159336/portfolio/albums/blob_l6bkw3.jpg"
+      ],
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "displaySize": "medium"
     }
   ],
   "hero": [
