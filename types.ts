@@ -18,6 +18,9 @@ export interface FocalPoint {
   y: number; // 0–100 (vertical)
 }
 
+/** Tamanho de exibição da foto na galeria (grid) */
+export type DisplaySize = 'small' | 'medium' | 'large';
+
 export interface ImageItem {
   id: number;
   url: string;
@@ -27,6 +30,8 @@ export interface ImageItem {
   album?: string[]; // Array de URLs das fotos do álbum/projeto
   /** Ponto focal da foto de capa no portfólio (opcional; padrão centro) */
   focalPoint?: FocalPoint;
+  /** Tamanho na grade da galeria: small/medium = 1 col, large = 2 cols (opcional) */
+  displaySize?: DisplaySize;
 }
 
 /** Álbum da página Álbuns/Livros (Photobook) */

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Plus, Minus } from 'lucide-react';
 import { Language } from '../types';
-import { translations } from '../translations';
+import { getContent } from '../contentSource';
 
 interface FAQProps {
   lang: Language;
@@ -9,7 +9,7 @@ interface FAQProps {
 
 export const FAQ: React.FC<FAQProps> = ({ lang }) => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const t = translations[lang].faq;
+  const t = getContent(lang).faq;
 
   const toggleFAQ = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);

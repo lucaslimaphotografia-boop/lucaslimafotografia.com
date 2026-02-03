@@ -35,7 +35,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   }
 
   try {
-    const { gallery, hero, photobook, testimonials, token } = req.body;
+    const { gallery, hero, photobook, testimonials, content, token } = req.body;
 
     if (!gallery || !Array.isArray(gallery)) {
       return res.status(400).json({ error: 'gallery (array) is required' });
@@ -53,8 +53,6 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       });
     }
 
-    // Usar o repositório conectado ao deploy (Vercel injeta VERCEL_GIT_*). Assim o push
-    // vai para o mesmo repo que o site usa e o Vercel faz um novo deploy.
     const owner =
       process.env.GITHUB_REPO_OWNER ||
       process.env.VERCEL_GIT_REPO_OWNER ||
@@ -65,19 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       'lucaslimafotografia.com';
     const path = 'images.json';
 
-    const fileContent = JSON.stringify(
-      {
-        gallery,
-        hero: hero || [],
-        photobook: photobook && photobook.albums ? photobook : { albums: [] },
-        testimonials: Array.isArray(testimonials) ? testimonials : []
-      },
-      null,
-      2
-    );
-    const contentBase64 = Buffer.from(fileContent, 'utf-8').toString('base64');
-
-    // 1. Get current file to obtain sha (required for update)
+    // 1. Get current file to obtain sha and existing content (merge content, gallery, etc.)
     const getRes = await fetch(
       `${GITHUB_API}/repos/${owner}/${repo}/contents/${path}`,
       {
@@ -90,9 +76,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     );
 
     let sha: string | undefined;
+    let existing: Record<string, unknown> = {};
     if (getRes.ok) {
       const file = await getRes.json();
       sha = file.sha;
+      if (file.content) {
+        try {
+          existing = JSON.parse(Buffer.from(file.content, 'base64').toString('utf-8'));
+        } catch (_) {}
+      }
     } else if (getRes.status !== 404) {
       const err = await getRes.text();
       console.error('GitHub GET error:', getRes.status, err);
@@ -103,6 +95,22 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
           : err
       });
     }
+
+    const payload = {
+      ...existing,
+      gallery,
+      hero: Array.isArray(hero) ? hero : (existing.hero as string[] | undefined) || [],
+      photobook: photobook && (photobook as { albums?: unknown[] }).albums
+        ? (photobook as { albums: unknown[] })
+        : (existing.photobook as { albums: unknown[] } | undefined) || { albums: [] },
+      testimonials: Array.isArray(testimonials) ? testimonials : (existing.testimonials as unknown[] | undefined) || []
+    };
+    if (content && typeof content === 'object' && (content as Record<string, unknown>).pt != null) {
+      (payload as Record<string, unknown>).content = content;
+    }
+
+    const fileContent = JSON.stringify(payload, null, 2);
+    const contentBase64 = Buffer.from(fileContent, 'utf-8').toString('base64');
 
     // 2. Create or update file
     const putBody: { message: string; content: string; sha?: string } = {

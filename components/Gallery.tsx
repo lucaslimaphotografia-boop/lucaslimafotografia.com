@@ -129,7 +129,7 @@ export const Gallery: React.FC<GalleryProps> = ({ onImageClick, lang }) => {
             <div 
                 key={img.id} 
                 onClick={() => onImageClick(img)}
-                className="group cursor-pointer relative overflow-hidden aspect-[3/4]"
+                className={`group cursor-pointer relative overflow-hidden aspect-[3/4] ${img.displaySize === 'large' ? 'sm:col-span-2' : ''}`}
             >
                 <img 
                 src={img.url} 

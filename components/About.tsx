@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
-import { translations } from '../translations';
+import { getContent } from '../contentSource';
 import { TypographyAnimation } from './TypographyAnimation';
 
 interface AboutProps {
@@ -8,7 +8,7 @@ interface AboutProps {
 }
 
 export const About: React.FC<AboutProps> = ({ lang }) => {
-  const t = translations[lang].about;
+  const t = getContent(lang).about;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const people = (t as any).people || [];

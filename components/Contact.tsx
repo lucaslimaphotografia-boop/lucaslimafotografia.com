@@ -1,13 +1,13 @@
 import React from 'react';
 import { Language } from '../types';
-import { translations } from '../translations';
+import { getContent } from '../contentSource';
 
 interface ContactProps {
   lang: Language;
 }
 
 export const Contact: React.FC<ContactProps> = ({ lang }) => {
-  const t = translations[lang].contact;
+  const t = getContent(lang).contact;
 
   return (
     <div className="w-full min-h-screen bg-gray-50 pt-32 pb-20 px-4 md:px-16 flex flex-col">

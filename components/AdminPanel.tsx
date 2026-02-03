@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ImageItem, Language, PhotobookAlbum, TestimonialItem } from '../types';
+import { ImageItem, Language, PhotobookAlbum, TestimonialItem, DisplaySize } from '../types';
 import imagesData from '../images.json';
 import { translations } from '../translations';
+import { getContent } from '../contentSource';
 import { 
   Save, Plus, Trash2, Edit2, Image as ImageIcon, 
   Settings, Eye, EyeOff, Upload, X, Check, Download, Loader2,
@@ -43,6 +44,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [newAlbumUrls, setNewAlbumUrls] = useState<string[]>(['']);
   const [newFocalPointX, setNewFocalPointX] = useState(50);
   const [newFocalPointY, setNewFocalPointY] = useState(50);
+  const [newDisplaySize, setNewDisplaySize] = useState<DisplaySize>('medium');
   const [hasChanges, setHasChanges] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState<{ [key: string]: number }>({});
@@ -54,6 +56,13 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [selectedPhotobookAlbumForUpload, setSelectedPhotobookAlbumForUpload] = useState<number | null>(null);
   const [uploadingTestimonialImage, setUploadingTestimonialImage] = useState<number | null>(null);
   const [selectedTestimonialForUpload, setSelectedTestimonialForUpload] = useState<number | null>(null);
+  const [contentSite, setContentSite] = useState<{ pt: Record<string, unknown>; en: Record<string, unknown> }>(() => {
+    const fromJson = (imagesData as { content?: { pt?: Record<string, unknown>; en?: Record<string, unknown> } }).content;
+    return {
+      pt: fromJson?.pt ? { ...getContent('pt'), ...fromJson.pt } : getContent('pt') as Record<string, unknown>,
+      en: fromJson?.en ? { ...getContent('en'), ...fromJson.en } : getContent('en') as Record<string, unknown>
+    };
+  });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const albumFileInputRef = useRef<HTMLInputElement>(null);
   const photobookFileInputRef = useRef<HTMLInputElement>(null);
@@ -98,6 +107,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewAlbumUrls(['']);
     setNewFocalPointX(50);
     setNewFocalPointY(50);
+    setNewDisplaySize('medium');
     setShowAddForm(true);
   };
 
@@ -151,7 +161,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       const res = await fetch('/api/save-images', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ gallery: g, hero: h, photobook: pb, testimonials: tb, token })
+        body: JSON.stringify({ gallery: g, hero: h, photobook: pb, testimonials: tb, content: contentSite, token })
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) {
@@ -194,7 +204,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                 ? (newImageSubcategories.length === 1 ? newImageSubcategories[0] : newImageSubcategories)
                 : undefined,
               album: newAlbumUrls.filter(u => u.trim()).length > 0 ? newAlbumUrls.filter(u => u.trim()) : undefined,
-              focalPoint: { x: newFocalPointX, y: newFocalPointY }
+              focalPoint: { x: newFocalPointX, y: newFocalPointY },
+              displaySize: newDisplaySize
             }
           : img
       );
@@ -241,7 +252,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       album: newAlbumUrls.filter(url => url.trim()).length > 0 
         ? newAlbumUrls.filter(url => url.trim())
         : undefined,
-      focalPoint: { x: newFocalPointX, y: newFocalPointY }
+      focalPoint: { x: newFocalPointX, y: newFocalPointY },
+      displaySize: newDisplaySize
     };
 
     setGallery(prev => [...prev, newImage]);
@@ -275,6 +287,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
     setNewAlbumUrls(item.album && item.album.length > 0 ? item.album : ['']);
     setNewFocalPointX(item.focalPoint?.x ?? 50);
     setNewFocalPointY(item.focalPoint?.y ?? 50);
+    setNewDisplaySize(item.displaySize ?? 'medium');
     setShowAddForm(true);
   };
 
@@ -298,7 +311,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             album: newAlbumUrls.filter(url => url.trim()).length > 0 
               ? newAlbumUrls.filter(url => url.trim())
               : undefined,
-            focalPoint: { x: newFocalPointX, y: newFocalPointY }
+            focalPoint: { x: newFocalPointX, y: newFocalPointY },
+            displaySize: newDisplaySize
           }
         : img
     );
@@ -813,6 +827,19 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                           <span className="text-xs text-gray-500">%</span>
                         </div>
                       </div>
+                    </div>
+                    <div className="mt-4">
+                      <label className="block text-sm font-medium mb-2">Tamanho na galeria</label>
+                      <p className="text-xs text-gray-500 mb-2">Define se a foto ocupa 1 ou 2 colunas na grade do portfólio.</p>
+                      <select
+                        value={newDisplaySize}
+                        onChange={(e) => setNewDisplaySize(e.target.value as DisplaySize)}
+                        className="w-full max-w-xs px-3 py-2 border border-gray-300 rounded text-sm"
+                      >
+                        <option value="small">Pequeno (1 coluna)</option>
+                        <option value="medium">Médio (1 coluna)</option>
+                        <option value="large">Grande (2 colunas)</option>
+                      </select>
                     </div>
                   </div>
 
@@ -1529,9 +1556,253 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           )}
 
-          {(activeSection === 'intro' || activeSection === 'home' || activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
-            activeSection === 'blog' || activeSection === 'videos' || activeSection === 'faq' ||
-            activeSection === 'seo' || activeSection === 'contact' || activeSection === 'social' || 
+          {activeSection === 'about' && (
+            <div className="bg-white rounded-xl shadow-sm p-8">
+              <h2 className="text-xl font-semibold mb-6">Textos da página Sobre</h2>
+              <p className="text-sm text-gray-500 mb-6">Altere os textos e clique em Publicar no rodapé para atualizar o site.</p>
+              {(['pt', 'en'] as const).map((lang) => {
+                const about = (contentSite[lang].about as Record<string, unknown>) || {};
+                const intro = (about.intro as { text?: string; subtext?: string }) || {};
+                const closing = (about.closing as { text?: string[] }) || {};
+                const people = (about.people as Array<{ name?: string; role?: string; image?: string; bio?: string[]; by?: string }>) || [];
+                return (
+                  <div key={lang} className="mb-10 p-6 border border-gray-200 rounded-lg">
+                    <h3 className="text-lg font-medium mb-4">{lang === 'pt' ? 'Português' : 'English'}</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Intro (texto)</label>
+                        <input
+                          type="text"
+                          value={intro.text || ''}
+                          onChange={(e) => {
+                            setContentSite(prev => ({
+                              ...prev,
+                              [lang]: {
+                                ...prev[lang],
+                                about: {
+                                  ...(prev[lang].about as object || {}),
+                                  intro: { ...intro, text: e.target.value }
+                                }
+                              }
+                            }));
+                            setHasChanges(true);
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Intro (subtexto)</label>
+                        <textarea
+                          value={intro.subtext || ''}
+                          onChange={(e) => {
+                            setContentSite(prev => ({
+                              ...prev,
+                              [lang]: {
+                                ...prev[lang],
+                                about: {
+                                  ...(prev[lang].about as object || {}),
+                                  intro: { ...intro, subtext: e.target.value }
+                                }
+                              }
+                            }));
+                            setHasChanges(true);
+                          }}
+                          rows={2}
+                          className="w-full px-3 py-2 border border-gray-300 rounded"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Subtítulo da tipografia</label>
+                        <input
+                          type="text"
+                          value={(about.typographySubtitle as string) || ''}
+                          onChange={(e) => {
+                            setContentSite(prev => ({
+                              ...prev,
+                              [lang]: {
+                                ...prev[lang],
+                                about: { ...(prev[lang].about as object || {}), typographySubtitle: e.target.value }
+                              }
+                            }));
+                            setHasChanges(true);
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded"
+                        />
+                      </div>
+                      {people.map((person, idx) => (
+                        <div key={idx} className="p-4 bg-gray-50 rounded space-y-2">
+                          <div className="font-medium">Pessoa {idx + 1}</div>
+                          <input
+                            placeholder="Nome"
+                            value={person.name || ''}
+                            onChange={(e) => {
+                              const next = [...people];
+                              next[idx] = { ...next[idx], name: e.target.value };
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], about: { ...(prev[lang].about as object || {}), people: next } } }));
+                              setHasChanges(true);
+                            }}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                          <input
+                            placeholder="Função"
+                            value={person.role || ''}
+                            onChange={(e) => {
+                              const next = [...people];
+                              next[idx] = { ...next[idx], role: e.target.value };
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], about: { ...(prev[lang].about as object || {}), people: next } } }));
+                              setHasChanges(true);
+                            }}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                          <input
+                            placeholder="URL da foto"
+                            value={person.image || ''}
+                            onChange={(e) => {
+                              const next = [...people];
+                              next[idx] = { ...next[idx], image: e.target.value };
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], about: { ...(prev[lang].about as object || {}), people: next } } }));
+                              setHasChanges(true);
+                            }}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                          <textarea
+                            placeholder="Bio (um parágrafo por linha)"
+                            value={(person.bio || []).join('\n')}
+                            onChange={(e) => {
+                              const next = [...people];
+                              next[idx] = { ...next[idx], bio: e.target.value.split('\n').filter(Boolean) };
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], about: { ...(prev[lang].about as object || {}), people: next } } }));
+                              setHasChanges(true);
+                            }}
+                            rows={3}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {activeSection === 'contact' && (
+            <div className="bg-white rounded-xl shadow-sm p-8">
+              <h2 className="text-xl font-semibold mb-6">Textos da página Contato</h2>
+              {(['pt', 'en'] as const).map((lang) => {
+                const contact = (contentSite[lang].contact as Record<string, unknown>) || {};
+                const form = (contact.form as Record<string, unknown>) || {};
+                return (
+                  <div key={lang} className="mb-10 p-6 border border-gray-200 rounded-lg">
+                    <h3 className="text-lg font-medium mb-4">{lang === 'pt' ? 'Português' : 'English'}</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Título</label>
+                        <input
+                          type="text"
+                          value={(contact.title as string) || ''}
+                          onChange={(e) => {
+                            setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], contact: { ...(prev[lang].contact as object || {}), title: e.target.value } } }));
+                            setHasChanges(true);
+                          }}
+                          className="w-full px-3 py-2 border border-gray-300 rounded"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">Texto informativo</label>
+                        <textarea
+                          value={(contact.infoText as string) || ''}
+                          onChange={(e) => {
+                            setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], contact: { ...(prev[lang].contact as object || {}), infoText: e.target.value } } }));
+                            setHasChanges(true);
+                          }}
+                          rows={3}
+                          className="w-full px-3 py-2 border border-gray-300 rounded"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {activeSection === 'faq' && (
+            <div className="bg-white rounded-xl shadow-sm p-8">
+              <h2 className="text-xl font-semibold mb-6">Perguntas frequentes</h2>
+              {(['pt', 'en'] as const).map((lang) => {
+                const faq = (contentSite[lang].faq as { title?: string; items?: Array<{ question: string; answer: string }> }) || {};
+                const items = faq.items || [];
+                return (
+                  <div key={lang} className="mb-10 p-6 border border-gray-200 rounded-lg">
+                    <h3 className="text-lg font-medium mb-4">{lang === 'pt' ? 'Português' : 'English'}</h3>
+                    <input
+                      placeholder="Título da seção"
+                      value={faq.title || ''}
+                      onChange={(e) => {
+                        setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], faq: { ...(prev[lang].faq as object || {}), title: e.target.value } } }));
+                        setHasChanges(true);
+                      }}
+                      className="w-full px-3 py-2 border border-gray-300 rounded mb-4"
+                    />
+                    {items.map((item, idx) => (
+                      <div key={idx} className="p-4 bg-gray-50 rounded mb-4 flex gap-2">
+                        <div className="flex-1 space-y-2">
+                          <input
+                            placeholder="Pergunta"
+                            value={item.question}
+                            onChange={(e) => {
+                              const next = items.map((i, iidx) => iidx === idx ? { ...i, question: e.target.value } : i);
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], faq: { ...(prev[lang].faq as object || {}), items: next } } }));
+                              setHasChanges(true);
+                            }}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                          <textarea
+                            placeholder="Resposta"
+                            value={item.answer}
+                            onChange={(e) => {
+                              const next = items.map((i, iidx) => iidx === idx ? { ...i, answer: e.target.value } : i);
+                              setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], faq: { ...(prev[lang].faq as object || {}), items: next } } }));
+                              setHasChanges(true);
+                            }}
+                            rows={2}
+                            className="w-full px-3 py-2 border border-gray-300 rounded text-sm"
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const next = items.filter((_, i) => i !== idx);
+                            setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], faq: { ...(prev[lang].faq as object || {}), items: next } } }));
+                            setHasChanges(true);
+                          }}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    ))}
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const next = [...items, { question: '', answer: '' }];
+                        setContentSite(prev => ({ ...prev, [lang]: { ...prev[lang], faq: { ...(prev[lang].faq as object || {}), items: next } } }));
+                        setHasChanges(true);
+                      }}
+                      className="flex items-center gap-2 px-4 py-2 bg-black text-white rounded-lg text-sm"
+                    >
+                      <Plus className="w-4 h-4" /> Adicionar pergunta
+                    </button>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+
+          {(activeSection === 'intro' || activeSection === 'home' || activeSection === 'portfolio' || activeSection === 'services' || 
+            activeSection === 'blog' || activeSection === 'videos' ||
+            activeSection === 'seo' || activeSection === 'social' || 
             activeSection === 'settings') && (
             <div className="bg-white rounded-xl shadow-sm p-8">
               <p className="text-gray-500 text-center py-12">Seção {getPageTitle()} em desenvolvimento</p>
