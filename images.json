@@ -435,6 +435,18 @@
         "y": 50
       },
       "displaySize": "medium"
+    },
+    {
+      "id": 26,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162079/portfolio/blob_wsef6j.jpg",
+      "category": "Cidades",
+      "subcategory": "Houston - EUA",
+      "title": "Gabriela e Drew",
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "displaySize": "medium"
     }
   ],
   "hero": [
