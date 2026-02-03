@@ -355,6 +355,29 @@
         "y": 50
       },
       "displaySize": "medium"
+    },
+    {
+      "id": 24,
+      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159361/portfolio/blob_mioamr.jpg",
+      "category": "Campo",
+      "subcategory": "Terras de Clara",
+      "title": "Ligia e Mattheus",
+      "album": [
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159411/portfolio/albums/blob_o34fwv.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159412/portfolio/albums/blob_jdodpo.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159413/portfolio/albums/blob_xtoqa8.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159414/portfolio/albums/blob_w7knnx.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159418/portfolio/albums/blob_eao917.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159419/portfolio/albums/blob_t81lw6.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159420/portfolio/albums/blob_icazh6.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159422/portfolio/albums/blob_eofkqi.jpg",
+        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770159423/portfolio/albums/blob_e3mnnq.jpg"
+      ],
+      "focalPoint": {
+        "x": 50,
+        "y": 50
+      },
+      "displaySize": "medium"
     }
   ],
   "hero": [
