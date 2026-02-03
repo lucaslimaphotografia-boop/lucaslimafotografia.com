@@ -131,8 +131,12 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
                 aria-label="Vídeo do Our Book"
               >
                 <source
-                  src="https://res.cloudinary.com/di6xabxne/video/upload/v1770134964/LL_-_Logo_hq8w6i.mp4"
+                  src="https://res.cloudinary.com/di6xabxne/video/upload/f_mp4,vc_h264/q_auto/LL_-_Logo_hq8w6i.mp4"
                   type="video/mp4"
+                />
+                <source
+                  src="https://res.cloudinary.com/di6xabxne/video/upload/v1770134964/LL_-_Logo_hq8w6i.mp4"
+                  type="video/mp4; codecs=hvc1"
                 />
               </video>
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
