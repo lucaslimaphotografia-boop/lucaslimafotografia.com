@@ -17,7 +17,7 @@ interface AdminPanelProps {
 
 type AdminTab = 'pages' | 'content' | 'design' | 'settings';
 type AdminSubTab = 'gallery' | 'hero' | 'portfolio' | 'translations' | 'seo' | 'social' | 'analytics';
-type AdminSection = 'dashboard' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'photobook' | 'seo' | 'contact' | 'social' | 'settings';
+type AdminSection = 'dashboard' | 'home' | 'portfolio' | 'about' | 'services' | 'testimonials' | 'blog' | 'gallery' | 'videos' | 'photobook' | 'faq' | 'seo' | 'contact' | 'social' | 'settings';
 
 export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const [activeTab, setActiveTab] = useState<AdminTab>('pages');
@@ -1035,6 +1035,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
   const getPageTitle = () => {
     const titles: { [key: string]: string } = {
       'dashboard': 'Dashboard',
+      'home': 'Página Inicial',
       'portfolio': 'Gerenciar Portfólio',
       'about': 'Página Sobre',
       'services': 'Serviços',
@@ -1043,6 +1044,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       'gallery': 'Galeria de Fotos',
       'videos': 'Vídeos',
       'photobook': 'Álbuns/Livros',
+      'faq': 'FAQ',
       'seo': 'Configurações de SEO',
       'contact': 'Mensagens de Contato',
       'social': 'Redes Sociais',
@@ -1064,7 +1066,7 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Principal</div>
             <button
               onClick={() => showSection('dashboard')}
-              className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all ${
+              className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all mb-1 ${
                 activeSection === 'dashboard' 
                   ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
                   : 'text-white/80 hover:bg-white/10 hover:text-white'
@@ -1073,23 +1075,36 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
               <span className="text-xl">📊</span>
               <span>Dashboard</span>
             </button>
+            <button
+              onClick={() => showSection('home')}
+              className={`w-full flex items-center gap-3 px-5 py-3 rounded-lg transition-all ${
+                activeSection === 'home' 
+                  ? 'bg-gradient-to-r from-purple-600 to-purple-700 text-white' 
+                  : 'text-white/80 hover:bg-white/10 hover:text-white'
+              }`}
+            >
+              <span className="text-xl">🏠</span>
+              <span>Página Inicial</span>
+            </button>
           </div>
           <div className="mb-8">
             <div className="text-xs uppercase tracking-wider opacity-50 font-semibold mb-3 px-5">Conteúdo</div>
-            {['portfolio', 'about', 'services', 'testimonials', 'blog'].map((section) => {
+            {['portfolio', 'about', 'services', 'testimonials', 'blog', 'faq'].map((section) => {
               const icons: { [key: string]: string } = {
                 'portfolio': '🖼️',
                 'about': '👤',
                 'services': '⚙️',
                 'testimonials': '💬',
-                'blog': '📝'
+                'blog': '📝',
+                'faq': '❓'
               };
               const labels: { [key: string]: string } = {
                 'portfolio': 'Portfólio',
                 'about': 'Sobre',
                 'services': 'Serviços',
                 'testimonials': 'Depoimentos',
-                'blog': 'Blog'
+                'blog': 'Blog',
+                'faq': 'FAQ'
               };
               return (
                 <button
@@ -1502,8 +1517,8 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
             </div>
           )}
 
-          {(activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
-            activeSection === 'blog' || activeSection === 'videos' || 
+          {(activeSection === 'home' || activeSection === 'portfolio' || activeSection === 'about' || activeSection === 'services' || 
+            activeSection === 'blog' || activeSection === 'videos' || activeSection === 'faq' ||
             activeSection === 'seo' || activeSection === 'contact' || activeSection === 'social' || 
             activeSection === 'settings') && (
             <div className="bg-white rounded-xl shadow-sm p-8">
