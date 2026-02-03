@@ -12,6 +12,8 @@ interface ClaudeChatProps {
   lang: Language;
 }
 
+const REQUEST_TIMEOUT_MS = 25000;
+
 export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -39,24 +41,36 @@ export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
     if (!input.trim() || isLoading) return;
 
     const userMessage: Message = { role: 'user', content: input };
+    const updatedMessages = [...messages, userMessage];
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setIsLoading(true);
 
+    const controller = typeof AbortController !== 'undefined' ? new AbortController() : null;
+    const timeoutId = controller
+      ? window.setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS)
+      : null;
+
     try {
       // Chamada para API backend que usa a API key do Claude
-      const response = await fetch('/api/claude-chat', {
+      const requestOptions: RequestInit = {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, userMessage].map(msg => ({
+          messages: updatedMessages.map(msg => ({
             role: msg.role,
             content: msg.content
           }))
-        }),
-      });
+        })
+      };
+
+      if (controller) {
+        requestOptions.signal = controller.signal;
+      }
+
+      const response = await fetch('/api/claude-chat', requestOptions);
 
       if (!response.ok) {
         const errorData = await response.json().catch(() => ({}));
@@ -74,8 +88,12 @@ export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
       
       // Mensagens de erro mais específicas
       let errorMessage = t.error;
+      const normalizedMessage =
+        typeof error?.message === 'string' ? error.message.toLowerCase() : '';
       
-      if (error.message?.includes('API key not configured')) {
+      if (error?.name === 'AbortError' || normalizedMessage.includes('stalled') || normalizedMessage.includes('timeout')) {
+        errorMessage = t.timeout;
+      } else if (error.message?.includes('API key not configured')) {
         errorMessage = '⚠️ API Key não configurada. Configure a variável ANTHROPIC_API_KEY no Vercel.';
       } else if (error.message?.includes('authentication')) {
         errorMessage = '⚠️ Erro de autenticação. Verifique sua API Key no Vercel.';
@@ -91,6 +109,9 @@ export const ClaudeChat: React.FC<ClaudeChatProps> = ({ lang }) => {
       };
       setMessages(prev => [...prev, errorMsg]);
     } finally {
+      if (timeoutId) {
+        window.clearTimeout(timeoutId);
+      }
       setIsLoading(false);
     }
   };

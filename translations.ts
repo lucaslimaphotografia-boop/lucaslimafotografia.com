@@ -168,6 +168,7 @@ export const translations = {
       placeholder: "Digite sua mensagem...",
       send: "Enviar",
       error: "Desculpe, ocorreu um erro. Por favor, tente novamente.",
+      timeout: "⚠️ A conexão demorou para responder. Tente novamente em instantes.",
       disclaimer: "Respostas geradas por IA. Podem conter imprecisões."
     }
   },
@@ -338,6 +339,7 @@ export const translations = {
       placeholder: "Type your message...",
       send: "Send",
       error: "Sorry, an error occurred. Please try again.",
+      timeout: "⚠️ The connection took too long to respond. Please try again shortly.",
       disclaimer: "AI-generated responses. May contain inaccuracies."
     }
   }
