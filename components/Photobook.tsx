@@ -23,7 +23,6 @@ const DEFAULT_ALBUMS = [
 export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
-  const [videoReady, setVideoReady] = useState(false);
 
   const albums = (imagesData as { photobook?: { albums?: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook?.albums?.length
     ? (imagesData as { photobook: { albums: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook.albums
@@ -127,26 +126,15 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
             </div>
 
             <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden">
-              <img
-                src={OUR_BOOK_VIDEO.poster}
-                alt="Capa do Our Book"
-                className="absolute inset-0 h-full w-full object-cover"
-                loading="lazy"
-              />
               <video
-                className={`absolute inset-0 block h-full w-full object-cover transition-opacity duration-700 ${
-                  videoReady ? 'opacity-100' : 'opacity-0'
-                }`}
+                className="absolute inset-0 block h-full w-full object-cover"
                 autoPlay
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="auto"
                 poster={OUR_BOOK_VIDEO.poster}
                 aria-label="Vídeo do Our Book"
-                onCanPlay={() => setVideoReady(true)}
-                onLoadedData={() => setVideoReady(true)}
-                onError={() => setVideoReady(false)}
               >
                 <source src={OUR_BOOK_VIDEO.mp4} type="video/mp4" />
                 <source
