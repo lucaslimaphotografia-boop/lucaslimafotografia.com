@@ -73,6 +73,22 @@ export const Contact: React.FC<ContactProps> = ({ lang }) => {
                         <input type="date" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
                     </div>
                     <div className="group md:col-span-2">
+                        <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.location}</label>
+                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                    </div>
+                    <div className="group">
+                        <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.time}</label>
+                        <input type="time" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                    </div>
+                    <div className="group">
+                        <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.guests}</label>
+                        <input type="number" min={0} className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                    </div>
+                    <div className="group md:col-span-2">
+                        <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.planner}</label>
+                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                    </div>
+                    <div className="group md:col-span-2">
                          <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.found}</label>
                         <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
                     </div>
