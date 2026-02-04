@@ -106,6 +106,10 @@ export const translations = {
         found: "Como nos encontrou?",
         message: "Mensagem",
         consent: "Concordo que as informações enviadas acima sejam gravadas e usadas para comunicação comigo.",
+        consentRequired: "⚠️ É necessário aceitar o consentimento para enviar.",
+        sending: "Enviando...",
+        success: "✅ Recebemos sua mensagem. Em breve entraremos em contato.",
+        error: "❌ Não foi possível enviar. Tente novamente mais tarde.",
         submit: "Enviar Solicitação",
         types: ["Casamento", "Noivado", "Editorial"]
       }
@@ -283,6 +287,10 @@ export const translations = {
         found: "How did you find us?",
         message: "Message",
         consent: "I agree that the information submitted above will be stored and used to communicate with me.",
+        consentRequired: "⚠️ You must accept the consent to submit.",
+        sending: "Sending...",
+        success: "✅ We received your message. We'll get back to you soon.",
+        error: "❌ Unable to send. Please try again later.",
         submit: "Send Request",
         types: ["Wedding", "Engagement", "Editorial"]
       }

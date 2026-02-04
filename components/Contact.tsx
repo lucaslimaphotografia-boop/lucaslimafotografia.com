@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Language } from '../types';
 import { getContent } from '../contentSource';
 
@@ -8,6 +8,93 @@ interface ContactProps {
 
 export const Contact: React.FC<ContactProps> = ({ lang }) => {
   const t = getContent(lang).contact;
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    type: t.form.types[0] || '',
+    date: '',
+    location: '',
+    time: '',
+    guests: '',
+    planner: '',
+    found: '',
+    message: '',
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [submitSuccess, setSubmitSuccess] = useState('');
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      type: prev.type || t.form.types[0] || ''
+    }));
+  }, [t.form.types]);
+
+  const handleChange = (field: keyof typeof formData) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  ) => {
+    const value = e.target.type === 'checkbox'
+      ? (e.target as HTMLInputElement).checked
+      : e.target.value;
+    setFormData((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitError('');
+    setSubmitSuccess('');
+
+    if (!formData.consent) {
+      setSubmitError(t.form.consentRequired);
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          type: formData.type,
+          date: formData.date,
+          location: formData.location,
+          time: formData.time,
+          guests: formData.guests,
+          planner: formData.planner,
+          found: formData.found,
+          message: formData.message
+        })
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error(data.message || t.form.error);
+      }
+
+      setSubmitSuccess(t.form.success);
+      setFormData({
+        name: '',
+        email: '',
+        type: t.form.types[0] || '',
+        date: '',
+        location: '',
+        time: '',
+        guests: '',
+        planner: '',
+        found: '',
+        message: '',
+        consent: false
+      });
+    } catch (error: any) {
+      setSubmitError(error.message || t.form.error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="w-full min-h-screen bg-gray-50 pt-32 pb-20 px-4 md:px-16 flex flex-col">
@@ -51,18 +138,37 @@ export const Contact: React.FC<ContactProps> = ({ lang }) => {
 
             {/* Form */}
             <div className="md:col-span-8">
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12">
+                <form
+                  className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-12"
+                  onSubmit={handleSubmit}
+                >
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.name}</label>
-                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="text"
+                          value={formData.name}
+                          onChange={handleChange('name')}
+                          required
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.email}</label>
-                        <input type="email" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="email"
+                          value={formData.email}
+                          onChange={handleChange('email')}
+                          required
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.type}</label>
-                        <select className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors appearance-none rounded-none">
+                        <select
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors appearance-none rounded-none"
+                          value={formData.type}
+                          onChange={handleChange('type')}
+                        >
                             {t.form.types.map((opt, i) => (
                                 <option key={i}>{opt}</option>
                             ))}
@@ -70,41 +176,99 @@ export const Contact: React.FC<ContactProps> = ({ lang }) => {
                     </div>
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.date}</label>
-                        <input type="date" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="date"
+                          value={formData.date}
+                          onChange={handleChange('date')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group md:col-span-2">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.location}</label>
-                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="text"
+                          value={formData.location}
+                          onChange={handleChange('location')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.time}</label>
-                        <input type="time" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="time"
+                          value={formData.time}
+                          onChange={handleChange('time')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.guests}</label>
-                        <input type="number" min={0} className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="number"
+                          min={0}
+                          value={formData.guests}
+                          onChange={handleChange('guests')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group md:col-span-2">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.planner}</label>
-                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="text"
+                          value={formData.planner}
+                          onChange={handleChange('planner')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                     <div className="group md:col-span-2">
                          <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.found}</label>
-                        <input type="text" className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors" />
+                        <input
+                          type="text"
+                          value={formData.found}
+                          onChange={handleChange('found')}
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors"
+                        />
                     </div>
                      <div className="group md:col-span-2">
                         <label className="block text-xs font-bold uppercase text-black mb-2">{t.form.message}</label>
-                        <textarea rows={4} className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors resize-none"></textarea>
+                        <textarea
+                          rows={4}
+                          value={formData.message}
+                          onChange={handleChange('message')}
+                          required
+                          className="w-full bg-transparent border-b border-gray-400 py-2 text-xl font-serif text-black focus:outline-none focus:border-black transition-colors resize-none"
+                        ></textarea>
                     </div>
                     
                     <div className="md:col-span-2 flex items-center gap-4 mt-8">
-                         <input type="checkbox" id="consent" className="w-5 h-5 border-2 border-black rounded-none focus:ring-0 text-black" />
+                         <input
+                           type="checkbox"
+                           id="consent"
+                           checked={formData.consent}
+                           onChange={handleChange('consent')}
+                           className="w-5 h-5 border-2 border-black rounded-none focus:ring-0 text-black"
+                         />
                          <label htmlFor="consent" className="text-xs uppercase text-black font-bold tracking-wider">{t.form.consent}</label>
                     </div>
 
-                    <div className="md:col-span-2 mt-8 flex justify-end">
-                        <button type="submit" className="bg-black text-white px-12 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors">
-                            {t.form.submit}
+                    <div className="md:col-span-2 mt-8 flex flex-col items-end gap-3">
+                        {(submitError || submitSuccess) && (
+                          <p
+                            className={`text-sm ${
+                              submitError ? 'text-red-600' : 'text-green-600'
+                            }`}
+                            role="status"
+                            aria-live="polite"
+                          >
+                            {submitError || submitSuccess}
+                          </p>
+                        )}
+                        <button
+                          type="submit"
+                          disabled={isSubmitting}
+                          className="bg-black text-white px-12 py-4 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        >
+                            {isSubmitting ? t.form.sending : t.form.submit}
                         </button>
                     </div>
                 </form>
