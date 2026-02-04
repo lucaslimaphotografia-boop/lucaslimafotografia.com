@@ -295,170 +295,7 @@
         "x": 50,
         "y": 50
       },
-      "displaySize": "medium"
-    },
-    {
-      "id": 22,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161426/portfolio/blob_eocuep.jpg",
-      "category": "Noivado",
-      "title": "Noivado | Kerlly e Rafael",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161463/portfolio/albums/blob_yeqiq6.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161465/portfolio/albums/blob_guknwo.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161466/portfolio/albums/blob_t1fz8c.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161467/portfolio/albums/blob_u1kckr.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161468/portfolio/albums/blob_okjyem.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161470/portfolio/albums/blob_fi1o7s.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161471/portfolio/albums/blob_urdzzm.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161472/portfolio/albums/blob_mbrvju.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161474/portfolio/albums/blob_szx0bq.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161475/portfolio/albums/blob_nu6fzj.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161476/portfolio/albums/blob_ixzqxp.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161478/portfolio/albums/blob_hdqp3r.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161479/portfolio/albums/blob_pe29tp.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161482/portfolio/albums/blob_jbu3n0.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161483/portfolio/albums/blob_h2z9ac.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161484/portfolio/albums/blob_zahkrs.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161486/portfolio/albums/blob_nzahi7.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161487/portfolio/albums/blob_riehzw.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161488/portfolio/albums/blob_bzkbfk.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161490/portfolio/albums/blob_lfwdth.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161491/portfolio/albums/blob_mxsd11.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161493/portfolio/albums/blob_tlcg0b.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161494/portfolio/albums/blob_vy3cjg.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161495/portfolio/albums/blob_hol60u.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161497/portfolio/albums/blob_kipiom.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161498/portfolio/albums/blob_dyvfqy.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161499/portfolio/albums/blob_vwujp0.jpg"
-      ],
-      "focalPoint": {
-        "x": 50,
-        "y": 50
-      },
-      "displaySize": "medium"
-    },
-    {
-      "id": 23,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161590/portfolio/blob_cdjrf7.jpg",
-      "category": [
-        "Igreja",
-        "Espaços de eventos"
-      ],
-      "subcategory": "Clube Monte Líbano",
-      "title": "Carolina & Gabriel",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161633/portfolio/albums/blob_um8eg1.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161635/portfolio/albums/blob_l4kl82.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161636/portfolio/albums/blob_cgqp7j.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161637/portfolio/albums/blob_vwtnlb.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161639/portfolio/albums/blob_tfgrwy.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161640/portfolio/albums/blob_jwk7g9.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161642/portfolio/albums/blob_fvqti5.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161643/portfolio/albums/blob_aesapk.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161644/portfolio/albums/blob_t83wj8.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161646/portfolio/albums/blob_yyeu46.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161647/portfolio/albums/blob_n4l0di.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161648/portfolio/albums/blob_lnmw9c.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161650/portfolio/albums/blob_dgthcj.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161651/portfolio/albums/blob_x5xjic.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161653/portfolio/albums/blob_bvae5l.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161654/portfolio/albums/blob_xogcdu.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161656/portfolio/albums/blob_uvjaob.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161657/portfolio/albums/blob_ualjp4.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161658/portfolio/albums/blob_isdjjg.jpg"
-      ],
-      "focalPoint": {
-        "x": 50,
-        "y": 50
-      },
-      "displaySize": "medium"
-    },
-    {
-      "id": 24,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161752/portfolio/blob_vwey0j.jpg",
-      "category": [
-        "Igreja",
-        "Hoteis"
-      ],
-      "subcategory": "Rosewood",
-      "title": "Carol & Gabriel",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161805/portfolio/albums/blob_dtwysr.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161806/portfolio/albums/blob_wzzhhk.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161808/portfolio/albums/blob_wwlnjc.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161809/portfolio/albums/blob_hfdolw.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161811/portfolio/albums/blob_i6sndh.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161812/portfolio/albums/blob_zjvj6n.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161813/portfolio/albums/blob_twufmm.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161815/portfolio/albums/blob_okkac1.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161816/portfolio/albums/blob_dztqj1.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161817/portfolio/albums/blob_aenbbr.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161819/portfolio/albums/blob_nnie57.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161820/portfolio/albums/blob_pgriyj.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161822/portfolio/albums/blob_y60gw5.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161823/portfolio/albums/blob_cifzbt.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161824/portfolio/albums/blob_mjg0wm.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161825/portfolio/albums/blob_mcruvq.jpg"
-      ],
-      "focalPoint": {
-        "x": 50,
-        "y": 50
-      },
-      "displaySize": "medium"
-    },
-    {
-      "id": 25,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161880/portfolio/blob_nh23aq.jpg",
-      "category": "Campo",
-      "subcategory": "Terras de Clara",
-      "title": "Isabela & Neto",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161895/portfolio/albums/blob_wrrgyf.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161897/portfolio/albums/blob_rmamrv.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161898/portfolio/albums/blob_l2bh5m.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161899/portfolio/albums/blob_akzkv2.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161900/portfolio/albums/blob_waxqlm.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161901/portfolio/albums/blob_uad1ak.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161902/portfolio/albums/blob_w3opa1.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161904/portfolio/albums/blob_t2o4h9.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161905/portfolio/albums/blob_n89h2i.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161906/portfolio/albums/blob_o5trvv.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161907/portfolio/albums/blob_dzcuqd.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161909/portfolio/albums/blob_oxegtn.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161910/portfolio/albums/blob_hh86jc.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161912/portfolio/albums/blob_ct9nge.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161913/portfolio/albums/blob_ikzal4.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770161914/portfolio/albums/blob_awbc2z.jpg"
-      ],
-      "focalPoint": {
-        "x": 50,
-        "y": 50
-      },
-      "displaySize": "medium"
-    },
-    {
-      "id": 26,
-      "url": "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162079/portfolio/blob_wsef6j.jpg",
-      "category": "Cidades",
-      "subcategory": "Houston - EUA",
-      "title": "Gabriela e Drew",
-      "album": [
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162305/portfolio/albums/blob_pnz0kd.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162307/portfolio/albums/blob_i07pcw.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162308/portfolio/albums/blob_gczxor.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162310/portfolio/albums/blob_x8qxcb.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162312/portfolio/albums/blob_dmy7q7.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162313/portfolio/albums/blob_o3xwsg.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162315/portfolio/albums/blob_ohlszs.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162316/portfolio/albums/blob_xg8qyw.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162317/portfolio/albums/blob_gqdglc.jpg",
-        "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770162318/portfolio/albums/blob_pa8ydl.jpg"
-      ],
-      "focalPoint": {
-        "x": 50,
-        "y": 50
-      },
-      "displaySize": "medium"
+      "displaySize": "large"
     }
   ],
   "hero": [
@@ -511,10 +348,10 @@
         "description": "100 fotos em 60 páginas",
         "details": "Nosso maior quadrado. Presença marcante para histórias que merecem destaque.",
         "images": [
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078113/portfolio/photobook/blob_otnd5c.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078115/portfolio/photobook/blob_pc8akb.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078116/portfolio/photobook/blob_nb0f9a.jpg",
-          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078118/portfolio/photobook/blob_qqzzay.jpg"
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770164161/portfolio/photobook/blob_u4buoh.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770164162/portfolio/photobook/blob_flgins.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770164163/portfolio/photobook/blob_fkkd6n.jpg",
+          "https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770164164/portfolio/photobook/blob_wuqqot.jpg"
         ]
       },
       {
