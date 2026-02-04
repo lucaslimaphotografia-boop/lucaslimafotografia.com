@@ -8,7 +8,7 @@ import {
   Settings, Eye, EyeOff, Upload, X, Check, Download, Loader2,
   FileText, PenTool, Palette, Bell, HelpCircle, User, ChevronRight,
   Home, ExternalLink, Globe, Search, Eye as EyeIcon, MoreVertical,
-  ChevronDown, Menu
+  ChevronDown, ChevronUp, Menu
 } from 'lucide-react';
 
 interface AdminPanelProps {
@@ -272,6 +272,15 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
       setGallery(gallery.filter(img => img.id !== id));
       setHasChanges(true);
     }
+  };
+
+  const moveGalleryItem = (fromIndex: number, toIndex: number) => {
+    if (toIndex < 0 || toIndex >= gallery.length || toIndex === fromIndex) return;
+    const updated = [...gallery];
+    const [moved] = updated.splice(fromIndex, 1);
+    updated.splice(toIndex, 0, moved);
+    setGallery(updated);
+    setHasChanges(true);
   };
 
   const handleEditImage = (item: ImageItem) => {
@@ -1016,10 +1025,35 @@ export const AdminPanel: React.FC<AdminPanelProps> = ({ onBack, lang }) => {
                 <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider">Todas as Fotos</h3>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
-                {gallery.map((item) => (
+                {gallery.map((item, index) => (
                   <div key={item.id} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow">
                     <div className="relative aspect-[3/4] bg-gray-100">
                       <img src={item.url} alt={item.title || 'Foto'} className="w-full h-full object-cover" />
+                      <div className="absolute top-2 left-2 flex flex-col gap-1">
+                        <button
+                          onClick={() => moveGalleryItem(index, index - 1)}
+                          disabled={index === 0}
+                          className={`bg-white p-1.5 rounded shadow-sm transition-colors ${
+                            index === 0 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-50'
+                          }`}
+                          aria-label="Mover para cima"
+                        >
+                          <ChevronUp className="w-4 h-4 text-gray-700" />
+                        </button>
+                        <button
+                          onClick={() => moveGalleryItem(index, index + 1)}
+                          disabled={index === gallery.length - 1}
+                          className={`bg-white p-1.5 rounded shadow-sm transition-colors ${
+                            index === gallery.length - 1 ? 'opacity-40 cursor-not-allowed' : 'hover:bg-gray-50'
+                          }`}
+                          aria-label="Mover para baixo"
+                        >
+                          <ChevronDown className="w-4 h-4 text-gray-700" />
+                        </button>
+                      </div>
+                      <div className="absolute bottom-2 left-2 rounded bg-white/90 px-2 py-1 text-[10px] font-semibold uppercase tracking-wider text-gray-700">
+                        Ordem #{index + 1}
+                      </div>
                       <div className="absolute top-2 right-2 flex gap-1">
                         <button
                           onClick={() => handleEditImage(item)}
