@@ -31,15 +31,17 @@ export const translations = {
         "Praia": "Praia",
         "Hoteis": "Hoteis",
         "Cidades": "Cidades",
-        "Espaços de eventos": "Espaços de eventos"
+        "Espaços de eventos": "Espaços de eventos",
+        "Noivado": "Noivado"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"],
-        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
+        "Cidades": ["São Paulo", "Évora - Portugal", "Houston - EUA"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano", "Casa Charlô"],
+        "Noivado": []
       },
       noResults: "Nenhum momento encontrado.",
       clearFilters: "Limpar Filtros"
@@ -97,9 +99,17 @@ export const translations = {
         email: "Email",
         type: "Tipo de Evento",
         date: "Data",
+        location: "Local do evento",
+        time: "Horário do evento",
+        guests: "Quantidade de convidados",
+        planner: "Possui assessoria? Se sim, qual?",
         found: "Como nos encontrou?",
         message: "Mensagem",
         consent: "Concordo que as informações enviadas acima sejam gravadas e usadas para comunicação comigo.",
+        consentRequired: "⚠️ É necessário aceitar o consentimento para enviar.",
+        sending: "Enviando...",
+        success: "✅ Recebemos sua mensagem. Em breve entraremos em contato.",
+        error: "❌ Não foi possível enviar. Tente novamente mais tarde.",
         submit: "Enviar Solicitação",
         types: ["Casamento", "Noivado", "Editorial"]
       }
@@ -168,6 +178,7 @@ export const translations = {
       placeholder: "Digite sua mensagem...",
       send: "Enviar",
       error: "Desculpe, ocorreu um erro. Por favor, tente novamente.",
+      timeout: "⚠️ A conexão demorou para responder. Tente novamente em instantes.",
       disclaimer: "Respostas geradas por IA. Podem conter imprecisões."
     }
   },
@@ -201,15 +212,17 @@ export const translations = {
         "Praia": "Beach",
         "Hoteis": "Hotels",
         "Cidades": "Cities",
-        "Espaços de eventos": "Event Venues"
+        "Espaços de eventos": "Event Venues",
+        "Noivado": "Engagement"
       },
       subcategories: {
         "Igreja": [],
         "Campo": ["Hotel Ort", "Terras de Clara"],
         "Praia": ["Trancoso", "Itacaré", "Ilha Bela"],
         "Hoteis": ["Rosewood", "Tangará", "Txai"],
-        "Cidades": ["São Paulo", "Évora - Portugal"],
-        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano"]
+        "Cidades": ["São Paulo", "Évora - Portugal", "Houston - EUA"],
+        "Espaços de eventos": ["Clube Monte Líbano", "Hípica Paulista", "Fundação Luisa Oscar Americano", "Casa Charlô"],
+        "Noivado": []
       },
       noResults: "No moments found.",
       clearFilters: "Clear Filters"
@@ -267,9 +280,17 @@ export const translations = {
         email: "Email",
         type: "Event Type",
         date: "Date",
+        location: "Event location",
+        time: "Event time",
+        guests: "Guest count",
+        planner: "Do you have a planner? If yes, which one?",
         found: "How did you find us?",
         message: "Message",
         consent: "I agree that the information submitted above will be stored and used to communicate with me.",
+        consentRequired: "⚠️ You must accept the consent to submit.",
+        sending: "Sending...",
+        success: "✅ We received your message. We'll get back to you soon.",
+        error: "❌ Unable to send. Please try again later.",
         submit: "Send Request",
         types: ["Wedding", "Engagement", "Editorial"]
       }
@@ -338,6 +359,7 @@ export const translations = {
       placeholder: "Type your message...",
       send: "Send",
       error: "Sorry, an error occurred. Please try again.",
+      timeout: "⚠️ The connection took too long to respond. Please try again shortly.",
       disclaimer: "AI-generated responses. May contain inaccuracies."
     }
   }

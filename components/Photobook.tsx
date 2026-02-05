@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ArrowRight, Phone, Mail, ArrowDown, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Language } from '../types';
 import imagesData from '../images.json';
@@ -6,6 +6,11 @@ import imagesData from '../images.json';
 interface PhotobookProps {
   lang: Language;
 }
+
+const OUR_BOOK_VIDEO = {
+  mp4: 'https://res.cloudinary.com/di6xabxne/video/upload/c_fill,w_900,h_1200,q_auto:good,vc_h264:baseline,ac_none,fl_progressive,f_mp4/v1770134964/LL_-_Logo_hq8w6i.mp4',
+  poster: 'https://res.cloudinary.com/di6xabxne/video/upload/c_fill,w_900,h_1200,q_auto,f_jpg,so_0/v1770134964/LL_-_Logo_hq8w6i.jpg'
+};
 
 const DEFAULT_ALBUMS = [
   { title: '30×30', subtitle: 'Formato Quadrado Clássico', description: '100 fotos em 60 páginas', details: 'O equilíbrio perfeito entre formato e conteúdo. Ideal para quem busca harmonia visual em cada spread.', images: [] as string[] },
@@ -18,6 +23,8 @@ const DEFAULT_ALBUMS = [
 export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
   const [activeSection, setActiveSection] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState<{ [key: number]: number }>({});
+  const [videoReady, setVideoReady] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const albums = (imagesData as { photobook?: { albums?: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook?.albums?.length
     ? (imagesData as { photobook: { albums: Array<{ title: string; subtitle: string; description: string; details: string; images: string[] }> } }).photobook.albums
@@ -39,6 +46,16 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
 
   const getCurrentImage = (albumIndex: number) => {
     return currentImageIndex[albumIndex] || 0;
+  };
+
+  const handleVideoReady = () => {
+    setVideoReady(true);
+    const video = videoRef.current;
+    if (video && video.paused) {
+      video.play().catch(() => {
+        // Autoplay pode ser bloqueado; mantém a capa visível.
+      });
+    }
   };
 
   return (
@@ -121,6 +138,34 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
             </div>
 
             <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden">
+              <img
+                src={OUR_BOOK_VIDEO.poster}
+                alt="Capa do Our Book"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <video
+                ref={videoRef}
+                className={`absolute inset-0 block h-full w-full object-cover transition-opacity duration-700 ${
+                  videoReady ? 'opacity-100' : 'opacity-0'
+                }`}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                poster={OUR_BOOK_VIDEO.poster}
+                aria-label="Vídeo do Our Book"
+                onCanPlay={handleVideoReady}
+                onLoadedData={handleVideoReady}
+                onError={() => setVideoReady(false)}
+              >
+                <source src={OUR_BOOK_VIDEO.mp4} type="video/mp4" />
+                <source
+                  src="https://res.cloudinary.com/di6xabxne/video/upload/v1770134964/LL_-_Logo_hq8w6i.mp4"
+                  type="video/mp4; codecs=hvc1"
+                />
+              </video>
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
