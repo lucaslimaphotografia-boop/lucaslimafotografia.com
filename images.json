@@ -515,6 +515,10 @@
           "message": "Mensagem",
           "consent": "Concordo que as informações enviadas acima sejam gravadas e usadas para comunicação comigo.",
           "submit": "Enviar Solicitação",
+          "sending": "Enviando...",
+          "success": "Mensagem enviada! Entraremos em contato em até 24 horas.",
+          "error": "Não foi possível enviar agora. Tente novamente ou fale com a gente direto pelo WhatsApp.",
+          "requiredNotice": "* Campos obrigatórios",
           "types": [
             "Casamento",
             "Noivado",
@@ -736,6 +740,10 @@
           "message": "Message",
           "consent": "I agree that the information submitted above will be stored and used to communicate with me.",
           "submit": "Send Request",
+          "sending": "Sending...",
+          "success": "Message sent! We'll get back to you within 24 hours.",
+          "error": "Couldn't send right now. Please try again or reach us directly on WhatsApp.",
+          "requiredNotice": "* Required fields",
           "types": [
             "Wedding",
             "Engagement",
