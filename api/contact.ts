@@ -1,10 +1,13 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 
 const RESEND_API = 'https://api.resend.com/emails';
-const TO_EMAIL = 'contato@lucaslimafotografia.com';
-// Resend permite enviar de "onboarding@resend.dev" sem verificar domínio.
-// Depois que o domínio lucaslimafotografia.com estiver verificado no Resend,
-// troque para algo como "Site Lucas Lima <contato@lucaslimafotografia.com>".
+// O remetente padrao "onboarding@resend.dev" so pode enviar para o e-mail da
+// propria conta Resend (lucaslimaphotografia@gmail.com) enquanto o dominio
+// lucaslimafotografia.com nao for verificado em resend.com/domains.
+// Depois de verificar o dominio, defina nas variaveis de ambiente da Vercel:
+//   CONTACT_TO_EMAIL=contato@lucaslimafotografia.com
+//   CONTACT_FROM_EMAIL=Site Lucas Lima <contato@lucaslimafotografia.com>
+const TO_EMAIL = process.env.CONTACT_TO_EMAIL || 'lucaslimaphotografia@gmail.com';
 const FROM_EMAIL = process.env.CONTACT_FROM_EMAIL || 'Site Lucas Lima <onboarding@resend.dev>';
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
