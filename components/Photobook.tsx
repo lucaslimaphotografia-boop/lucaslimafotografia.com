@@ -120,7 +120,7 @@ export const Photobook: React.FC<PhotobookProps> = ({ lang }) => {
               </a>
             </div>
 
-            <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden">
+            <div className="aspect-[3/4] bg-neutral-200 relative group overflow-hidden"><img src="https://res.cloudinary.com/di6xabxne/image/upload/w_1200,q_auto,f_auto/v1770078069/portfolio/photobook/blob_upnrhx.jpg" alt="Our Book - Álbum fine art Lucas Lima Studio" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           </div>
