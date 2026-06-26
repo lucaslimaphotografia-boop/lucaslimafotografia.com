@@ -12,7 +12,9 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "lucide-react": "^0.562.0",
-    "@anthropic-ai/sdk": "^0.31.0"
+    "@anthropic-ai/sdk": "^0.31.0",
+        "@vercel/analytics": "^1.0.0",
+        "@vercel/speed-insights": "^1.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
