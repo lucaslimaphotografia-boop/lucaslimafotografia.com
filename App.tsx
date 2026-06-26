@@ -14,6 +14,8 @@ import { AdminPanel } from './components/AdminPanel';
 import { Intro } from './components/Intro';
 import { Menu } from 'lucide-react';
 import { translations } from './translations';
+import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 
 export default function App() {
   const [currentView, setCurrentView] = useState<ViewState>(ViewState.HOME);
@@ -178,6 +180,9 @@ export default function App() {
         lang={lang}
         onAdminAccess={() => setCurrentView(ViewState.ADMIN)}
       />
+
+            <Analytics />
+            <SpeedInsights />
 
     </div>
   );
